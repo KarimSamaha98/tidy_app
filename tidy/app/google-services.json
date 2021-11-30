@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1022656454642",
+    "firebase_url": "https://tidy-37f26-default-rtdb.firebaseio.com",
+    "project_id": "tidy-37f26",
+    "storage_bucket": "tidy-37f26.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022656454642:android:4ef1119cb6ee7eb976956b",
+        "android_client_info": {
+          "package_name": "com.epfl.esl.tidy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1022656454642-dbnp39fn8nupkjke341hpclk0ogv6i31.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrG3AjRGSqsudu0zrLAk1rrrJ1kLmEHHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1022656454642-dbnp39fn8nupkjke341hpclk0ogv6i31.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
