@@ -1,2 +1,13 @@
 tidy/.idea/compiler.xml
 tidy/.idea/
+tidy/build/
+tidy/mobile/build
+tidy/wear/build
+tidy/local.properties
+tidy/captures
+.gradle
+.DS_Store
+.externalNativeBuild
+.cxx
+*.iml
+
