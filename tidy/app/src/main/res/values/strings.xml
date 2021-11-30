@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">tidy</string>
+    <string name="overview_title">Overview</string>
+    <string name="overview_desc">You can find all of the rooms and items to clean!</string>
 </resources>
