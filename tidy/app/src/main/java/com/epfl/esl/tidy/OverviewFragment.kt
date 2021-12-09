@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.epfl.esl.tidy.databinding.FragmentOverviewBinding
 
 class OverviewFragment : Fragment() {
@@ -17,6 +18,7 @@ class OverviewFragment : Fragment() {
 
     private lateinit var viewModel: OverviewViewModel
     private lateinit var binding : FragmentOverviewBinding
+    private val roomList : ArrayList<String> = arrayListOf("Living Room", "Dining Room", "Kitchen", "Bathroom")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +28,13 @@ class OverviewFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_overview,
             container, false)
 
-        return inflater.inflate(R.layout.fragment_overview, container, false)
+        binding.recyclerViewItems.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+        val roomAdapter = context?.let{ RoomAdapter(context=it, items = roomList)}
+
+        binding.recyclerViewItems.adapter = roomAdapter
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
