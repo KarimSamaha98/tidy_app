@@ -2,4 +2,8 @@
     <string name="app_name">tidy</string>
     <string name="overview_title">Overview</string>
     <string name="overview_desc">You can find all of the rooms and items to clean!</string>
+    <string name="pick_image">Pick image</string>
+    <string name="room">Room</string>
+    <string name="room_description">Add a description of the room</string>
+    <string name="add_room">Add Room</string>
 </resources>

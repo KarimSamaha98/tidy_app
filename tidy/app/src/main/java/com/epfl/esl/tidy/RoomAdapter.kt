@@ -1,13 +1,15 @@
 package com.epfl.esl.tidy
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class RoomAdapter(val context: Context, val items: ArrayList<String>) :
+class RoomAdapter(val context: Context, val items: ArrayList<String>, val items_2: ArrayList<Drawable>) :
     RecyclerView.Adapter<RoomAdapter.ViewHolder>() {
     /**
      * Inflates the item views which is designed in xml layout file
@@ -32,8 +34,10 @@ class RoomAdapter(val context: Context, val items: ArrayList<String>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val item_position = items.get(position)
+        val item_2_position = items_2.get(position)
 
         holder.tvItem.text = item_position
+        holder.tvItem_2.setImageDrawable(item_2_position)
     }
 
     /**
@@ -49,5 +53,6 @@ class RoomAdapter(val context: Context, val items: ArrayList<String>) :
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         // Holds the TextView that will add each item to
         var tvItem = view.findViewById<TextView>(R.id.room_name)
+        var tvItem_2 = view.findViewById<ImageView>(R.id.room_photo)
     }
 }
