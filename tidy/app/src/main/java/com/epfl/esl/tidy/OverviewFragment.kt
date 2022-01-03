@@ -29,8 +29,7 @@ class OverviewFragment : Fragment() {
 
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val roomRef: DatabaseReference = database.getReference("Space_IDs")
-    var roomList : ArrayList<String> = arrayListOf()
-    var roomImageList : ArrayList<Drawable> = arrayListOf()
+    var roomList : ArrayList<RoomUpload> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,38 +48,23 @@ class OverviewFragment : Fragment() {
                 for(space in snapshot.children) {
                     if (space.child("Space_ID").getValue(Int::class.java)!! == viewModel.tempID) {
                         for(rooms in space.child("Rooms").children) {
-                            val room = rooms.child("Attribute").getValue(String::class.java)!!
+//                            TODO is this correct way with dealing with this. I force the value to not be null with !!, but could also add in ? everywhere.
+                            val room : RoomUpload = rooms.getValue(RoomUpload::class.java)!!
                             roomList.add(room)
-                            var roomName : String = rooms.child("photo_URL").getValue(String::class.java)!!
-                            var roomImage = viewModel.storageRef.child("RoomImages/"+roomName+".jpg")
-//                            var bytes = roomImage.getBytes(Long.MAX_VALUE)
-//                            val image: Drawable = BitmapDrawable(
-//                                resources,
-//                                BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-//                            )
-                            roomImage.getBytes(Long.MAX_VALUE).addOnSuccessListener { byteArray ->
-                                val image: Drawable = BitmapDrawable(
-                                    resources,
-                                    BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-                                )
-                                //                                binding.welcomeImage.setImageDrawable(image)
-                                roomImageList.add(image)
-                            }.addOnFailureListener {
-                                val image : Drawable = getResources().getDrawable(R.drawable.living_room)
-                                roomImageList.add(image)
-                                Toast.makeText(context,"Image read was unsuccessful.",
-                                    Toast.LENGTH_SHORT).show()
-                            }
                         }
                     }
                 }
-                val roomAdapter = context?.let{ RoomAdapter(context=it, items = roomList, items_2 = roomImageList)}
+                val roomAdapter = context?.let{ RoomAdapter(context=it, items = roomList)}
 
                 binding.recyclerViewItems.adapter = roomAdapter
+                binding.progressCircular.visibility = View.INVISIBLE
             }
 
             override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show()
+                binding.progressCircular.visibility = View.INVISIBLE
             }
+
         }
         roomRef.addListenerForSingleValueEvent(roomListener)
 

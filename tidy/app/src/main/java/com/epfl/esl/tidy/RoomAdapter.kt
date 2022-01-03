@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 
-class RoomAdapter(val context: Context, val items: ArrayList<String>, val items_2: ArrayList<Drawable>) :
+class RoomAdapter(val context: Context, val items: ArrayList<RoomUpload>) :
     RecyclerView.Adapter<RoomAdapter.ViewHolder>() {
     /**
      * Inflates the item views which is designed in xml layout file
@@ -33,11 +34,15 @@ class RoomAdapter(val context: Context, val items: ArrayList<String>, val items_
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val item_position = items.get(position)
-        val item_2_position = items_2.get(position)
+        val item_position : RoomUpload = items.get(position)
 
-        holder.tvItem.text = item_position
-        holder.tvItem_2.setImageDrawable(item_2_position)
+        holder.tvItem.text = item_position.room
+        Picasso.with(context)
+            .load(item_position.imageUrl)
+            .placeholder(R.mipmap.ic_launcher)
+            .fit()
+            .centerCrop()
+            .into(holder.tvItem_2)
     }
 
     /**

@@ -5,16 +5,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <ImageButton
             android:id="@+id/roomImage"
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            android:text = "@string/pick_image"
             android:background="@null"
+            android:scaleType="centerInside"
+            android:text="@string/pick_image"
             app:srcCompat="@drawable/pick_image" />
 
         <FrameLayout
@@ -22,6 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/roomImage">
 
@@ -40,6 +44,7 @@
                     android:inputType="textPersonName"
                     android:textSize="30sp" />
 
+                <!--TODO make this a dropdown menu, not open text.-->
                 <EditText
                     android:id="@+id/roomDescription"
                     android:layout_width="match_parent"
@@ -58,6 +63,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/frameLayout">
 
@@ -68,10 +75,19 @@
                 android:layout_gravity="center"
                 android:orientation="vertical">
 
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"/>
+
                 <Button
                     android:id="@+id/AddRoomButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="@string/add_room"
                     android:textSize="20sp"/>
 

@@ -9,10 +9,11 @@ import com.google.firebase.storage.ktx.storage
 
 class AddRoomsViewModel : ViewModel() {
     var imageUri: Uri?
-    var roomName: String?
-    var roomDescription : String?
+    var roomName: String
+    var roomDescription : String
+    var imageUrl : String
     val tempID = 0
-    var tempID_key : String?
+    var tempID_key : String
 
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val roomRef: DatabaseReference = database.getReference("Space_IDs")
@@ -24,14 +25,13 @@ class AddRoomsViewModel : ViewModel() {
         "Kitchen" to 2,
         "Bathroom" to 3,
     )
-    var key: String
 
 
     init{
         imageUri = null
         roomName = ""
         roomDescription = ""
-        key = roomRef.push().key.toString()
-        tempID_key = null
+        imageUrl = ""
+        tempID_key = ""
     }
 }
