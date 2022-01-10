@@ -6,6 +6,10 @@
     <string name="room">Room</string>
     <string name="room_description">Add a description of the room</string>
     <string name="add_room">Add Room</string>
+
+    <string name="tasks_title">Tasks</string>
+    <string name="tasks_main_description">Here are all the tasks!</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="NextButton">Go</string>
