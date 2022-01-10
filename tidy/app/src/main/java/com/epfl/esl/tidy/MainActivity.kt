@@ -11,9 +11,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    public var loginInfo = UserDataClass(email="", password="", first_name="", last_name="", key="", space_id="")
+    public var loginInfo = UserDataClass(email="", password="", first_name="", last_name="", key="", space_id="", admin="")
     private lateinit var binding: ActivityMainBinding
-    private lateinit var bottomNavigationView: BottomNavigationView
+    public lateinit var bottomNavigationView: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)

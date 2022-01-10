@@ -45,7 +45,11 @@
         android:id="@+id/settings"
         android:name="com.epfl.esl.tidy.Settings"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settings_to_profileLogin"
+            app:destination="@id/profileLogin" />
+    </fragment>
     <fragment
         android:id="@+id/augmentedReality"
         android:name="com.epfl.esl.tidy.AugmentedReality"
