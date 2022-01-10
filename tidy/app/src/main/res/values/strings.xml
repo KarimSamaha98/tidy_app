@@ -11,4 +11,5 @@
     <string name="Last_Name">Last Name</string>
     <string name="Email">Email Address</string>
     <string name="Space_ID">Space ID</string>
+    <string name="Sign_Out">Sign Out</string>
 </resources>

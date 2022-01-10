@@ -31,4 +31,24 @@
             android:id="@+id/action_signUp_to_taskView"
             app:destination="@id/taskView" />
     </fragment>
+    <fragment
+        android:id="@+id/history"
+        android:name="com.epfl.esl.tidy.History"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/roomView"
+        android:name="com.epfl.esl.tidy.RoomView"
+        android:label="fragment_room_view"
+        tools:layout="@layout/fragment_room_view" />
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.epfl.esl.tidy.Settings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/augmentedReality"
+        android:name="com.epfl.esl.tidy.AugmentedReality"
+        android:label="fragment_augmented_reality"
+        tools:layout="@layout/fragment_augmented_reality" />
 </navigation>

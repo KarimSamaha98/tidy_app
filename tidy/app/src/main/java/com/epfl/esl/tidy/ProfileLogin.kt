@@ -90,6 +90,7 @@ class ProfileLogin : Fragment() {
                         //Store Credential
                         (activity as MainActivity).loginInfo = UserDataClass(email=email, password=password, first_name=first_name, last_name=last_name, space_id=space_id, key=key )
                         //Change Fragments
+                        (activity as MainActivity).setBottomNavigationVisibility(View.VISIBLE)
                         Navigation.findNavController(view)
                 .navigate(R.id.action_profileLogin_to_taskView)}
                 }
