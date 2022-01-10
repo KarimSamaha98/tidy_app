@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation.xml"
-    app:startDestination="@id/overviewFragment2">
-
+    app:startDestination="@id/OverviewFragment">
     <fragment
-        android:id="@+id/overviewFragment2"
+        android:id="@+id/addRooms"
+        android:name="com.epfl.esl.tidy.AddRooms"
+        android:label="AddRooms" />
+    <fragment
+        android:id="@+id/OverviewFragment"
         android:name="com.epfl.esl.tidy.OverviewFragment"
         android:label="OverviewFragment" />
 </navigation>

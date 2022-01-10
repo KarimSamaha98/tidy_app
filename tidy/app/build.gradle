@@ -65,4 +65,6 @@ dependencies {
 //    Card View/SlidingPane Dependency
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.slidingpanelayout:slidingpanelayout:1.2.0-beta01"
+
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 }
