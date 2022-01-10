@@ -9,6 +9,12 @@ import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 class FirebaseRepository {
     private val TAG = "FirebaseRepository"
@@ -18,36 +24,47 @@ class FirebaseRepository {
     var storageRef: StorageReference = Firebase.storage.reference
 
     fun registerUser() {
-
     }
 
     fun getCurrentUserID() {
     }
 
-    fun getRoomDetailsCo(spaceID: Int): MutableLiveData<Response> {
-        val mutableLiveData = MutableLiveData<Response>()
+    suspend fun getRoomDetailsCo(spaceID: Int): Response = suspendCoroutine { continuation ->
         val response = Response()
-        val roomListener = object : ValueEventListener {
+        var roomListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (space in snapshot.children) {
                     if (space.child(Constants.SPACEID).getValue(Int::class.java)!! == spaceID) {
-                        Log.d(TAG, "Went into Loop")
                         response.rooms = space.child(Constants.ROOMS).children.map { snapShot ->
-                                snapShot.getValue(RoomUpload::class.java)
-                            }
+                            snapShot.getValue(RoomUpload::class.java)
+                        }
+                        continuation.resume(response)
+                    } else{
+                        continuation.resumeWithException(Throwable("No userID matches"))
                     }
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {
                 response.exception = error
+                continuation.resumeWithException(Throwable(error.toString()))
+                Log.d(TAG, "Database Error: ${error.toString()}")
             }
         }
         roomRef.addListenerForSingleValueEvent(roomListener)
-        mutableLiveData.value = response
-
-        return mutableLiveData
     }
 }
+//        withContext(IO) {
+//            val job = launch {
+//                roomRef.addListenerForSingleValueEvent(roomListener)
+//            }
+//            job.await()
+//        }
+//        roomRef.addListenerForSingleValueEvent(roomListener).await()
+//        Log.d(TAG, "debug: ${Thread.currentThread().name}")
+//        return response
+//    }
+//}
 //    fun getRoomDetails(spaceID : Int): ArrayList<RoomUpload?> {
 //        var roomList : ArrayList<RoomUpload?> = arrayListOf()
 //

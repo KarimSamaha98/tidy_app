@@ -32,7 +32,8 @@ class OverviewFragment : Fragment() {
 
         binding.recyclerViewItems.layoutManager = GridLayoutManager(activity, 2)
 
-        viewModel.getResponse().observe(viewLifecycleOwner) {
+        viewModel.getRoomDetails()
+        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
             if(it.exception != null) {
                 val roomAdapter = RoomAdapter(
                     context = context,
