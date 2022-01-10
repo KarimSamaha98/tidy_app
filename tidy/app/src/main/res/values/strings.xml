@@ -6,4 +6,16 @@
     <string name="room">Room</string>
     <string name="room_description">Add a description of the room</string>
     <string name="add_room">Add Room</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="NextButton">Go</string>
+    <string name="Email_Address">Email Address</string>
+    <string name="Sign_Up">Sign Up</string>
+    <string name="Sign_Up_Text">No account yet?</string>
+    <string name="Password">Password</string>
+    <string name="First_Name">First Name</string>
+    <string name="Last_Name">Last Name</string>
+    <string name="Email">Email Address</string>
+    <string name="Space_ID">Space ID</string>
+    <string name="Sign_Out">Sign Out</string>
 </resources>
