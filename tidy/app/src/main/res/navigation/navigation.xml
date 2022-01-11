@@ -4,14 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
     app:startDestination="@id/profileLogin">
-    <fragment
-        android:id="@+id/addRooms"
-        android:name="com.epfl.esl.tidy.AddRooms"
-        android:label="AddRooms" />
-    <fragment
-        android:id="@+id/OverviewFragment"
-        android:name="com.epfl.esl.tidy.OverviewFragment"
-        android:label="OverviewFragment" />
+
 
     <fragment
         android:id="@+id/profileLogin"
@@ -20,16 +13,12 @@
         tools:layout="@layout/fragment_profile_login" >
         <action
             android:id="@+id/action_profileLogin_to_taskView"
-            app:destination="@id/taskView" />
+            app:destination="@id/TasksFragment" />
         <action
             android:id="@+id/action_profileLogin_to_signUp"
             app:destination="@id/signUp" />
     </fragment>
-    <fragment
-        android:id="@+id/taskView"
-        android:name="com.epfl.esl.tidy.TaskView"
-        android:label="fragment_task_view"
-        tools:layout="@layout/fragment_task_view" />
+
     <fragment
         android:id="@+id/signUp"
         android:name="com.epfl.esl.tidy.SignUp"
@@ -37,18 +26,35 @@
         tools:layout="@layout/fragment_sign_up" >
         <action
             android:id="@+id/action_signUp_to_taskView"
-            app:destination="@id/taskView" />
+            app:destination="@id/TasksFragment" />
     </fragment>
     <fragment
         android:id="@+id/history"
         android:name="com.epfl.esl.tidy.History"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
+
     <fragment
-        android:id="@+id/roomView"
-        android:name="com.epfl.esl.tidy.RoomView"
-        android:label="fragment_room_view"
-        tools:layout="@layout/fragment_room_view" />
+        android:id="@+id/addRooms"
+        android:name="com.epfl.esl.tidy.AddRooms"
+        android:label="AddRooms" />
+    <fragment
+        android:id="@+id/addTasks"
+        android:name="com.epfl.esl.tidy.AddTask"
+        android:label="fragment_add_tasks"/>
+
+    <fragment
+        android:id="@+id/OverviewFragment"
+        android:name="com.epfl.esl.tidy.OverviewFragment"
+        android:label="OverviewFragment" />
+    <fragment
+        android:id="@+id/TasksFragment"
+        android:name="com.epfl.esl.tidy.TasksFragment"
+        android:label="TasksFragment" >
+        <action
+            android:id="@+id/action_TasksFragment_to_addTasks"
+            app:destination="@id/addTasks" />
+    </fragment>
     <fragment
         android:id="@+id/settings"
         android:name="com.epfl.esl.tidy.Settings"

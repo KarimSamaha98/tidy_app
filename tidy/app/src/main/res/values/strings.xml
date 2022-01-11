@@ -9,6 +9,9 @@
 
     <string name="tasks_title">Tasks</string>
     <string name="tasks_main_description">Here are all the tasks!</string>
+    <string name="task">Task</string>
+    <string name="task_description">Add a description for the task (optional)</string>
+    <string name="add_task">Add Task</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -22,4 +25,11 @@
     <string name="Email">Email Address</string>
     <string name="Space_ID">Space ID</string>
     <string name="Sign_Out">Sign Out</string>
+    <string name="room_view">Rooms</string>
+    <string name="task_view">Tasks</string>
+    <string name="settings">Settings</string>
+    <string name="augmented_reality">Augmented Reality</string>
+
+
+
 </resources>
