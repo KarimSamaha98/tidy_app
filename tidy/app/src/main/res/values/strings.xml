@@ -25,11 +25,10 @@
     <string name="Email">Email Address</string>
     <string name="Space_ID">Space ID</string>
     <string name="Sign_Out">Sign Out</string>
+    <string name="Administrator">Admin</string>
+
     <string name="room_view">Rooms</string>
     <string name="task_view">Tasks</string>
     <string name="settings">Settings</string>
     <string name="augmented_reality">Augmented Reality</string>
-
-
-
 </resources>

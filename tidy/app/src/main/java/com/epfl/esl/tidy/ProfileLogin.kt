@@ -22,6 +22,7 @@ class ProfileLogin : Fragment() {
     var first_name : String = ""
     var last_name : String = ""
     var space_id : String = ""
+    var admin : String = ""
 
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val profileRef: DatabaseReference = database.getReference("Profiles")
@@ -71,6 +72,7 @@ class ProfileLogin : Fragment() {
                                 first_name = user.child("First_Name").getValue(String::class.java)!!
                                 last_name = user.child("Last_Name").getValue(String::class.java)!!
                                 space_id = user.child("Space_Id").getValue(String::class.java)!!
+                                admin = user.child("Admin").getValue(String::class.java)!!
                                 break
                             }
                             else {
@@ -88,7 +90,7 @@ class ProfileLogin : Fragment() {
 
                     if (correctUsername && correctPassword) {
                         //Store Credential
-                        (activity as MainActivity).loginInfo = UserDataClass(email=email, password=password, first_name=first_name, last_name=last_name, space_id=space_id, key=key )
+                        (activity as MainActivity).loginInfo = UserDataClass(email=email, password=password, first_name=first_name, last_name=last_name, space_id=space_id, key=key, admin=admin)
                         //Change Fragments
                         (activity as MainActivity).setBottomNavigationVisibility(View.VISIBLE)
                         Navigation.findNavController(view)
