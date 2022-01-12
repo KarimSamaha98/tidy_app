@@ -1,15 +1,23 @@
 package com.epfl.esl.tidy.overview
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
+import com.epfl.esl.tidy.datalayer.FirebaseRepository
+import com.epfl.esl.tidy.onGetDataListener
+
 
 class OverviewViewModel : ViewModel() {
-    var storageRef = Firebase.storage.reference
-    val tempID = 0
+    private val repository: FirebaseRepository = FirebaseRepository()
+    val tempID: Int = 0
 
+    init {
+    }
+
+    fun getRoomDetails(onGetDataListener: onGetDataListener) {
+        repository.getRoomDetails(tempID, onGetDataListener)
+    }
+
+//    private fun setValue(input: Response) {
+//        mutableLiveData.postValue(input)
+//    }
 }

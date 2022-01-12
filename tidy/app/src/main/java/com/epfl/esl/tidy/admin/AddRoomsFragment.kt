@@ -1,4 +1,4 @@
-package com.epfl.esl.tidy.admin
+package com.epfl.esl.tidy
 
 import android.app.Activity
 import android.content.Intent
@@ -17,12 +17,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
-import com.epfl.esl.tidy.R
+import com.epfl.esl.tidy.admin.AddRoomsViewModel
 import com.epfl.esl.tidy.databinding.AddRoomsFragmentBinding
+import com.epfl.esl.tidy.overview.Room
+import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
+import java.security.KeyStore
 
 class AddRooms : Fragment() {
 

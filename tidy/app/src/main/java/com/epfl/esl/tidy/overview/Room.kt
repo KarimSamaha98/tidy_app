@@ -15,7 +15,7 @@ data class Room (val room:String = "",
         )
         roomID = roomMapping[room]!!
     }
-    }
+}
 
 fun main() {
     var room = Room("Kitchen", "desc", "URL")

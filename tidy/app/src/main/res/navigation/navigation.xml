@@ -28,11 +28,6 @@
             android:id="@+id/action_signUp_to_TasksFragment"
             app:destination="@id/TasksFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/history"
-        android:name="com.epfl.esl.tidy.History"
-        android:label="fragment_history"
-        tools:layout="@layout/fragment_history" />
 
     <fragment
         android:id="@+id/addRooms"
@@ -64,12 +59,6 @@
             android:id="@+id/action_settings_to_profileLogin"
             app:destination="@id/profileLogin" />
     </fragment>
-
-    <fragment
-        android:id="@+id/augmentedReality"
-        android:name="com.epfl.esl.tidy.AugmentedReality"
-        android:label="fragment_augmented_reality"
-        tools:layout="@layout/fragment_augmented_reality" />
 
 
 </navigation>

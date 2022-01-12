@@ -1,7 +1,6 @@
-package com.epfl.esl.tidy.overview
+package com.epfl.esl.tidy.admin
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.epfl.esl.tidy.R
 import com.squareup.picasso.Picasso
 
-class RoomAdapter(val context: Context?, val items: List<Room?>) :
-    RecyclerView.Adapter<RoomAdapter.ViewHolder>() {
+class SupplyAdapter(val context: Context, val items: ArrayList<Supply>) :
+    RecyclerView.Adapter<SupplyAdapter.ViewHolder>() {
     /**
      * Inflates the item views which is designed in xml layout file
      */
@@ -35,11 +34,11 @@ class RoomAdapter(val context: Context?, val items: List<Room?>) :
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val item_position : Room? = items.get(position)
+        val item_position : Supply = items.get(position)
 
-        holder.tvItem.text = item_position?.room
+        holder.tvItem.text = item_position.name
         Picasso.with(context)
-            .load(item_position?.imageUrl)
+            .load(item_position.logoUrl)
             .placeholder(R.mipmap.ic_launcher)
             .fit()
             .centerCrop()
