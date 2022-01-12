@@ -1,19 +1,8 @@
 package com.epfl.esl.tidy
 
-import android.content.Context
-import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.epfl.esl.tidy.datalayer.FirebaseRepository
-import com.epfl.esl.tidy.utils.Constants
-import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.ktx.storage
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
 
 
 class OverviewViewModel : ViewModel() {
@@ -24,11 +13,8 @@ class OverviewViewModel : ViewModel() {
     init {
     }
 
-    fun getRoomDetails() {
-        CoroutineScope(IO).launch {
-            val response = repository.getRoomDetailsCo(tempID)
-            mutableLiveData.postValue(response)
-        }
+    fun getRoomDetails(onGetDataListener: onGetDataListener) {
+        repository.getRoomDetails(tempID, onGetDataListener)
     }
 
 //    private fun setValue(input: Response) {

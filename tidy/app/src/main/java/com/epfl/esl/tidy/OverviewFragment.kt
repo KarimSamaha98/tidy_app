@@ -3,6 +3,7 @@ package com.epfl.esl.tidy
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +18,7 @@ class OverviewFragment : Fragment() {
     companion object {
         fun newInstance() = OverviewFragment()
     }
-
+    private val TAG = "OverviewFragment"
     private lateinit var viewModel: OverviewViewModel
     private lateinit var binding : FragmentOverviewBinding
 
@@ -32,21 +33,25 @@ class OverviewFragment : Fragment() {
 
         binding.recyclerViewItems.layoutManager = GridLayoutManager(activity, 2)
 
-        viewModel.getRoomDetails()
-        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
-            if(it.exception != null) {
+        viewModel.getRoomDetails(object : onGetDataListener {
+            override fun onSuccess(response: Response) {
                 val roomAdapter = RoomAdapter(
                     context = context,
-                    items = it.rooms!!,
+//                  TODO: have to be careful this will give nullpointer exception if response.objectList doesnt get a value
+                    items = response.objectList as List<RoomUpload?>,
                 )
                 binding.recyclerViewItems.adapter = roomAdapter
                 binding.progressCircular.visibility = View.INVISIBLE
             }
-            else {
-//                do something
+
+            override fun onStart() {
+                Log.d(TAG, "Listener Started")
             }
 
-        }
+            override fun onFailure(response: Response) {
+                Log.d(TAG, "Listener Failed with error: ${response.exception.toString()}")
+            }
+        })
 
         return binding.root
     }
