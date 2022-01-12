@@ -40,7 +40,7 @@
         android:label="AddRooms" />
     <fragment
         android:id="@+id/addTasks"
-        android:name="com.epfl.esl.tidy.AddTask"
+        android:name="com.epfl.esl.tidy.AddNewTask"
         android:label="fragment_add_tasks"/>
 
     <fragment

@@ -21,7 +21,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
             <LinearLayout
                 android:id="@+id/EditTexts"
                 android:layout_width="match_parent"
@@ -35,9 +34,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:gravity="center"
-                    android:hint="@string/tasks_title"
+                    android:hint="Task"
                     android:inputType="textPersonName"
-                    android:textSize="30sp" />
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/roomName"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:hint="Room"
+                    android:inputType="textPersonName"
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/taskDescription"

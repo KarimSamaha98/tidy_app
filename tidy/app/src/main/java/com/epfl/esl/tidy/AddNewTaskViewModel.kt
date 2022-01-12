@@ -5,7 +5,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 
-class AddTaskViewModel : ViewModel() {
+class AddNewTaskViewModel : ViewModel() {
     var roomKey: String = ""
     var taskKey: String = ""
     var newTask: String = ""
