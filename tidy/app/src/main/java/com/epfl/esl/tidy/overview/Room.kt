@@ -1,8 +1,8 @@
-package com.epfl.esl.tidy
+package com.epfl.esl.tidy.overview
 
-data class RoomUpload (val room:String = "",
-                       val description: String = "",
-                       val imageUrl: String = ""){
+data class Room (val room:String = "",
+                 val description: String = "",
+                 val imageUrl: String = ""){
     val roomID: Int
 //    TODO fix this mapping so can add multiple bathrooms and multiple items
     init {
@@ -18,6 +18,6 @@ data class RoomUpload (val room:String = "",
     }
 
 fun main() {
-    var room = RoomUpload("Kitchen", "desc", "URL")
+    var room = Room("Kitchen", "desc", "URL")
     print(room.roomID)
 }

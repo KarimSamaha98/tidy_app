@@ -1,6 +1,5 @@
-package com.epfl.esl.tidy
+package com.epfl.esl.tidy.tasks
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.databinding.FragmentTasksBinding
 import com.google.firebase.database.*
 

@@ -1,7 +1,8 @@
-package com.epfl.esl.tidy
+package com.epfl.esl.tidy.signin
 
 import android.net.Uri
 import android.os.Parcelable
+import com.epfl.esl.tidy.R
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

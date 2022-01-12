@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/profileLogin"
-        android:name="com.epfl.esl.tidy.ProfileLogin"
+        android:name="com.epfl.esl.tidy.signin.ProfileLogin"
         android:label="fragment_profile_login"
         tools:layout="@layout/fragment_profile_login" >
         <action
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/signUp"
-        android:name="com.epfl.esl.tidy.SignUp"
+        android:name="com.epfl.esl.tidy.signin.SignUp"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -36,20 +36,20 @@
 
     <fragment
         android:id="@+id/addRooms"
-        android:name="com.epfl.esl.tidy.AddRooms"
+        android:name="com.epfl.esl.tidy.admin.AddRooms"
         android:label="AddRooms" />
     <fragment
         android:id="@+id/addTasks"
-        android:name="com.epfl.esl.tidy.AddNewTask"
+        android:name="com.epfl.esl.tidy.tasks.AddNewTask"
         android:label="fragment_add_tasks"/>
 
     <fragment
         android:id="@+id/OverviewFragment"
-        android:name="com.epfl.esl.tidy.OverviewFragment"
+        android:name="com.epfl.esl.tidy.overview.OverviewFragment"
         android:label="OverviewFragment" />
     <fragment
         android:id="@+id/TasksFragment"
-        android:name="com.epfl.esl.tidy.TasksFragment"
+        android:name="com.epfl.esl.tidy.tasks.TasksFragment"
         android:label="TasksFragment" >
         <action
             android:id="@+id/action_TasksFragment_to_addTasks"
@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/settings"
-        android:name="com.epfl.esl.tidy.Settings"
+        android:name="com.epfl.esl.tidy.signin.Settings"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action

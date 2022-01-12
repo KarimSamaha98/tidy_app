@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".OverviewFragment">
+    tools:context=".overview.OverviewFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/room_item"

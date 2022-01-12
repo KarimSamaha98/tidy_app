@@ -1,8 +1,5 @@
-package com.epfl.esl.tidy
+package com.epfl.esl.tidy.overview
 
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,11 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.epfl.esl.tidy.R
+import com.epfl.esl.tidy.Room
 import com.epfl.esl.tidy.databinding.FragmentOverviewBinding
 import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 
 class OverviewFragment : Fragment() {
 
@@ -29,7 +25,7 @@ class OverviewFragment : Fragment() {
 
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val roomRef: DatabaseReference = database.getReference("Space_IDs")
-    var roomList : ArrayList<RoomUpload> = arrayListOf()
+    var roomList : ArrayList<Room> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,12 +45,12 @@ class OverviewFragment : Fragment() {
                     if (space.child("Space_ID").getValue(Int::class.java)!! == viewModel.tempID) {
                         for(rooms in space.child("Rooms").children) {
 //                            TODO is this correct way with dealing with this. I force the value to not be null with !!, but could also add in ? everywhere.
-                            val room : RoomUpload = rooms.getValue(RoomUpload::class.java)!!
+                            val room : Room = rooms.getValue(Room::class.java)!!
                             roomList.add(room)
                         }
                     }
                 }
-                val roomAdapter = context?.let{ RoomAdapter(context=it, items = roomList)}
+                val roomAdapter = context?.let{ RoomAdapter(context=it, items = roomList) }
 
                 binding.recyclerViewItems.adapter = roomAdapter
                 binding.progressCircular.visibility = View.INVISIBLE

@@ -1,4 +1,4 @@
-package com.epfl.esl.tidy
+package com.epfl.esl.tidy.admin
 
 import android.net.Uri
 import androidx.lifecycle.ViewModel

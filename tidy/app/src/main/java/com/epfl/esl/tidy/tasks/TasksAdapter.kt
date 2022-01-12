@@ -1,24 +1,23 @@
-package com.epfl.esl.tidy
+package com.epfl.esl.tidy.tasks
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
+import com.epfl.esl.tidy.R
 
-class RoomAdapter(val context: Context, val items: ArrayList<RoomUpload>) :
-    RecyclerView.Adapter<RoomAdapter.ViewHolder>() {
+class TasksAdapter (val context: Context, val task_name: ArrayList<String>,
+                    val due_date: ArrayList<String>, val user: ArrayList<String>) :
+    RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
     /**
      * Inflates the item views which is designed in xml layout file
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(context).inflate(
-                R.layout.room_recycle,
+                R.layout.tasks_recycle,
                 parent,
                 false
             )
@@ -34,22 +33,20 @@ class RoomAdapter(val context: Context, val items: ArrayList<RoomUpload>) :
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val item_position : RoomUpload = items.get(position)
+        val itemPosition1 = task_name.get(position)
+        val itemPosition2 = due_date.get(position)
+        val itemPosition3 = user.get(position)
 
-        holder.tvItem.text = item_position.room
-        Picasso.with(context)
-            .load(item_position.imageUrl)
-            .placeholder(R.mipmap.ic_launcher)
-            .fit()
-            .centerCrop()
-            .into(holder.tvItem_2)
+        holder.taskName.text = itemPosition1
+        holder.taskDueDate.text = itemPosition2
+        holder.taskUser.text = itemPosition3
     }
 
     /**
      * Gets the number of items in the list
      */
     override fun getItemCount(): Int {
-        return items.size
+        return task_name.size
     }
 
     /**
@@ -57,7 +54,8 @@ class RoomAdapter(val context: Context, val items: ArrayList<RoomUpload>) :
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         // Holds the TextView that will add each item to
-        var tvItem = view.findViewById<TextView>(R.id.room_name)
-        var tvItem_2 = view.findViewById<ImageView>(R.id.room_photo)
+        var taskName: TextView = view.findViewById<TextView>(R.id.task_name)
+        var taskDueDate: TextView = view.findViewById<TextView>(R.id.task_due_date)
+        var taskUser: TextView = view.findViewById<TextView>(R.id.task_user)
     }
 }
