@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/profileLogin">
+
+    <fragment
+        android:id="@+id/profileLogin"
+        android:name="com.epfl.esl.tidy.ProfileLogin"
+        android:label="fragment_profile_login"
+        tools:layout="@layout/fragment_profile_login" >
+        <action
+            android:id="@+id/action_profileLogin_to_taskView"
+            app:destination="@id/taskView" />
+        <action
+            android:id="@+id/action_profileLogin_to_signUp"
+            app:destination="@id/signUp" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskView"
+        android:name="com.epfl.esl.tidy.TaskView"
+        android:label="fragment_task_view"
+        tools:layout="@layout/fragment_task_view" />
+    <fragment
+        android:id="@+id/signUp"
+        android:name="com.epfl.esl.tidy.SignUp"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUp_to_taskView"
+            app:destination="@id/taskView" />
+    </fragment>
+    <fragment
+        android:id="@+id/history"
+        android:name="com.epfl.esl.tidy.History"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/roomView"
+        android:name="com.epfl.esl.tidy.RoomView"
+        android:label="fragment_room_view"
+        tools:layout="@layout/fragment_room_view" />
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.epfl.esl.tidy.Settings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settings_to_profileLogin"
+            app:destination="@id/profileLogin" />
+    </fragment>
+    <fragment
+        android:id="@+id/augmentedReality"
+        android:name="com.epfl.esl.tidy.AugmentedReality"
+        android:label="fragment_augmented_reality"
+        tools:layout="@layout/fragment_augmented_reality" />
+</navigation>
