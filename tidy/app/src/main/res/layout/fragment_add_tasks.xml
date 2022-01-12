@@ -25,33 +25,24 @@
             <LinearLayout
                 android:id="@+id/EditTexts"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="176dp"
                 android:orientation="vertical">
 
                 <!--TODO make this a dropdown menu, not open text.-->
-                <EditText
-                    android:id="@+id/taskRoom"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:gravity="center"
-                    android:hint="@string/room"
-                    android:inputType="textPersonName"
-                    android:textSize="30sp" />
 
                 <EditText
                     android:id="@+id/taskName"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:gravity="center"
-                    android:hint="@string/task"
+                    android:hint="@string/tasks_title"
                     android:inputType="textPersonName"
                     android:textSize="30sp" />
-
 
                 <EditText
                     android:id="@+id/taskDescription"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="121dp"
                     android:gravity="center"
                     android:hint="@string/task_description"
                     android:inputType="textLongMessage"
@@ -79,13 +70,6 @@
                 android:orientation="vertical">
 
 
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"/>
-
                 <Button
                     android:id="@+id/AddTaskButton"
                     android:layout_width="wrap_content"
@@ -93,14 +77,6 @@
                     android:layout_gravity="center"
                     android:text="@string/add_task"
                     android:textSize="20sp"/>
-
-                <!--                <Button-->
-                <!--                    android:id="@+id/SignUpButton"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="match_parent"-->
-                <!--                    android:text="@string/sign_up"-->
-                <!--                    android:textColor="@color/purple_200"-->
-                <!--                    app:backgroundTint="@color/white" />-->
             </LinearLayout>
 
         </FrameLayout>

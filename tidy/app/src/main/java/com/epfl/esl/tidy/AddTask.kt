@@ -21,7 +21,6 @@ import java.security.KeyStore
 import java.util.*
 
 class AddTask : Fragment() {
-
     companion object {
         fun newInstance() = AddTask()
     }
@@ -39,16 +38,11 @@ class AddTask : Fragment() {
             container, false
         )
 
-        //viewModel = ViewModelProvider(this).get(AddTaskViewModel::class.java)
-
         binding.AddTaskButton.setOnClickListener {
-            viewModel.taskRoom = binding.taskRoom.text.toString()
             viewModel.newTask = binding.taskName.text.toString()
             viewModel.taskDescription = binding.taskDescription.text.toString()
-            if (viewModel.taskRoom == "") {
-                Toast.makeText(context, "Enter location of the task.", Toast.LENGTH_SHORT).show()
-            }
-            else if (viewModel.newTask == "") {
+
+            if (viewModel.newTask == "") {
                 Toast.makeText(context, "Enter the tile of the task.", Toast.LENGTH_SHORT).show()
             }
             else {
@@ -56,58 +50,48 @@ class AddTask : Fragment() {
 
                 viewModel.tasksRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        var roomExists: Boolean = false
                         var taskExists: Boolean = false
 
-                        // Check if room and task already exists
-                        for (location in dataSnapshot.children) {
-                            if (location.child("Room")
-                                    .getValue(String::class.java)!! == viewModel.taskRoom
+                        // Check if task already exists
+                        loop@ for (task in dataSnapshot.children) {
+                            if (task.child("Title")
+                                    .getValue(String::class.java)!! == viewModel.newTask
                             ) {
-                                roomExists = true
+                                taskExists = true
 
-                                for (task in location.children){
-                                    if (task.child("Task")
-                                            .getValue(String::class.java)!! == viewModel.newTask
-                                    ) {
-                                        taskExists = true
-                                        android.widget.Toast.makeText(
-                                            context,
-                                            "Location and task pair already exist.",
-                                            android.widget.Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
+                                if (task.child("Description")
+                                        .getValue(String::class.java)!! == viewModel.taskDescription){
+                                    Toast.makeText(
+                                        context, "Task and description already exists.",
+                                        Toast.LENGTH_SHORT).show()
                                 }
-
-                                if (!taskExists) {
-                                    viewModel.roomKey = location.key.toString()
-                                    // Send tasks data to firebase
-                                    viewModel.sendDataToFireBase()
+                                else {
+                                    viewModel.taskKey = viewModel.tasksRef.push().key.toString()
+                                    viewModel.tasksRef.child(viewModel.taskKey).child("Description")
+                                        .setValue(viewModel.taskDescription)
+                                    Toast.makeText(
+                                        context, "Task exists, updating description.",
+                                        Toast.LENGTH_SHORT).show()
+                                }
+                                break@loop
                                 }
                             }
-                        }
 
-                        // If room does not exist we create a new room
-                        if (!roomExists) {
-                            viewModel.roomKey = Random().nextInt().toString()
-                            viewModel.tasksRef.child(viewModel.roomKey).child("Room")
-                                .setValue(viewModel.taskRoom)
-                            Toast.makeText(
-                                context,
-                                "Creating a new location for tasks in Firebase",
-                                Toast.LENGTH_SHORT
-                            ).show()
-
+                        // If task does not exist we create new task
+                        if (!taskExists) {
+                            viewModel.taskKey = Random().nextInt().toString()
                             // Send tasks data to firebase
                             viewModel.sendDataToFireBase()
+
+                            Toast.makeText(
+                                context,"New task created",
+                                Toast.LENGTH_SHORT).show()
                         }
                     }
                     override fun onCancelled(databaseError: DatabaseError) {}
                 })
             }
         }
-
-
         return binding.root
     }
 

@@ -17,6 +17,7 @@ class TasksFragment : Fragment() {
     private lateinit var viewModel: TasksViewModel
     private lateinit var binding : FragmentTasksBinding
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
     ): View? {
@@ -29,6 +30,9 @@ class TasksFragment : Fragment() {
         binding.AddTaskButton.setOnClickListener {view: View ->
             Navigation.findNavController(view).navigate(R.id.action_TasksFragment_to_addTasks)
         }
+
+        // grab all unique tasks
+        viewModel.getAllTaskKeys()
 
         return binding.root
     }

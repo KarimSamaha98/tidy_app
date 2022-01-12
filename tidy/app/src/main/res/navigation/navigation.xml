@@ -12,7 +12,7 @@
         android:label="fragment_profile_login"
         tools:layout="@layout/fragment_profile_login" >
         <action
-            android:id="@+id/action_profileLogin_to_taskView"
+            android:id="@+id/action_profileLogin_to_TasksFragment"
             app:destination="@id/TasksFragment" />
         <action
             android:id="@+id/action_profileLogin_to_signUp"
@@ -25,7 +25,7 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
-            android:id="@+id/action_signUp_to_taskView"
+            android:id="@+id/action_signUp_to_TasksFragment"
             app:destination="@id/TasksFragment" />
     </fragment>
     <fragment
@@ -64,7 +64,7 @@
             android:id="@+id/action_settings_to_profileLogin"
             app:destination="@id/profileLogin" />
     </fragment>
-    
+
     <fragment
         android:id="@+id/augmentedReality"
         android:name="com.epfl.esl.tidy.AugmentedReality"

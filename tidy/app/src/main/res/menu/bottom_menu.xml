@@ -14,8 +14,4 @@
     <item
         android:id="@+id/augmentedReality"
         android:title="@string/augmented_reality" />
-
-    <item
-        android:id="@+id/addRooms"
-        android:title="Add rooms" />
 </menu>

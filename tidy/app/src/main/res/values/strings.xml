@@ -7,9 +7,11 @@
     <string name="room_description">Add a description of the room</string>
     <string name="add_room">Add Room</string>
 
+    <!-- Task view items -->
     <string name="tasks_title">Tasks</string>
     <string name="tasks_main_description">Here are all the tasks!</string>
-    <string name="task">Task</string>
+
+    <!-- Add tasks items -->
     <string name="task_description">Add a description for the task (optional)</string>
     <string name="add_task">Add Task</string>
 
