@@ -15,7 +15,7 @@ data class RoomUpload (val room:String = "",
         )
         roomID = roomMapping[room]!!
     }
-    }
+}
 
 fun main() {
     var room = RoomUpload("Kitchen", "desc", "URL")

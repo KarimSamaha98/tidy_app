@@ -40,7 +40,8 @@ class OverviewFragment : Fragment() {
             container, false)
         viewModel = ViewModelProvider(this).get(OverviewViewModel::class.java)
 
-        binding.recyclerViewItems.layoutManager = GridLayoutManager(activity, 2)
+        binding.recyclerViewRooms.layoutManager = GridLayoutManager(activity, 2)
+        binding.recyclerViewSupplies.layoutManager = GridLayoutManager(activity, 3)
 
 //        TODO move to view model
         val roomListener = object : ValueEventListener {
@@ -56,7 +57,7 @@ class OverviewFragment : Fragment() {
                 }
                 val roomAdapter = context?.let{ RoomAdapter(context=it, items = roomList)}
 
-                binding.recyclerViewItems.adapter = roomAdapter
+                binding.recyclerViewRooms.adapter = roomAdapter
                 binding.progressCircular.visibility = View.INVISIBLE
             }
 
