@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.24270833333333333" />
+        <entry key="app/src/main/res/layout/add_rooms_fragment.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/add_supplies_fragment.xml" value="0.4671875" />
+        <entry key="app/src/main/res/layout/fragment_augmented_reality.xml" value="0.5640625" />
+        <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/overview_fragment.xml" value="0.22864583333333333" />
+        <entry key="app/src/main/res/layout/room_recycle.xml" value="0.5397727272727273" />
+        <entry key="app/src/main/res/layout/supply_recycle.xml" value="0.48828125" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
