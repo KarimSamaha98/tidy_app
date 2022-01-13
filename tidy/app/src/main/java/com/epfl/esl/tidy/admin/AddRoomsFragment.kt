@@ -18,8 +18,8 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import com.epfl.esl.tidy.admin.AddRoomsViewModel
+import com.epfl.esl.tidy.admin.Room
 import com.epfl.esl.tidy.databinding.AddRoomsFragmentBinding
-import com.epfl.esl.tidy.overview.Room
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

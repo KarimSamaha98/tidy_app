@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.Response
+import com.epfl.esl.tidy.admin.Room
 import com.epfl.esl.tidy.databinding.FragmentOverviewBinding
 import com.epfl.esl.tidy.onGetDataListener
 

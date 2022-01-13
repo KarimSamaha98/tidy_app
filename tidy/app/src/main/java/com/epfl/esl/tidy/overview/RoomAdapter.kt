@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.epfl.esl.tidy.R
+import com.epfl.esl.tidy.admin.Room
 import com.squareup.picasso.Picasso
 
 class RoomAdapter(val context: Context?, val items: List<Room?>) :

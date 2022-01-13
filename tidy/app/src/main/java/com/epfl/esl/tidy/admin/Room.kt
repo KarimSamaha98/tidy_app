@@ -1,4 +1,4 @@
-package com.epfl.esl.tidy.overview
+package com.epfl.esl.tidy.admin
 
 data class Room (val room:String = "",
                  val description: String = "",
