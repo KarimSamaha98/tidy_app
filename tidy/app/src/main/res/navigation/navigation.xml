@@ -12,11 +12,11 @@
         android:label="fragment_profile_login"
         tools:layout="@layout/fragment_profile_login" >
         <action
-            android:id="@+id/action_profileLogin_to_TasksFragment"
-            app:destination="@id/TasksFragment" />
-        <action
             android:id="@+id/action_profileLogin_to_signUp"
             app:destination="@id/signUp" />
+        <action
+            android:id="@+id/action_profileLogin_to_OverviewFragment"
+            app:destination="@id/OverviewFragment" />
     </fragment>
 
     <fragment
@@ -25,13 +25,13 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
-            android:id="@+id/action_signUp_to_TasksFragment"
-            app:destination="@id/TasksFragment" />
+            android:id="@+id/action_signUp_to_profileLogin"
+            app:destination="@id/profileLogin" />
     </fragment>
 
     <fragment
         android:id="@+id/addRooms"
-        android:name="com.epfl.esl.tidy.admin.AddRooms"
+        android:name="com.epfl.esl.tidy.admin.AddRoomFragment"
         android:label="AddRooms" />
     <fragment
         android:id="@+id/addTasks"

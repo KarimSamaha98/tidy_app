@@ -1,6 +1,7 @@
 package com.epfl.esl.tidy.signin
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,7 @@ import com.google.firebase.database.*
 
 
 class ProfileLogin : Fragment() {
-
+    private val TAG = "ProfileLogin"
     private lateinit var binding: FragmentProfileLoginBinding
 
     var email: String = ""
@@ -97,11 +98,13 @@ class ProfileLogin : Fragment() {
                         //Change Fragments
                         (activity as MainActivity).setBottomNavigationVisibility(View.VISIBLE)
                         Navigation.findNavController(view)
-                .navigate(R.id.action_profileLogin_to_TasksFragment)}
+                .navigate(R.id.action_profileLogin_to_OverviewFragment)}
                 }
 
                  override fun onCancelled(error: DatabaseError) {
-                     TODO("Not yet implemented")
+                     Log.d(TAG, "DatabaseError: $error")
+                     Toast.makeText(context,"Database Error: $error",
+                         Toast.LENGTH_LONG).show()
                  }
              })
         }

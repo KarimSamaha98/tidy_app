@@ -57,7 +57,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_rooms"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="500dp"
             android:layout_marginTop="50dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
@@ -80,7 +80,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_supplies"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="300dp"
             android:layout_marginTop="50dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"

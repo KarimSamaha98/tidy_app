@@ -56,7 +56,7 @@ class SignUp : Fragment() {
             sendDataToFireBase()
             (activity as MainActivity).setBottomNavigationVisibility(View.VISIBLE)
             (activity as MainActivity).loginInfo = UserDataClass(email=email, password=password, first_name=first_name, last_name=last_name, space_id=space_id, key=key, admin="0")
-            Navigation.findNavController(view).navigate(R.id.action_signUp_to_TasksFragment)
+            Navigation.findNavController(view).navigate(R.id.action_signUp_to_profileLogin)
         }
 
         return binding.root
