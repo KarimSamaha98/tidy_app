@@ -16,6 +16,5 @@ data class Response (
 
 interface onGetDataListener {
     fun onSuccess(response: Response)
-    fun onStart()
     fun onFailure(response: Response)
 }

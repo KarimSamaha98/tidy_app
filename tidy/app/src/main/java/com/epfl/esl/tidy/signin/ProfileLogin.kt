@@ -90,6 +90,7 @@ class ProfileLogin : Fragment() {
                     if (!correctUsername) {
                         Toast.makeText(context,"You should register first.",
                             Toast.LENGTH_LONG).show()
+                        //TODO If the username wrong should take them back to fill in username info, otherwise they have no way of correcting a username mistake.
                     }
 
                     if (correctUsername && correctPassword) {

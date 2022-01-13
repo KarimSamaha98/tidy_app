@@ -2,7 +2,7 @@ package com.epfl.esl.tidy.admin
 
 data class Room (val room:String = "",
                  val description: String = "",
-                 val imageUrl: String = ""){
+                 var imageUrl: String = ""){
     val roomID: Int
 //    TODO fix this mapping so can add multiple bathrooms and multiple items
     init {

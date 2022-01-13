@@ -1,9 +1,11 @@
 package com.epfl.esl.tidy.overview
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.epfl.esl.tidy.Response
+import com.epfl.esl.tidy.admin.Room
 import com.epfl.esl.tidy.datalayer.FirebaseRepository
 import com.epfl.esl.tidy.onGetDataListener
+import com.epfl.esl.tidy.utils.Constants
 
 
 class OverviewViewModel : ViewModel() {
@@ -14,10 +16,8 @@ class OverviewViewModel : ViewModel() {
     }
 
     fun getRoomDetails(onGetDataListener: onGetDataListener) {
-        repository.getRoomDetails(tempID, onGetDataListener)
+        repository.getSpaceIdSnapshot(tempID, onGetDataListener) { r, d ->
+            repository.getRooms(r, d)
+        }
     }
-
-//    private fun setValue(input: Response) {
-//        mutableLiveData.postValue(input)
-//    }
 }

@@ -15,6 +15,10 @@ import com.epfl.esl.tidy.admin.Room
 import com.epfl.esl.tidy.databinding.FragmentOverviewBinding
 import com.epfl.esl.tidy.onGetDataListener
 
+//TODO get supplies recycler view working
+//TODO when you click on Tile it opens up the room page. Need onclick listeners for Recycler view
+
+
 class OverviewFragment : Fragment() {
 
     companion object {
@@ -45,10 +49,6 @@ class OverviewFragment : Fragment() {
                 )
                 binding.recyclerViewRooms.adapter = roomAdapter
                 binding.progressCircular.visibility = View.INVISIBLE
-            }
-
-            override fun onStart() {
-                Log.d(TAG, "Listener Started")
             }
 
             override fun onFailure(response: Response) {

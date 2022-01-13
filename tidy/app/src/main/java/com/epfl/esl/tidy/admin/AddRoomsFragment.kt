@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,25 +18,34 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import com.epfl.esl.tidy.admin.AddRoomsViewModel
 import com.epfl.esl.tidy.admin.Room
 import com.epfl.esl.tidy.databinding.AddRoomsFragmentBinding
-import com.google.android.gms.tasks.Task
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.storage.FirebaseStorage
+import com.epfl.esl.tidy.overview.RoomAdapter
+import com.epfl.esl.tidy.utils.Constants
+import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
-import java.security.KeyStore
 
-class AddRooms : Fragment() {
+//TODO AddRooms doesn't update once a room is added, have to leave and come back. Maybe need different listener
+//TODO Make Rooms a dropdown to select and add in rather than a free text. Then need to update the Room dataclass
+//TODO If you click on an item then you should be able to edits its information.
+//TODO move Firebase code to Firebase repository, but it kind of sucks to refactor... keep running into problems.
+
+class AddRoomsFragment : Fragment() {
 
     companion object {
-        fun newInstance() = AddRooms()
+        fun newInstance() = AddRoomsFragment()
     }
-
+    private val TAG : String = "AddRoomsFragment"
     private lateinit var viewModel: AddRoomsViewModel
     private lateinit var binding: AddRoomsFragmentBinding
+    private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+    private val spaceRef: DatabaseReference = database.getReference(Constants.SPACEIDS)
+    private var storageRef: StorageReference = Firebase.storage.reference
 
     var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -55,12 +65,31 @@ class AddRooms : Fragment() {
             inflater, R.layout.add_rooms_fragment,
             container, false
         )
+        viewModel = ViewModelProvider(this).get(AddRoomsViewModel::class.java)
+
+        binding.recyclerViewRooms.layoutManager = GridLayoutManager(activity, 3)
 
         binding.roomImage.setOnClickListener {
             val imgIntent = Intent(Intent.ACTION_GET_CONTENT)
             imgIntent.setType("image/*")
             resultLauncher.launch(imgIntent)
         }
+
+        viewModel.getRoomDetails(object : onGetDataListener {
+            override fun onSuccess(response: Response) {
+                val roomAdapter = RoomAdapter(
+                    context = context,
+//                  TODO: have to be careful this will give nullpointer exception if response.objectList doesnt get a value
+                    items = response.objectList as List<Room?>,
+                )
+                binding.recyclerViewRooms.adapter = roomAdapter
+                binding.progressCircular.visibility = View.INVISIBLE
+            }
+
+            override fun onFailure(response: Response) {
+                Log.d(TAG, "Listener Failed with error: ${response.exception.toString()}")
+            }
+        })
 
         binding.AddRoomButton.setOnClickListener {
             viewModel.roomName = binding.roomName.text.toString()
@@ -73,7 +102,8 @@ class AddRooms : Fragment() {
             } else if (viewModel.imageUri == null) {
                 Toast.makeText(context, "Pick an image for the room", Toast.LENGTH_SHORT).show()
             } else {
-                viewModel.roomRef.addListenerForSingleValueEvent(object : ValueEventListener {
+//              TODO: Refactor out of Fragment.
+                viewModel.spaceRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                         var isRegistered = false
@@ -105,7 +135,9 @@ class AddRooms : Fragment() {
                                 "Your room is registered to Firebase",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            sendDataToFireBase()
+                            var imageBitmap =
+                                MediaStore.Images.Media.getBitmap(context?.contentResolver, viewModel.imageUri)
+                            viewModel.sendImagetoFirebase(imageBitmap)
                         }
                     }
 
@@ -115,78 +147,14 @@ class AddRooms : Fragment() {
         }
 
 
+
+
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AddRoomsViewModel::class.java)
     }
 
 //    TODO move this to view model.
-    fun sendDataToFireBase() {
-        val matrix = Matrix()
-        matrix.postRotate(90F)
-
-        var imageBitmap =
-            MediaStore.Images.Media.getBitmap(context?.contentResolver, viewModel.imageUri)
-        val ratio: Float = 13F
-
-        val imageBitmapScaled = Bitmap.createScaledBitmap(
-            imageBitmap,
-            (imageBitmap.width / ratio).toInt(),
-            (imageBitmap.height / ratio).toInt(),
-            false
-        )
-        imageBitmap = Bitmap.createBitmap(
-            imageBitmapScaled,
-            0,
-            0,
-            (imageBitmap.width / ratio).toInt(),
-            (imageBitmap.height / ratio).toInt(),
-            matrix,
-            true
-        )
-
-        val stream = ByteArrayOutputStream()
-        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-        val imageByteArray = stream.toByteArray()
-
-//        TODO put in timestamp so this is unique.
-        val profileImageRef =
-            viewModel.storageRef.child("RoomImages/" + viewModel.tempID.toString() + "_" + viewModel.roomMapping[viewModel.roomName].toString() + ".jpg")
-
-        profileImageRef.putBytes(imageByteArray).addOnFailureListener {
-            Toast.makeText(context, "Room image upload to firebase was failed.", Toast.LENGTH_SHORT)
-                .show()
-
-        }.addOnSuccessListener { taskSnapshot ->
-//            Get a URL that points to our data and can be used by Picasso to easily load image.
-//            Not sure if this is the best way to do this...
-            taskSnapshot.metadata?.reference?.downloadUrl?.addOnSuccessListener { uri: Uri ->
-//                TODO check if you spam button multiple times what happens.
-//                Note: This will only upload data if photo is also loaded. could also change this behavior.
-                viewModel.imageUrl = uri.toString()
-                val room = Room(viewModel.roomName, viewModel.roomDescription, viewModel.imageUrl)
-                val key = viewModel.roomRef.push().key.toString()
-                viewModel.roomRef.child(viewModel.tempID_key)
-                    .child("Rooms")
-                    .child(key)
-                    .setValue(room)
-
-                Handler(Looper.getMainLooper()).postDelayed({ binding.progressBar.progress = 0 }, 500)
-
-            }?.addOnFailureListener {
-                Toast.makeText(context, "No Image URL saved.", Toast.LENGTH_SHORT)
-                    .show()
-            }
-
-        }.addOnProgressListener { taskSnapshot ->
-//            TODO is this working as expected?
-            val progress: Double =
-                (100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount)
-            binding.progressBar.progress = progress.toInt()
-        }
-
-    }
 }
