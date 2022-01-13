@@ -31,6 +31,7 @@ import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
 
 //TODO AddRooms doesn't update once a room is added, have to leave and come back. Maybe need different listener
+//TODO also doesn't check for dupliate rooms anymore... stopped working.
 //TODO Make Rooms a dropdown to select and add in rather than a free text. Then need to update the Room dataclass
 //TODO If you click on an item then you should be able to edits its information.
 //TODO move Firebase code to Firebase repository, but it kind of sucks to refactor... keep running into problems.
