@@ -15,7 +15,6 @@ import com.google.firebase.database.*
 
 
 class ProfileLogin : Fragment() {
-
     private lateinit var binding: FragmentProfileLoginBinding
 
     var email: String = ""
@@ -28,8 +27,6 @@ class ProfileLogin : Fragment() {
     lateinit var image : Uri
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val profileRef: DatabaseReference = database.getReference("Profiles")
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,7 +109,6 @@ class ProfileLogin : Fragment() {
         }
         return binding.root
     }
-
 }
 
 //R.layout.fragment_profile_login

@@ -9,7 +9,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.epfl.esl.tidy.databinding.ActivityMainBinding
 import com.epfl.esl.tidy.signin.UserDataClass
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 

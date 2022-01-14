@@ -8,9 +8,19 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.epfl.esl.tidy.R
 
-class TasksAdapter (val context: Context, val task_names: ArrayList<String>,
+class TasksAdapter (val context: Context?, val task_names: ArrayList<String>,
                     val due_dates: ArrayList<String>, val users: ArrayList<String>) :
     RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
+
+    fun deleteItem(i : Int){
+        task_names.removeAt(i)
+        due_dates.removeAt(i)
+        users.removeAt(i)
+
+        notifyDataSetChanged()
+    }
+
+
     /**
      * Inflates the item views which is designed in xml layout file
      */
@@ -58,4 +68,5 @@ class TasksAdapter (val context: Context, val task_names: ArrayList<String>,
         var taskDueDates: TextView = view.findViewById<TextView>(R.id.task_due_date)
         var taskUsers: TextView = view.findViewById<TextView>(R.id.task_user)
     }
+
 }

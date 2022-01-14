@@ -28,6 +28,7 @@ class TasksViewModel : ViewModel() {
     val tasks_list = ArrayList<String>()
     val dueDate_list = ArrayList<String>()
     val user_list = ArrayList<String>()
+    val rank = ArrayList<String>()
 
 
 
@@ -64,7 +65,7 @@ class TasksViewModel : ViewModel() {
     fun checkDate() {
         val dayOfWeek = cal.get(Calendar.DAY_OF_WEEK) // indexed starting at 1 for Sunday
         println("DAY $dayOfWeek")
-        if (dayOfWeek == 6){
+        if (dayOfWeek == 1){
             assignTasks = true
             val today = LocalDate.now()
             println(today.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)))
