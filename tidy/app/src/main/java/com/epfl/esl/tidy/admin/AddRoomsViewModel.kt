@@ -32,6 +32,7 @@ class AddRoomsViewModel(application: Application) : AndroidViewModel(application
     var imageUrl : String
     val tempID = 0
     var tempID_key : String
+    var itemList : List<Room?>? = null
 
     lateinit var listener : ValueEventListener
     private val statusMessage = MutableLiveData<Event<String>>()
@@ -80,7 +81,8 @@ class AddRoomsViewModel(application: Application) : AndroidViewModel(application
                             break@loop
                         }
                     }
-                    if (!isRegistered) {
+//                    TODO do I need this check
+                    if (!isRegistered && imageUri != null) {
                         statusMessage.value = Event("Your room is registered to Firebase")
                         val imageBitmap =
                             MediaStore.Images.Media.getBitmap(

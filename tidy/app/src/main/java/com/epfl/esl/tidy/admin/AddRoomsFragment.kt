@@ -30,12 +30,15 @@ import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
+import com.squareup.picasso.Picasso
 import java.io.ByteArrayOutputStream
 
 //TODO Make Rooms a dropdown to select and add in rather than a free text. Then need to update the Room dataclass
-//TODO If you click on an item then you should be able to edits its information.
+//TODO Figure out clearing informaiton and updating rooms and information
+//TODO Sort recycler view by most recent added
 
-class AddRoomsFragment : Fragment() {
+
+class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
 
     companion object {
         fun newInstance() = AddRoomsFragment()
@@ -80,7 +83,7 @@ class AddRoomsFragment : Fragment() {
                 Toast.makeText(context, "Enter a room name.", Toast.LENGTH_SHORT).show()
             } else if (viewModel.roomDescription == "") {
                 Toast.makeText(context, "Enter a room description.", Toast.LENGTH_SHORT).show()
-            } else if (viewModel.imageUri == null) {
+            } else if (viewModel.imageUri == null && viewModel.imageUrl == "") {
                 Toast.makeText(context, "Pick an image for the room", Toast.LENGTH_SHORT).show()
             } else {
                 viewModel.checkExistingRooms()
@@ -96,6 +99,33 @@ class AddRoomsFragment : Fragment() {
         return binding.root
     }
 
+    private fun clearInfo() {
+        viewModel.imageUrl = ""
+        viewModel.roomName = ""
+        viewModel.roomDescription = ""
+
+        binding.roomName.setText(viewModel.roomName)
+        binding.roomDescription.setText(viewModel.roomDescription)
+//        TODO Not sure why its not just letting me set it.
+        binding.roomImage.setImageDrawable(getResources().getDrawable(R.drawable.pick_image))
+    }
+
+    override fun onItemClick(position: Int) {
+        Toast.makeText(context, "Item $position clicked", Toast.LENGTH_SHORT).show()
+        val clickedItem = viewModel.itemList?.get(position)
+
+//        TODO not sure why adding !! fixed this error here...
+        viewModel.imageUrl = clickedItem!!.imageUrl
+        viewModel.roomName = clickedItem.room
+        viewModel.roomDescription = clickedItem.description
+
+        binding.roomName.setText(viewModel.roomName)
+        binding.roomDescription.setText(viewModel.roomDescription)
+        Picasso.with(context)
+            .load(viewModel.imageUrl)
+            .into(binding.roomImage)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
     }
@@ -104,7 +134,8 @@ class AddRoomsFragment : Fragment() {
         super.onStart()
         viewModel.getRoomDetails(object : onGetDataListener {
             override fun onSuccess(response: Response) {
-                response.objectList?.let { updateBinding(it as List<Room?>) }
+                viewModel.itemList = response.objectList as List<Room?>?
+                viewModel.itemList?.let { updateBinding(it) }
             }
             override fun onFailure(response: Response) {
                 response.exception?.let{ Toast.makeText(
@@ -121,9 +152,11 @@ class AddRoomsFragment : Fragment() {
             context = context,
 //                 TODO: have to be careful this will give nullpointer exception if response.objectList doesnt get a value
             items = items,
+            this
         )
         binding.recyclerViewRooms.adapter = roomAdapter
         binding.progressCircular.visibility = View.INVISIBLE
+
     }
 
     override fun onStop() {

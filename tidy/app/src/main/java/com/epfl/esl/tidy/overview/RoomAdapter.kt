@@ -13,7 +13,8 @@ import com.epfl.esl.tidy.admin.Room
 import com.squareup.picasso.Picasso
 
 class RoomAdapter(val context: Context?,
-                  val items: List<Room?>,) :
+                  val items: List<Room?>,
+                  private val listener : OnItemClickListener) :
     RecyclerView.Adapter<RoomAdapter.ViewHolder>() {
     /**
      * Inflates the item views which is designed in xml layout file
@@ -58,9 +59,25 @@ class RoomAdapter(val context: Context?,
     /**
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
      */
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
         // Holds the TextView that will add each item to
         var tvItem = view.findViewById<TextView>(R.id.room_name)
         var tvItem_2 = view.findViewById<ImageView>(R.id.room_photo)
+
+        init {
+            view.setOnClickListener(this)
+        }
+
+        override fun onClick(p0: View?) {
+            val position : Int = bindingAdapterPosition
+//            Make sure position is not invalid, for example if deleting an element during animation.
+            if(position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
+            }
+        }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
     }
 }
