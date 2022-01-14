@@ -17,54 +17,45 @@ import com.google.firebase.database.ValueEventListener
 import java.util.*
 
 class AddNewTask : Fragment() {
-    companion object {
-        fun newInstance() = AddNewTask()
-    }
-
     private lateinit var binding: FragmentAddTasksBinding
-    private lateinit var viewModelNew: AddNewTaskViewModel
+    private lateinit var viewModel: AddNewTaskViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_add_tasks,
             container, false
         )
 
         binding.AddTaskButton.setOnClickListener {
-            viewModelNew.newTask = binding.taskName.text.toString()
-            viewModelNew.taskDescription = binding.taskDescription.text.toString()
+            viewModel.newTask = binding.taskName.text.toString()
+            viewModel.taskDescription = binding.taskDescription.text.toString()
 
-            if (viewModelNew.newTask == "") {
+            if (viewModel.newTask == "") {
                 Toast.makeText(context, "Enter the tile of the task.", Toast.LENGTH_SHORT).show()
             }
             else {
-                viewModelNew.taskKey = Random().nextInt().toString()
-
-                viewModelNew.tasksRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                viewModel.tasksRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         var taskExists = false
 
                         // Check if task already exists
                         loop@ for (task in dataSnapshot.children) {
                             if (task.child("Title")
-                                    .getValue(String::class.java)!! == viewModelNew.newTask
+                                    .getValue(String::class.java)!! == viewModel.newTask
                             ) {
                                 taskExists = true
 
                                 if (task.child("Description")
-                                        .getValue(String::class.java)!! == viewModelNew.taskDescription){
+                                        .getValue(String::class.java)!! == viewModel.taskDescription){
                                     Toast.makeText(
                                         context, "Task and description already exists.",
                                         Toast.LENGTH_SHORT).show()
                                 }
                                 else {
-                                    viewModelNew.taskKey = viewModelNew.tasksRef.push().key.toString()
-                                    viewModelNew.tasksRef.child(viewModelNew.taskKey).child("Description")
-                                        .setValue(viewModelNew.taskDescription)
+                                    viewModel.taskKey = task.key.toString()
+                                    viewModel.tasksRef.child(viewModel.taskKey).child("Description")
+                                        .setValue(viewModel.taskDescription)
                                     Toast.makeText(
                                         context, "Task exists, updating description.",
                                         Toast.LENGTH_SHORT).show()
@@ -75,9 +66,9 @@ class AddNewTask : Fragment() {
 
                         // If task does not exist we create new task
                         if (!taskExists) {
-                            viewModelNew.taskKey = Random().nextInt().toString()
+                            viewModel.taskKey = viewModel.tasksRef.push().key.toString()
                             // Send tasks data to firebase
-                            viewModelNew.sendDataToFireBase()
+                            viewModel.sendDataToFireBase()
 
                             Toast.makeText(
                                 context,"New task created",
@@ -93,6 +84,6 @@ class AddNewTask : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModelNew = ViewModelProvider(this).get(AddNewTaskViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(AddNewTaskViewModel::class.java)
     }
 }

@@ -6,4 +6,6 @@ object Constants {
     const val SPACEID: String = "Space_ID"
     const val PROFILES: String = "Profiles"
     const val SUPPLIES: String = "Supplies"
+    const val TASKS: String = "Tasks"
+    const val USERS: String = "Users"
 }

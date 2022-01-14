@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.epfl.esl.tidy.databinding.FragmentProfileLoginBinding
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
+import com.epfl.esl.tidy.signin.UserDataClass
 import com.google.firebase.database.*
 
 
@@ -96,7 +97,7 @@ class ProfileLogin : Fragment() {
                         //Change Fragments
                         (activity as MainActivity).setBottomNavigationVisibility(View.VISIBLE)
                         Navigation.findNavController(view)
-                .navigate(R.id.action_profileLogin_to_taskView)}
+                .navigate(R.id.action_profileLogin_to_TasksFragment)}
                 }
 
                  override fun onCancelled(error: DatabaseError) {
