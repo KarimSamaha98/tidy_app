@@ -27,37 +27,35 @@ class FirebaseRepository {
     private var storageRef: StorageReference = Firebase.storage.reference
 
 
-    fun registerUser() {
+    fun checkSpaceId(snapshot: DataSnapshot, spaceID : Int) : DataSnapshot? {
+        for (space in snapshot.children) {
+            return if (space.child(Constants.SPACEID).getValue(Int::class.java)!! == spaceID)
+                space else null
+        }
+        return null
     }
 
     fun getSpaceIdSnapshot(
         spaceID: Int,
         onGetDataListener: onGetDataListener,
-        function: (response: Response, space: DataSnapshot) -> (Unit)
-    ) {
+        pullData: (response: Response, space: DataSnapshot) -> (Unit)
+    ): ValueEventListener {
         val response = Response()
 
         var roomListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                for (space in snapshot.children) {
-                    if (space.child(Constants.SPACEID).getValue(Int::class.java)!! == spaceID) {
-//                        response.objectList =
-//                            space.child(Constants.ROOMS).children.map { snapShot ->
-//                                snapShot.getValue(Room::class.java)
-//                            }
-                        function(response, space)
-                    }
-                }
+                checkSpaceId(snapshot, spaceID)?.let { pullData(response, it) }
                 onGetDataListener.onSuccess(response)
             }
 
             override fun onCancelled(error: DatabaseError) {
-                response.exception = Throwable(error.toString())
+                response.exception = Throwable("DatabaseError: $error")
                 onGetDataListener.onFailure(response)
-                Log.d(TAG, "Database Error: ${error.toString()}")
+                Log.d(TAG, "Database Error: $error")
             }
         }
-        spaceRef.addListenerForSingleValueEvent(roomListener)
+//        spaceRef.addListenerForSingleValueEvent(roomListener)
+        return spaceRef.addValueEventListener(roomListener)
     }
 
     fun getRooms(response: Response, space: DataSnapshot): Unit {
@@ -75,43 +73,41 @@ class FirebaseRepository {
     }
 
     fun processImage(imageBitmap: Bitmap): ByteArray {
-        val matrix = Matrix()
-//        var imageBitmap =
-//            MediaStore.Images.Media.getBitmap(context?.contentResolver, viewModel.imageUri)
-        val ratio: Float = 13F
-
-        val imageBitmapScaled = Bitmap.createScaledBitmap(
-            imageBitmap,
-            (imageBitmap.width / ratio).toInt(),
-            (imageBitmap.height / ratio).toInt(),
-            false
-        )
-        val newImageBitmap = Bitmap.createBitmap(
-            imageBitmapScaled,
-            0,
-            0,
-            (imageBitmap.width / ratio).toInt(),
-            (imageBitmap.height / ratio).toInt(),
-            matrix,
-            true
-        )
+//        val matrix = Matrix()
+////        var imageBitmap =
+////            MediaStore.Images.Media.getBitmap(context?.contentResolver, viewModel.imageUri)
+//        val ratio: Float = 13F
+//
+//        val imageBitmapScaled = Bitmap.createScaledBitmap(
+//            imageBitmap,
+//            (imageBitmap.width / ratio).toInt(),
+//            (imageBitmap.height / ratio).toInt(),
+//            false
+//        )
+//        val newImageBitmap = Bitmap.createBitmap(
+//            imageBitmapScaled,
+//            0,
+//            0,
+//            (imageBitmap.width / ratio).toInt(),
+//            (imageBitmap.height / ratio).toInt(),
+//            matrix,
+//            true
+//        )
+        val newImageBitmap = imageBitmap
 
         val stream = ByteArrayOutputStream()
-        newImageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        newImageBitmap.compress(Bitmap.CompressFormat.PNG, 80, stream)
         val imageByteArray = stream.toByteArray()
 
         return imageByteArray
     }
 
-    //TODO Problem here with dataclass. I waant to make this function multi puprose but it is failing a bit because you have to specify a dataclass type. If I just use any then it breaks because I need to use information in the class to add it to the dataclass
-    //TODO also how to deal with propogating the toast errors through to the UI
     fun sendDataToFireBase(imageBitmap: Bitmap,
                            saveString: String,
                            childName: String,
                            tempID_key: String,
-                           dataClass: Room,
-                           //TODO here specify dataaClass as Room, not general at all.
-                           function: (uri: Uri, dataClass: Room, tempID_key: String, childName: String) -> (Unit)) {
+                           dataClass: Any,
+                           putData: (uri: Uri, dataClass: Any, tempID_key: String, childName: String) -> (Unit)) {
         val imageByteArray = processImage(imageBitmap)
 
         val profileImageRef = storageRef.child("RoomImages/$saveString.jpg")
@@ -127,7 +123,7 @@ class FirebaseRepository {
             taskSnapshot.metadata?.reference?.downloadUrl?.addOnSuccessListener { uri: Uri ->
 //                TODO check if you spam button multiple times what happens.
 //                Note: This will only upload data if photo is also loaded. could also change this behavior.
-                function(uri, dataClass, tempID_key, childName)
+                putData(uri, dataClass, tempID_key, childName)
 
 //                Handler(Looper.getMainLooper()).postDelayed({ binding.progressBar.progress = 0 }, 500)
 
@@ -136,21 +132,26 @@ class FirebaseRepository {
 //                    .show()
             }
 
-        }.addOnProgressListener { taskSnapshot ->
+        }
+//            .addOnProgressListener { taskSnapshot ->
 //            TODO is this working as expected?
 //            val progress: Double =
 //                (100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount)
 //            binding.progressBar.progress = progress.toInt()
-        }
+//        }
 
     }
-    fun putRoom(uri: Uri, dataClass: Room, tempID_key: String, childName: String){
-        //TODO this is where it brakes. If I want to add dataCLass : Supply it won't work with the declaration above.
-        dataClass.imageUrl = uri.toString()
+    fun putRoom(uri: Uri, room: Room, tempID_key: String, childName: String){
+        room.imageUrl = uri.toString()
         val key = spaceRef.push().key.toString()
         spaceRef.child(tempID_key)
             .child(childName)
             .child(key)
-            .setValue(dataClass)
+            .setValue(room)
+    }
+
+
+    fun removeListener(listener: ValueEventListener) {
+        spaceRef.removeEventListener(listener)
     }
 }

@@ -18,6 +18,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.epfl.esl.tidy.admin.AddRoomsViewModel
 import com.epfl.esl.tidy.admin.Room
@@ -30,11 +32,8 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
 
-//TODO AddRooms doesn't update once a room is added, have to leave and come back. Maybe need different listener
-//TODO also doesn't check for dupliate rooms anymore... stopped working.
 //TODO Make Rooms a dropdown to select and add in rather than a free text. Then need to update the Room dataclass
 //TODO If you click on an item then you should be able to edits its information.
-//TODO move Firebase code to Firebase repository, but it kind of sucks to refactor... keep running into problems.
 
 class AddRoomsFragment : Fragment() {
 
@@ -42,11 +41,8 @@ class AddRoomsFragment : Fragment() {
         fun newInstance() = AddRoomsFragment()
     }
     private val TAG : String = "AddRoomsFragment"
-    private lateinit var viewModel: AddRoomsViewModel
+    private lateinit var viewModel : AddRoomsViewModel
     private lateinit var binding: AddRoomsFragmentBinding
-    private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-    private val spaceRef: DatabaseReference = database.getReference(Constants.SPACEIDS)
-    private var storageRef: StorageReference = Firebase.storage.reference
 
     var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -76,22 +72,6 @@ class AddRoomsFragment : Fragment() {
             resultLauncher.launch(imgIntent)
         }
 
-        viewModel.getRoomDetails(object : onGetDataListener {
-            override fun onSuccess(response: Response) {
-                val roomAdapter = RoomAdapter(
-                    context = context,
-//                  TODO: have to be careful this will give nullpointer exception if response.objectList doesnt get a value
-                    items = response.objectList as List<Room?>,
-                )
-                binding.recyclerViewRooms.adapter = roomAdapter
-                binding.progressCircular.visibility = View.INVISIBLE
-            }
-
-            override fun onFailure(response: Response) {
-                Log.d(TAG, "Listener Failed with error: ${response.exception.toString()}")
-            }
-        })
-
         binding.AddRoomButton.setOnClickListener {
             viewModel.roomName = binding.roomName.text.toString()
             viewModel.roomDescription = binding.roomDescription.text.toString()
@@ -103,52 +83,15 @@ class AddRoomsFragment : Fragment() {
             } else if (viewModel.imageUri == null) {
                 Toast.makeText(context, "Pick an image for the room", Toast.LENGTH_SHORT).show()
             } else {
-//              TODO: Refactor out of Fragment.
-                viewModel.spaceRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                        var isRegistered = false
-
-                        loop@ for (space in dataSnapshot.children) {
-                            if (space.child("Space_ID")
-                                    .getValue(Int::class.java)!! == viewModel.tempID
-                            ) {
-                                viewModel.tempID_key = space.key.toString()
-                                for (rooms in space.child("Rooms").children) {
-
-                                    if (viewModel.roomMapping[viewModel.roomName] == rooms.child("Room_ID")
-                                            .getValue(Int::class.java) ?: break@loop
-                                    ) {
-                                        Toast.makeText(
-                                            context,
-                                            "This room is already registered to Firebase. Use another room",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                        isRegistered = true
-                                        break@loop
-                                    }
-                                }
-                            }
-                        }
-                        if (isRegistered == false) {
-                            Toast.makeText(
-                                context,
-                                "Your room is registered to Firebase",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            var imageBitmap =
-                                MediaStore.Images.Media.getBitmap(context?.contentResolver, viewModel.imageUri)
-                            viewModel.sendImagetoFirebase(imageBitmap)
-                        }
-                    }
-
-                    override fun onCancelled(databaseError: DatabaseError) {}
-                })
+                viewModel.checkExistingRooms()
             }
         }
 
-
-
+        viewModel.message.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+            }
+        })
 
         return binding.root
     }
@@ -157,5 +100,34 @@ class AddRoomsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
     }
 
-//    TODO move this to view model.
+    override fun onStart() {
+        super.onStart()
+        viewModel.getRoomDetails(object : onGetDataListener {
+            override fun onSuccess(response: Response) {
+                response.objectList?.let { updateBinding(it as List<Room?>) }
+            }
+            override fun onFailure(response: Response) {
+                response.exception?.let{ Toast.makeText(
+                    context,
+                    it.toString(),
+                    Toast.LENGTH_SHORT
+                ).show()}
+            }
+        })
+    }
+
+    fun updateBinding(items: List<Room?>) {
+        val roomAdapter = RoomAdapter(
+            context = context,
+//                 TODO: have to be careful this will give nullpointer exception if response.objectList doesnt get a value
+            items = items,
+        )
+        binding.recyclerViewRooms.adapter = roomAdapter
+        binding.progressCircular.visibility = View.INVISIBLE
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.removeListener()
+    }
 }

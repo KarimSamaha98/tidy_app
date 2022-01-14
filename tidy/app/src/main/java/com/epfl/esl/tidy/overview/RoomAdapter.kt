@@ -12,7 +12,8 @@ import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.admin.Room
 import com.squareup.picasso.Picasso
 
-class RoomAdapter(val context: Context?, val items: List<Room?>) :
+class RoomAdapter(val context: Context?,
+                  val items: List<Room?>,) :
     RecyclerView.Adapter<RoomAdapter.ViewHolder>() {
     /**
      * Inflates the item views which is designed in xml layout file
