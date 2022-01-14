@@ -8,4 +8,5 @@ object Constants {
     const val SUPPLIES: String = "Supplies"
     const val TASKS: String = "Tasks"
     const val USERS: String = "Users"
+    const val CURRTASK: String = "Current tasks"
 }
