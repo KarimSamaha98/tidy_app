@@ -5,6 +5,7 @@
     <string name="pick_image">Pick image</string>
     <string name="room">Room</string>
     <string name="room_description">Add a description of the room</string>
+    <string name="supply_description">Add a description of the supply</string>
     <string name="add_room">Add Room</string>
 
     <!-- Task view items -->
@@ -33,4 +34,18 @@
     <string name="task_view">Tasks</string>
     <string name="settings">Settings</string>
     <string name="augmented_reality">Augmented Reality</string>
+    <string name="supplies">Supplies</string>
+    <string name="rooms">Rooms</string>
+    <string name="supply_dropdown">Select Supplies</string>
+    <string-array name="supplies">
+        <item>Vaccum Cleaner</item>
+        <item>Broom</item>
+        <item>Mop</item>
+        <item>All Purpose Cleaner</item>
+        <item>Window Cleaner</item>
+        <item>Bathroom Cleaner</item>
+        <item>Bleach</item>
+        <item>Rags</item>
+        <item>Bucket</item>
+    </string-array>
 </resources>

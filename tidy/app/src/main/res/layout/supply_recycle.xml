@@ -5,7 +5,7 @@
     tools:context=".overview.OverviewFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/room_item"
+        android:id="@+id/supply_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
@@ -16,22 +16,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/room_photo"
-            android:layout_width="match_parent"
-            android:layout_height="0px"
-            android:layout_weight="3"
-            android:adjustViewBounds="true"
-            app:srcCompat="@drawable/pick_image" />
+            <ImageView
+                android:id="@+id/supply_photo"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="3"
+                android:adjustViewBounds="true"
+                app:srcCompat="@drawable/pick_image" />
 
-        <TextView
-            android:id="@+id/room_name"
-            android:layout_width="match_parent"
-            android:layout_height="0px"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="30sp"
-            android:text="Room 1" />
+            <TextView
+                android:id="@+id/supply_name"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="30sp"
+                android:text="Supply 1" />
 
         </LinearLayout>
 

@@ -1,4 +1,4 @@
-package com.epfl.esl.tidy
+package com.epfl.esl.tidy.tasks
 
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.*

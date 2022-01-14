@@ -84,7 +84,7 @@
             android:layout_width="239dp"
             android:layout_height="190dp"
             android:layout_marginTop="284dp"
-            android:src="@drawable/broom"
+            android:src="@drawable/user"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.122"
             app:layout_constraintStart_toStartOf="parent"

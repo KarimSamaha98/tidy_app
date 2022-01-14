@@ -3,53 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/profileLogin">
+    app:startDestination="@id/addRoomsFragment">
 
 
     <fragment
         android:id="@+id/profileLogin"
-        android:name="com.epfl.esl.tidy.ProfileLogin"
+        android:name="com.epfl.esl.tidy.signin.ProfileLogin"
         android:label="fragment_profile_login"
         tools:layout="@layout/fragment_profile_login" >
         <action
-            android:id="@+id/action_profileLogin_to_TasksFragment"
-            app:destination="@id/TasksFragment" />
-        <action
             android:id="@+id/action_profileLogin_to_signUp"
             app:destination="@id/signUp" />
+        <action
+            android:id="@+id/action_profileLogin_to_OverviewFragment"
+            app:destination="@id/OverviewFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/signUp"
-        android:name="com.epfl.esl.tidy.SignUp"
+        android:name="com.epfl.esl.tidy.signin.SignUp"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
-            android:id="@+id/action_signUp_to_TasksFragment"
-            app:destination="@id/TasksFragment" />
+            android:id="@+id/action_signUp_to_profileLogin"
+            app:destination="@id/profileLogin" />
     </fragment>
     <fragment
-        android:id="@+id/history"
-        android:name="com.epfl.esl.tidy.History"
-        android:label="fragment_history"
-        tools:layout="@layout/fragment_history" />
-
-    <fragment
-        android:id="@+id/addRooms"
-        android:name="com.epfl.esl.tidy.AddRooms"
-        android:label="AddRooms" />
-    <fragment
         android:id="@+id/addTasks"
-        android:name="com.epfl.esl.tidy.AddNewTask"
+        android:name="com.epfl.esl.tidy.tasks.AddNewTask"
         android:label="fragment_add_tasks"/>
 
     <fragment
         android:id="@+id/OverviewFragment"
-        android:name="com.epfl.esl.tidy.OverviewFragment"
+        android:name="com.epfl.esl.tidy.overview.OverviewFragment"
         android:label="OverviewFragment" />
     <fragment
         android:id="@+id/TasksFragment"
-        android:name="com.epfl.esl.tidy.TasksFragment"
+        android:name="com.epfl.esl.tidy.tasks.TasksFragment"
         android:label="TasksFragment" >
         <action
             android:id="@+id/action_TasksFragment_to_addTasks"
@@ -57,19 +47,17 @@
     </fragment>
     <fragment
         android:id="@+id/settings"
-        android:name="com.epfl.esl.tidy.Settings"
+        android:name="com.epfl.esl.tidy.signin.Settings"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
             android:id="@+id/action_settings_to_profileLogin"
             app:destination="@id/profileLogin" />
     </fragment>
-
     <fragment
-        android:id="@+id/augmentedReality"
-        android:name="com.epfl.esl.tidy.AugmentedReality"
-        android:label="fragment_augmented_reality"
-        tools:layout="@layout/fragment_augmented_reality" />
+        android:id="@+id/addRoomsFragment"
+        android:name="com.epfl.esl.tidy.AddRoomsFragment"
+        android:label="AddRoomsFragment" />
 
 
 </navigation>

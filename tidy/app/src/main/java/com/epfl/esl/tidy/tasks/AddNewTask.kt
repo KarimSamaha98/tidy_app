@@ -1,4 +1,4 @@
-package com.epfl.esl.tidy
+package com.epfl.esl.tidy.tasks
 
 
 import androidx.lifecycle.ViewModelProvider
@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.databinding.FragmentAddTasksBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
