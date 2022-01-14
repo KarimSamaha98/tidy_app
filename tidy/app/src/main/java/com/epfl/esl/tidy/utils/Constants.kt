@@ -9,4 +9,5 @@ object Constants {
     const val TASKS: String = "Tasks"
     const val USERS: String = "Users"
     const val CURRTASK: String = "Current tasks"
+    const val PREVTASK: String = "Previous tasks"
 }

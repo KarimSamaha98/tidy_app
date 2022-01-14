@@ -87,6 +87,7 @@ class TasksFragment : Fragment() {
                     viewModel.user_list.add(space.child(USERS).child(userKey)
                         .child("Name").getValue(String::class.java)!!)
                     viewModel.dueDate_list.add(dueDate)
+                    viewModel.tasks_key_list.add(task.key.toString())
                 }
 
                 // Adapter class is initialized and list is passed in the param.
@@ -105,21 +106,21 @@ class TasksFragment : Fragment() {
         val swipeGesture = object : SwipeGesture(){
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                viewModel.tasks_list.removeAt(position)
-                viewModel.user_list.removeAt(position)
-                viewModel.dueDate_list.removeAt(position)
+                viewModel.completeTask(position)
                 binding.recyclerViewTasks.adapter?.notifyItemRemoved(position)
             }
         }
 
         val itemTouchHelper = ItemTouchHelper(swipeGesture)
-
         itemTouchHelper.attachToRecyclerView(binding.recyclerViewTasks)
 
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+        if (viewModel.tasks_key_list.size == 0){
+            val text = "All done"
+        }
         super.onActivityCreated(savedInstanceState)
     }
 }
