@@ -3,15 +3,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/HistoryFragment"
+        android:title="@string/history"
+        app:labelVisibilityMode="labeled"/>
+
+    <item
         android:id="@+id/OverviewFragment"
-        android:title="@string/room_view" />
+        android:title="@string/room_view"
+        app:labelVisibilityMode="labeled"/>
     <item
         android:id="@+id/TasksFragment"
-        android:title="@string/task_view" />
+        android:title="@string/task_view"
+        app:labelVisibilityMode="labeled"/>
     <item
         android:id="@+id/settings"
-        android:title="@string/settings" />
+        android:title="@string/settings"
+        app:labelVisibilityMode="labeled"/>
     <item
         android:id="@+id/augmentedReality"
-        android:title="@string/augmented_reality" />
+        android:title="@string/augmented_reality"
+        app:labelVisibilityMode="labeled"/>
 </menu>

@@ -18,7 +18,6 @@ class TasksViewModel : ViewModel() {
     val tempID : String = "12325345345erst22"
     val myKey : String = "-Mt87SEqJ9dLmEg579L8"
 
-
     var allTasks : MutableList<String> = mutableListOf()
     var allUsers : MutableList<String> = mutableListOf()
 
@@ -30,8 +29,6 @@ class TasksViewModel : ViewModel() {
     val dueDate_list = ArrayList<String>()
     val user_list = ArrayList<String>()
     val rank = ArrayList<String>()
-
-
 
     private fun shuffleTasks(): List<String> {
         println(allTasks)

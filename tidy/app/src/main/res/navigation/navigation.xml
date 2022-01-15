@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/TasksFragment">
+    app:startDestination="@id/profileLogin">
 
 
     <fragment
@@ -28,10 +28,7 @@
             android:id="@+id/action_signUp_to_profileLogin"
             app:destination="@id/profileLogin" />
     </fragment>
-    <fragment
-        android:id="@+id/addTasks"
-        android:name="com.epfl.esl.tidy.tasks.AddNewTask"
-        android:label="fragment_add_tasks"/>
+
 
     <fragment
         android:id="@+id/OverviewFragment"
@@ -46,6 +43,11 @@
             app:destination="@id/addTasks" />
     </fragment>
     <fragment
+        android:id="@+id/HistoryFragment"
+        android:name="com.epfl.esl.tidy.tasks.HistoryFragment"
+        android:label="HistoryFragment" />
+
+    <fragment
         android:id="@+id/settings"
         android:name="com.epfl.esl.tidy.signin.Settings"
         android:label="fragment_settings"
@@ -58,6 +60,11 @@
         android:id="@+id/addRoomsFragment"
         android:name="com.epfl.esl.tidy.AddRoomsFragment"
         android:label="AddRoomsFragment" />
+
+    <fragment
+        android:id="@+id/addTasks"
+        android:name="com.epfl.esl.tidy.tasks.AddNewTask"
+        android:label="fragment_add_tasks"/>
 
 
 </navigation>

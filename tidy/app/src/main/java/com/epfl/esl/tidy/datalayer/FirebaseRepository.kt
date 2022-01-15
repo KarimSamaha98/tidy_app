@@ -68,9 +68,9 @@ class FirebaseRepository {
     }
 
     fun getSupplies(response: Response, space: DataSnapshot): Unit {
-        response.objectList =
-            space.child(Constants.SUPPLIES).children.map { snapShot ->
-                snapShot.getValue(Supply::class.java)
+        response.objectList =space.child(Constants.SUPPLIES).children.map { snapShot ->
+            snapShot.getValue(Supply::class.java)
+
             }
     }
 

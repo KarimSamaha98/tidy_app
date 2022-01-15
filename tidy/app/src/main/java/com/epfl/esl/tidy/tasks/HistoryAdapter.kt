@@ -8,9 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.epfl.esl.tidy.R
 
-class TasksAdapter (val context: Context?, val task_names: ArrayList<String>,
-                    val due_dates: ArrayList<String>, val users: ArrayList<String>) :
-    RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
+class HistoryAdapter (val context: Context?, val tasks: ArrayList<String>,
+                    val due_dates: ArrayList<String>, val users: ArrayList<String>,
+                      val complete_dates: ArrayList<String>) :
+    RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     /**
      * Inflates the item views which is designed in xml layout file
@@ -18,7 +19,7 @@ class TasksAdapter (val context: Context?, val task_names: ArrayList<String>,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(context).inflate(
-                R.layout.tasks_recycle,
+                R.layout.history_recycle,
                 parent,
                 false
             )
@@ -34,20 +35,23 @@ class TasksAdapter (val context: Context?, val task_names: ArrayList<String>,
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val itemPosition1 = task_names.get(position)
+        val itemPosition1 = tasks.get(position)
         val itemPosition2 = due_dates.get(position)
         val itemPosition3 = users.get(position)
+        val itemPosition4 = complete_dates.get(position)
 
         holder.taskNames.text = itemPosition1
         holder.taskDueDates.text = itemPosition2
         holder.taskUsers.text = itemPosition3
+        holder.taskCompleteDates.text = itemPosition4
+
     }
 
     /**
      * Gets the number of items in the list
      */
     override fun getItemCount(): Int {
-        return task_names.size
+        return tasks.size
     }
 
     /**
@@ -58,5 +62,7 @@ class TasksAdapter (val context: Context?, val task_names: ArrayList<String>,
         var taskNames: TextView = view.findViewById<TextView>(R.id.task_name)
         var taskDueDates: TextView = view.findViewById<TextView>(R.id.task_due_date)
         var taskUsers: TextView = view.findViewById<TextView>(R.id.task_user)
+        var taskCompleteDates: TextView = view.findViewById<TextView>(R.id.task_complete_date)
     }
+
 }

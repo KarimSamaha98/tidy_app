@@ -37,6 +37,9 @@
     <string name="supplies">Supplies</string>
     <string name="rooms">Rooms</string>
     <string name="supply_dropdown">Select Supplies</string>
+    <string name="task_history">Task History</string>
+    <string name="task_hist_description">Here are all the completed tasks!</string>
+    <string name="history">History</string>
     <string-array name="supplies">
         <item>Vaccum Cleaner</item>
         <item>Broom</item>

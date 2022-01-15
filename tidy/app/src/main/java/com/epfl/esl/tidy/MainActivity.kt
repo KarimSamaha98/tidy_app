@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         val navController = this.findNavController(R.id.mainFragment)
         bottomNavigationView = binding.bottomMenuView
         bottomNavigationView.setupWithNavController(navController)
-        setBottomNavigationVisibility(View.GONE)
+        //setBottomNavigationVisibility(View.GONE)
     }
 
     public fun setBottomNavigationVisibility (visibility: Int){
