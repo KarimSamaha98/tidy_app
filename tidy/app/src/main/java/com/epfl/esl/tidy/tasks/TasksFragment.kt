@@ -1,7 +1,9 @@
 package com.epfl.esl.tidy.tasks
 
+import android.content.ContentValues.TAG
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +16,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.epfl.esl.tidy.R
-import com.epfl.esl.tidy.SwipeGesture
+import com.epfl.esl.tidy.utils.SwipeGesture
 import com.epfl.esl.tidy.databinding.FragmentTasksBinding
 import com.epfl.esl.tidy.utils.Constants.CURRTASK
 import com.epfl.esl.tidy.utils.Constants.TASKS
@@ -42,64 +44,50 @@ class TasksFragment : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_TasksFragment_to_addTasks)
         }
 
-        // Adapter class is initialized and list is passed in the param.
-        var tasksAdapter = TasksAdapter(context = context,
-            task_names = viewModel.tasks_list,
-            users = viewModel.user_list,
-            due_dates = viewModel.dueDate_list)
-
-        // Checks date and assigns new tasks if needed
-        viewModel.checkDate()
-        if (viewModel.assignTasks) {
-            viewModel.spaceRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val space = dataSnapshot.child(viewModel.tempID)
-                    // Gets the unique keys for all possible tasks for a space
-                    for (task in space.child(TASKS).children) {
-                        viewModel.allTasks.add(task.key.toString())
-                    }
-                    // Gets the unique keys for all users in space
-                    for (user in space.child(USERS).children) {
-                        viewModel.allUsers.add(user.key.toString())
-                    }
-                    viewModel.assignTasks()
-                }
-                override fun onCancelled(databaseError: DatabaseError) {}
-            })
-        }
 
         // Get all current tasks
         viewModel.spaceRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val displayTasksList = ArrayList<TasksAdapterClass>()
                 val space = dataSnapshot.child(viewModel.tempID)
                 // Gets the current tasks
                 for (task in space.child(CURRTASK).children) {
-                    // get task name
-                    val taskKey = task.child("task_key").getValue(String::class.java)!!
-                    val userKey = task.child("user_key").getValue(String::class.java)!!
-                    val dueDate = task.child("due").getValue(String::class.java)!!
+                    // get current task info
+                    var currentTask: CurrentTaskClass = CurrentTaskClass()
+                    currentTask = task.getValue(CurrentTaskClass::class.java)!!
+                    val displayTask = TasksAdapterClass()
 
-                    val taskName = space.child(TASKS).child(taskKey)
+                    val taskName = space.child(TASKS).child(currentTask.task_key)
                         .child("Name").getValue(String::class.java)!!
-                    val taskRoom = space.child(TASKS).child(taskKey)
+                    val taskRoom = space.child(TASKS).child(currentTask.task_key)
                         .child("Room").getValue(String::class.java)!!
-                    viewModel.tasks_list.add(taskName.plus(" in ").plus(taskRoom.lowercase()))
-                    viewModel.user_list.add(space.child(USERS).child(userKey)
-                        .child("Name").getValue(String::class.java)!!)
-                    viewModel.dueDate_list.add(dueDate)
-                    viewModel.tasks_key_list.add(task.key.toString())
+
+                    displayTask.task_name = taskName.plus(" in ").plus(taskRoom.lowercase())
+                    displayTask.user = space.child(USERS).child(currentTask.user_key)
+                        .child("Name").getValue(String::class.java)!!
+                    displayTask.due_date = currentTask.due
+                    displayTask.task_key = task.key.toString()
+                    if (currentTask.user_key == viewModel.myKey){
+                        displayTask.rank = 1
+                    }
+                    else{
+                        displayTask.rank = 0
+                    }
+
+                    displayTasksList.add(displayTask)
                 }
 
                 // Adapter class is initialized and list is passed in the param.
-                tasksAdapter = TasksAdapter(context = context,
-                    task_names = viewModel.tasks_list,
-                    users = viewModel.user_list,
-                    due_dates = viewModel.dueDate_list)
+                viewModel.displayTasksList = displayTasksList
+                viewModel.displayTasksList.sortByDescending { it.rank }
+                val tasksAdapter = TasksAdapter(context = context,
+                    viewModel.displayTasksList)
 
                 binding.recyclerViewTasks.adapter = tasksAdapter
             }
-
-            override fun onCancelled(databaseError: DatabaseError) {}
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.d(TAG, databaseError.message)
+            }
         })
 
         // Swipe right
@@ -117,10 +105,8 @@ class TasksFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        if (viewModel.tasks_key_list.size == 0){
-            val text = "All done"
-        }
         super.onActivityCreated(savedInstanceState)
     }
 }

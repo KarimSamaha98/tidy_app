@@ -1,4 +1,4 @@
-package com.epfl.esl.tidy
+package com.epfl.esl.tidy.utils
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView

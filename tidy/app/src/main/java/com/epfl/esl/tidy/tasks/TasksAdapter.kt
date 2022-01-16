@@ -1,15 +1,16 @@
 package com.epfl.esl.tidy.tasks
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.epfl.esl.tidy.R
 
-class TasksAdapter (val context: Context?, val task_names: ArrayList<String>,
-                    val due_dates: ArrayList<String>, val users: ArrayList<String>) :
+class TasksAdapter (val context: Context?, var tasks : ArrayList<TasksAdapterClass>) :
     RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
 
     /**
@@ -33,21 +34,25 @@ class TasksAdapter (val context: Context?, val task_names: ArrayList<String>,
      * layout file.
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val itemPosition = tasks.get(position)
+        // change color
+        if (itemPosition.rank == 1){
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#90CAF9"))
+        }
+        else{
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#E3F2FD"))
+        }
 
-        val itemPosition1 = task_names.get(position)
-        val itemPosition2 = due_dates.get(position)
-        val itemPosition3 = users.get(position)
-
-        holder.taskNames.text = itemPosition1
-        holder.taskDueDates.text = itemPosition2
-        holder.taskUsers.text = itemPosition3
+        holder.taskNames.text = itemPosition.task_name
+        holder.taskDueDates.text = "DUE DATE: ".plus(itemPosition.due_date)
+        holder.taskUsers.text = itemPosition.user
     }
 
     /**
      * Gets the number of items in the list
      */
     override fun getItemCount(): Int {
-        return task_names.size
+        return tasks.size
     }
 
     /**
@@ -58,5 +63,7 @@ class TasksAdapter (val context: Context?, val task_names: ArrayList<String>,
         var taskNames: TextView = view.findViewById<TextView>(R.id.task_name)
         var taskDueDates: TextView = view.findViewById<TextView>(R.id.task_due_date)
         var taskUsers: TextView = view.findViewById<TextView>(R.id.task_user)
+        // holds cardView ref
+        val cardView : CardView = view.findViewById(R.id.tasks_view_item)
     }
 }
