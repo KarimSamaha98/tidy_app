@@ -1,14 +1,12 @@
-package com.epfl.esl.tidy
+package com.epfl.esl.tidy.services
 
-import android.content.ContentValues.TAG
+import android.content.BroadcastReceiver
+import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.Worker
-import androidx.work.WorkerParameters
 import com.epfl.esl.tidy.tasks.CurrentTaskClass
 import com.epfl.esl.tidy.utils.Constants
 import com.google.firebase.database.*
@@ -16,30 +14,22 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.*
-import java.util.concurrent.TimeUnit
 
-class MyWorker(context: Context, workerParameters: WorkerParameters) :
-    Worker(context, workerParameters){
+class AlarmReceiver : BroadcastReceiver() {
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val spaceRef: DatabaseReference = database.getReference(Constants.SPACEIDS)
     val tempID : String = "12325345345erst22"
 
     var allTasks : MutableList<String> = mutableListOf()
     var allUsers : MutableList<String> = mutableListOf()
+    var unfinishedTasks : MutableList<String> = mutableListOf()
 
     var dueDate : String = ""
+    val reassignTaskDay : Int = 2 // indexed starting at 1 for Sunday
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun doWork(): Result {
-        val reassignTaskDay = 1 // indexed starting at 1 for Sunday
-        val currentDate = Calendar.getInstance()
-        val currentTime = currentDate.time
-        println("CURRENT $currentTime")
-
-        assignTasks(reassignTaskDay)
-        Log.d("do work success", "doWork: Success function called")
-
-        return Result.success()
+    override fun onReceive(context: Context?, intent: Intent?) {
+        assignTasks()
     }
 
     private fun addTaskToFirebase(){
@@ -63,25 +53,25 @@ class MyWorker(context: Context, workerParameters: WorkerParameters) :
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun checkDate(reassignTaskDay : Int) : Boolean {
+    private fun checkDate() : Boolean {
         val cal: Calendar = Calendar.getInstance()
         val dayOfWeek = cal.get(Calendar.DAY_OF_WEEK)
-        var assignNewTasks: Boolean = false
+        var assignNewTasks = false
 
         //println("DAY $dayOfWeek")
         if (dayOfWeek == reassignTaskDay){
             assignNewTasks = true
             val today = LocalDate.now()
             println(today.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)))
-            dueDate = today.plusDays(7).toString() // set due date to be a week later
+            dueDate = today.plusDays(6).toString() // set due date to be a week later
             println(dueDate)
         }
         return assignNewTasks
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun assignTasks(reassignTaskDay : Int) {
-        val assignNewTasks = checkDate(reassignTaskDay)
+    private fun assignTasks() {
+        val assignNewTasks = checkDate()
         if (assignNewTasks) {
             spaceRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -94,10 +84,14 @@ class MyWorker(context: Context, workerParameters: WorkerParameters) :
                     for (user in space.child(Constants.USERS).children) {
                         allUsers.add(user.key.toString())
                     }
+                    // Gets all current tasks
+                    for (undone in space.child(Constants.CURRTASK).children){
+                        unfinishedTasks.add(undone.key.toString())
+                    }
                     addTaskToFirebase()
                 }
                 override fun onCancelled(databaseError: DatabaseError) {
-                    Log.d(TAG, databaseError.message)
+                    Log.d(ContentValues.TAG, databaseError.message)
                 }
             })
         }
