@@ -18,9 +18,6 @@ class TasksViewModel : ViewModel() {
 
     var displayTasksList = ArrayList<TasksAdapterClass>()
 
-
-
-    @RequiresApi(Build.VERSION_CODES.O)
     fun completeTask(position: Int){
         // add completed task to history in Firebase
         val task = displayTasksList[position]

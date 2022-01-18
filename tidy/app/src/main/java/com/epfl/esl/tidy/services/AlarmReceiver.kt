@@ -20,14 +20,13 @@ class AlarmReceiver : BroadcastReceiver() {
     val spaceRef: DatabaseReference = database.getReference(Constants.SPACEIDS)
     val tempID : String = "12325345345erst22"
 
-    var allTasks : MutableList<String> = mutableListOf()
+    var allTasks : MutableSet<String> = mutableSetOf()
     var allUsers : MutableList<String> = mutableListOf()
-    var unfinishedTasks : MutableList<String> = mutableListOf()
+    var unfinishedTasks : MutableSet<String> = mutableSetOf()
 
     var dueDate : String = ""
     val reassignTaskDay : Int = 2 // indexed starting at 1 for Sunday
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onReceive(context: Context?, intent: Intent?) {
         assignTasks()
     }
@@ -36,8 +35,12 @@ class AlarmReceiver : BroadcastReceiver() {
         // calculate total number of tasks and users
         val numUsers = allUsers.size
         val numTasks = allTasks.size
+
+        // we remove unfinished tasks from the pool of all tasks
+        val availableTasks = allTasks.minus(unfinishedTasks)
+
         println("Number of users is $numUsers and number of tasks is $numTasks")
-        val newTasks = allTasks.shuffled() // shuffle tasks
+        val newTasks = availableTasks.shuffled() // shuffle tasks
 
         for ((index, taskKey) in newTasks.withIndex()) {
             // Use modulus to assign each task
@@ -63,7 +66,7 @@ class AlarmReceiver : BroadcastReceiver() {
             assignNewTasks = true
             val today = LocalDate.now()
             println(today.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)))
-            dueDate = today.plusDays(6).toString() // set due date to be a week later
+            dueDate = today.plusDays(1).toString() // set due date to be a week later
             println(dueDate)
         }
         return assignNewTasks
@@ -84,9 +87,9 @@ class AlarmReceiver : BroadcastReceiver() {
                     for (user in space.child(Constants.USERS).children) {
                         allUsers.add(user.key.toString())
                     }
-                    // Gets all current tasks
-                    for (undone in space.child(Constants.CURRTASK).children){
-                        unfinishedTasks.add(undone.key.toString())
+                    // Gets all unfinished task keys (which are unique to the space)
+                    for (currentTask in space.child(Constants.CURRTASK).children){
+                        unfinishedTasks.add(currentTask.child("task_key").getValue(String::class.java)!!)
                     }
                     addTaskToFirebase()
                 }

@@ -53,7 +53,7 @@ class TasksFragment : Fragment() {
                 // Gets the current tasks
                 for (task in space.child(CURRTASK).children) {
                     // get current task info
-                    var currentTask: CurrentTaskClass = CurrentTaskClass()
+                    var currentTask = CurrentTaskClass()
                     currentTask = task.getValue(CurrentTaskClass::class.java)!!
                     val displayTask = TasksAdapterClass()
 
