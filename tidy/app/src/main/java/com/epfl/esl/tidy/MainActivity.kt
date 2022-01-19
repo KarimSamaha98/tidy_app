@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
     public var loginInfo = UserDataClass(email="", password="", first_name="", last_name="", key="", space_id="")
     private lateinit var binding: ActivityMainBinding
-    private lateinit var bottomNavigationView: BottomNavigationView
+    lateinit var bottomNavigationView: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
