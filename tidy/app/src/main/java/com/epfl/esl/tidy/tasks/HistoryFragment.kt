@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.epfl.esl.tidy.tasks.PastTaskClass
+import java.util.ArrayList
 
 class HistoryFragment : Fragment() {
     private lateinit var binding : FragmentHistoryBinding
@@ -35,38 +36,32 @@ class HistoryFragment : Fragment() {
         binding.recyclerViewHist.layoutManager = LinearLayoutManager(context,
             LinearLayoutManager.VERTICAL, false)
 
-        // Adapter class is initialized and list is passed in the param.
-        var histAdapter = HistoryAdapter(context = context,
-            tasks = viewModel.task_list,
-            users = viewModel.user_list,
-            due_dates = viewModel.dueDate_list,
-            complete_dates = viewModel.completeDate_list)
 
         // Get all task histories
         viewModel.spaceRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val space = dataSnapshot.child(viewModel.tempID)
+                viewModel.displayTasksList = ArrayList<PastTaskClass>()
+
                 // Gets the previous tasks
                 for (task in space.child(PREVTASK).children) {
+                    viewModel.displayTask = PastTaskClass()
+
                     println(task)
                     val userKey = task.child("user").getValue(String::class.java)
                     println("USER $userKey")
-                    var data: PastTaskClass = PastTaskClass()
+                    val data = task.getValue(PastTaskClass::class.java)!!
+                    viewModel.displayTask.task = data.task
+                    viewModel.displayTask.user = data.user
+                    viewModel.displayTask.date_due = data.date_due
+                    viewModel.displayTask.date_complete = data.date_complete
 
-                    data = task.getValue(PastTaskClass::class.java)!!
-                    //println("DATA $data")
-                    viewModel.task_list.add(data!!.task)
-                    viewModel.user_list.add(data.user)
-                    viewModel.dueDate_list.add(data.date_due)
-                    viewModel.completeDate_list.add(data.date_complete)
+                    viewModel.displayTasksList.add(viewModel.displayTask)
                 }
 
                 // Adapter class is initialized and list is passed in the param.
-                histAdapter = HistoryAdapter(context = context,
-                    tasks = viewModel.task_list,
-                    users = viewModel.user_list,
-                    due_dates = viewModel.dueDate_list,
-                    complete_dates = viewModel.completeDate_list)
+                val histAdapter = HistoryAdapter(context = context,
+                    viewModel.displayTasksList)
 
                 binding.recyclerViewHist.adapter = histAdapter
             }

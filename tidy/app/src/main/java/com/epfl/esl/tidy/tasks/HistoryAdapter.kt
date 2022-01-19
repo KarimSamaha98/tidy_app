@@ -8,9 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.epfl.esl.tidy.R
 
-class HistoryAdapter (val context: Context?, val tasks: ArrayList<String>,
-                    val due_dates: ArrayList<String>, val users: ArrayList<String>,
-                      val complete_dates: ArrayList<String>) :
+class HistoryAdapter (val context: Context?, var tasks : ArrayList<PastTaskClass>) :
     RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     /**
@@ -35,15 +33,12 @@ class HistoryAdapter (val context: Context?, val tasks: ArrayList<String>,
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val itemPosition1 = tasks.get(position)
-        val itemPosition2 = due_dates.get(position)
-        val itemPosition3 = users.get(position)
-        val itemPosition4 = complete_dates.get(position)
+        val itemPosition = tasks.get(position)
 
-        holder.taskNames.text = itemPosition1
-        holder.taskDueDates.text = itemPosition2
-        holder.taskUsers.text = itemPosition3
-        holder.taskCompleteDates.text = itemPosition4
+        holder.taskNames.text = itemPosition.task
+        holder.taskDueDates.text = "DUE".plus(itemPosition.date_due)
+        holder.taskUsers.text = itemPosition.user
+        holder.taskCompleteDates.text = "COMPLETED".plus(itemPosition.date_complete)
 
     }
 

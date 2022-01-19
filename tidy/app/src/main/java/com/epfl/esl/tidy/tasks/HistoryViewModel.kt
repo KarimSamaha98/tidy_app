@@ -11,9 +11,6 @@ class HistoryViewModel : ViewModel() {
     val spaceRef: DatabaseReference = database.getReference(Constants.SPACEIDS)
     val tempID : String = "12325345345erst22"
 
-    val completeDate_list = ArrayList<String>()
-    val task_list = ArrayList<String>()
-    val dueDate_list = ArrayList<String>()
-    val user_list = ArrayList<String>()
-
+    var displayTasksList = ArrayList<PastTaskClass>()
+    var displayTask = PastTaskClass()
 }

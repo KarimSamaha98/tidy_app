@@ -1,6 +1,5 @@
 package com.epfl.esl.tidy.tasks
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View

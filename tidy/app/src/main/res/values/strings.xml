@@ -15,6 +15,11 @@
     <!-- Add tasks items -->
     <string name="task_description">Add a description for the task (optional)</string>
     <string name="add_task">Add Task</string>
+    <string name="task_name">Task name</string>
+    <string name="task_complete_date">Date completed</string>
+    <string name="task_user">Username</string>
+    <string name="task_due_date">Due date</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -40,6 +45,8 @@
     <string name="task_history">Task History</string>
     <string name="task_hist_description">Here are all the completed tasks!</string>
     <string name="history">History</string>
+
+
     <string-array name="supplies">
         <item>Vaccum Cleaner</item>
         <item>Broom</item>

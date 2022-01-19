@@ -29,7 +29,7 @@
                     android:id="@+id/task_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="task_name"
+                    android:text="@string/task_name"
                     android:textColor="@android:color/black"
                     android:textSize="24sp"
                     android:textStyle="bold"/>
@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="task_due_date"
+                    android:text="@string/task_due_date"
                     android:textColor="@android:color/black"
                     android:textSize="24sp"
                     android:textStyle="bold"/>
@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:text="user"
+                    android:text="@string/task_user"
                     android:textSize="20sp" />
             </LinearLayout>
         </LinearLayout>

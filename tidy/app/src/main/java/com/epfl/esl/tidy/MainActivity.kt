@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     private fun setAlarm(){
         calendar = Calendar.getInstance()
         // Set execution time to be 01:00:00 AM
-        calendar.set(Calendar.HOUR_OF_DAY, 13)
+        calendar.set(Calendar.HOUR_OF_DAY, 15)
         calendar.set(Calendar.MINUTE,45)
         calendar.set(Calendar.SECOND,0)
 
@@ -58,6 +58,6 @@ class MainActivity : AppCompatActivity() {
             AlarmManager.INTERVAL_DAY, pendingIntent
         )
 
-        Toast.makeText(this, "Alarm set succesfully", Toast.LENGTH_SHORT     ).show()
+        Toast.makeText(this, "Alarm set successfully", Toast.LENGTH_SHORT     ).show()
     }
 }

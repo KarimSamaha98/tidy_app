@@ -48,37 +48,35 @@ class TasksFragment : Fragment() {
         // Get all current tasks
         viewModel.spaceRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val displayTasksList = ArrayList<TasksAdapterClass>()
+                viewModel.displayTasksList = ArrayList<TasksAdapterClass>()
                 val space = dataSnapshot.child(viewModel.tempID)
                 // Gets the current tasks
                 for (task in space.child(CURRTASK).children) {
+                    viewModel.displayTask = TasksAdapterClass()
                     // get current task info
-                    var currentTask = CurrentTaskClass()
-                    currentTask = task.getValue(CurrentTaskClass::class.java)!!
-                    val displayTask = TasksAdapterClass()
+                    val currentTask = task.getValue(CurrentTaskClass::class.java)!!
 
                     val taskName = space.child(TASKS).child(currentTask.task_key)
                         .child("Name").getValue(String::class.java)!!
                     val taskRoom = space.child(TASKS).child(currentTask.task_key)
                         .child("Room").getValue(String::class.java)!!
 
-                    displayTask.task_name = taskName.plus(" in ").plus(taskRoom.lowercase())
-                    displayTask.user = space.child(USERS).child(currentTask.user_key)
+                    viewModel.displayTask.task_name = taskName.plus(" in ").plus(taskRoom.lowercase())
+                    viewModel.displayTask.user = space.child(USERS).child(currentTask.user_key)
                         .child("Name").getValue(String::class.java)!!
-                    displayTask.due_date = currentTask.due
-                    displayTask.task_key = task.key.toString()
+                    viewModel.displayTask.due_date = currentTask.due
+                    viewModel.displayTask.task_key = task.key.toString()
                     if (currentTask.user_key == viewModel.myKey){
-                        displayTask.rank = 1
+                        viewModel.displayTask.rank = 1
                     }
                     else{
-                        displayTask.rank = 0
+                        viewModel.displayTask.rank = 0
                     }
 
-                    displayTasksList.add(displayTask)
+                    viewModel.displayTasksList.add(viewModel.displayTask)
                 }
 
                 // Adapter class is initialized and list is passed in the param.
-                viewModel.displayTasksList = displayTasksList
                 viewModel.displayTasksList.sortByDescending { it.rank }
                 val tasksAdapter = TasksAdapter(context = context,
                     viewModel.displayTasksList)
