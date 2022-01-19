@@ -1,8 +1,12 @@
 package com.epfl.esl.tidy.admin
 
+import com.google.firebase.database.Exclude
+
 data class Room (val room:String = "",
                  val description: String = "",
-                 var imageUrl: String = ""){
+                 var imageUrl: String = "",
+                 @get:Exclude
+                 var key : String = ""){
     val roomID: Int
 //    TODO fix this mapping so can add multiple bathrooms and multiple items
     init {

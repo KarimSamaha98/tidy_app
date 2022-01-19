@@ -35,7 +35,8 @@ import java.io.ByteArrayOutputStream
 
 //TODO Make Rooms a dropdown to select and add in rather than a free text. Then need to update the Room dataclass
 //TODO Figure out clearing informaiton and updating rooms and information
-//TODO Sort recycler view by most recent added
+//TODO Sort recycler
+// view by most recent added
 
 
 class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
@@ -60,7 +61,6 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = DataBindingUtil.inflate(
             inflater, R.layout.add_rooms_fragment,
             container, false
@@ -88,6 +88,35 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
             } else {
                 viewModel.checkExistingRooms()
             }
+
+        }
+
+        binding.UpdateRoomButton.setOnClickListener{
+            viewModel.roomName = binding.roomName.text.toString()
+            viewModel.roomDescription = binding.roomDescription.text.toString()
+
+            if (viewModel.roomName == "") {
+                Toast.makeText(context, "Enter a room name.", Toast.LENGTH_SHORT).show()
+            } else if (viewModel.roomDescription == "") {
+                Toast.makeText(context, "Enter a room description.", Toast.LENGTH_SHORT).show()
+            } else if (viewModel.imageUri == null && viewModel.imageUrl == "") {
+                Toast.makeText(context, "Pick an image for the room", Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.updateExistingRoom(object : onGetDataListener {
+                    override fun onSuccess(response: Response) {
+                        clearInfo()
+                        binding.UpdateLayout.visibility = View.INVISIBLE
+                        binding.AddClearLayout.visibility = View.VISIBLE
+                    }
+                    override fun onFailure(response: Response) {
+                    }
+                })
+            }
+
+        }
+
+        binding.ClearRoomButton.setOnClickListener {
+            clearInfo()
         }
 
         viewModel.message.observe(viewLifecycleOwner, Observer {
@@ -103,27 +132,13 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
         viewModel.imageUrl = ""
         viewModel.roomName = ""
         viewModel.roomDescription = ""
+        viewModel.imageUri = null
+        viewModel.roomKey = ""
 
         binding.roomName.setText(viewModel.roomName)
         binding.roomDescription.setText(viewModel.roomDescription)
 //        TODO Not sure why its not just letting me set it.
         binding.roomImage.setImageDrawable(getResources().getDrawable(R.drawable.pick_image))
-    }
-
-    override fun onItemClick(position: Int) {
-        Toast.makeText(context, "Item $position clicked", Toast.LENGTH_SHORT).show()
-        val clickedItem = viewModel.itemList?.get(position)
-
-//        TODO not sure why adding !! fixed this error here...
-        viewModel.imageUrl = clickedItem!!.imageUrl
-        viewModel.roomName = clickedItem.room
-        viewModel.roomDescription = clickedItem.description
-
-        binding.roomName.setText(viewModel.roomName)
-        binding.roomDescription.setText(viewModel.roomDescription)
-        Picasso.with(context)
-            .load(viewModel.imageUrl)
-            .into(binding.roomImage)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -157,6 +172,26 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
         binding.recyclerViewRooms.adapter = roomAdapter
         binding.progressCircular.visibility = View.INVISIBLE
 
+    }
+
+    override fun onItemClick(position: Int) {
+        Toast.makeText(context, "Item $position clicked", Toast.LENGTH_SHORT).show()
+        val clickedItem = viewModel.itemList?.get(position)
+
+//        TODO not sure why adding !! fixed this error here...
+        viewModel.imageUrl = clickedItem!!.imageUrl
+        viewModel.roomName = clickedItem.room
+        viewModel.roomDescription = clickedItem.description
+        viewModel.roomKey = clickedItem.key
+
+        binding.roomName.setText(viewModel.roomName)
+        binding.roomDescription.setText(viewModel.roomDescription)
+        Picasso.with(context)
+            .load(viewModel.imageUrl)
+            .into(binding.roomImage)
+
+        binding.UpdateLayout.visibility = View.VISIBLE
+        binding.AddClearLayout.visibility = View.INVISIBLE
     }
 
     override fun onStop() {

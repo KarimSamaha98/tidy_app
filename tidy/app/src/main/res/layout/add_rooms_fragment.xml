@@ -70,19 +70,17 @@
             tools:layout_editor_absoluteX="20dp">
 
             <LinearLayout
-                android:id="@+id/SignInSignUpButtons"
+                android:id="@+id/AddClearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-
-
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp" />
+                android:gravity="center"
+                android:orientation="horizontal">
+                <!--                <ProgressBar-->
+                <!--                    android:id="@+id/progressBar"-->
+                <!--                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginBottom="16dp" />-->
 
                 <Button
                     android:id="@+id/AddRoomButton"
@@ -90,6 +88,15 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/add_room"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="20dp"/>
+
+                <Button
+                    android:id="@+id/ClearRoomButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/clear"
                     android:textSize="20sp" />
 
                 <!--                <Button-->
@@ -99,6 +106,24 @@
                 <!--                    android:text="@string/sign_up"-->
                 <!--                    android:textColor="@color/purple_200"-->
                 <!--                    app:backgroundTint="@color/white" />-->
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/UpdateLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/UpdateRoomButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/update_room"
+                    android:textSize="20sp" />
+
             </LinearLayout>
 
         </FrameLayout>

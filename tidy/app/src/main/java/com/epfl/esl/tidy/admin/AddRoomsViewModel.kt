@@ -22,10 +22,12 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 
 class AddRoomsViewModel(application: Application) : AndroidViewModel(application) {
+    private val TAG = "AddRoomsViewModel"
     val repository = FirebaseRepository()
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val spaceRef: DatabaseReference = database.getReference(Constants.SPACEIDS)
 
+    var roomKey : String
     var imageUri: Uri?
     var roomName: String
     var roomDescription : String
@@ -53,6 +55,7 @@ class AddRoomsViewModel(application: Application) : AndroidViewModel(application
         roomDescription = ""
         imageUrl = ""
         tempID_key = ""
+        roomKey = ""
     }
 
     fun getRoomDetails(onGetDataListener: onGetDataListener) {
@@ -81,8 +84,7 @@ class AddRoomsViewModel(application: Application) : AndroidViewModel(application
                             break@loop
                         }
                     }
-//                    TODO do I need this check
-                    if (!isRegistered && imageUri != null) {
+                    if (!isRegistered) {
                         statusMessage.value = Event("Your room is registered to Firebase")
                         val imageBitmap =
                             MediaStore.Images.Media.getBitmap(
@@ -98,11 +100,52 @@ class AddRoomsViewModel(application: Application) : AndroidViewModel(application
         })
     }
 
+    fun updateExistingRoom(onGetDataListener: onGetDataListener) {
+        if(imageUri != null) {
+            val imageBitmap =
+                MediaStore.Images.Media.getBitmap(
+                    getApplication<Application>().contentResolver,
+                    imageUri
+                )
+            Log.d(TAG,"Room Key Value: $roomKey")
+            repository.sendDataToFireBase(imageBitmap, roomKey) { uri, key ->
+                spaceRef.child(tempID_key)
+                    .child(Constants.ROOMS)
+                    .child(roomKey)
+                    .setValue(Room(roomName, roomDescription, uri.toString()))
+                    .addOnSuccessListener {
+                        statusMessage.value = Event("Room Update Successful")
+                        onGetDataListener.onSuccess(Response())
+                    }.addOnFailureListener{
+                        statusMessage.value = Event("Room Update Failed")
+                    }
+            }
+        }else {
+            val updates : MutableMap<String, Any> = HashMap()
+            updates["room"] = roomName
+            updates["description"] = roomDescription
+            spaceRef.child(tempID_key)
+                .child(Constants.ROOMS)
+                .child(roomKey).updateChildren(updates).addOnSuccessListener {
+                    statusMessage.value = Event("Room Update Successful")
+                    onGetDataListener.onSuccess(Response())
+                }.addOnFailureListener{
+                    statusMessage.value = Event("Room Update Failed")
+                }
+        }
+
+    }
+
     private fun sendImagetoFirebase(imageBitmap: Bitmap) {
-        val saveString = tempID_key
         val room = Room(roomName, roomDescription,)
-        repository.sendDataToFireBase(imageBitmap, saveString, Constants.ROOMS, tempID_key, room){uri, dC, temp, name ->
-            repository.putRoom(uri, dC as Room, temp, name)
+        val key = spaceRef.push().key.toString()
+        repository.sendDataToFireBase(imageBitmap, key){uri, k ->
+//            repository.putRoom(uri, dC as Room, temp, name, key)
+            room.imageUrl = uri.toString()
+            spaceRef.child(tempID_key)
+                .child(Constants.ROOMS)
+                .child(k)
+                .setValue(room)
         }
     }
 

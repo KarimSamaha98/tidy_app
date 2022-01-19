@@ -44,7 +44,9 @@ class FirebaseRepository {
 
         var roomListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                checkSpaceId(snapshot, spaceID)?.let { pullData(response, it) }
+                checkSpaceId(snapshot, spaceID)?.let {
+                    pullData(response, it)
+                    Log.d(TAG, "Correct Space Key: ${it.key}")}
                 onGetDataListener.onSuccess(response)
             }
 
@@ -59,10 +61,16 @@ class FirebaseRepository {
     }
 
     fun getRooms(response: Response, space: DataSnapshot): Unit {
-        response.objectList =
-            space.child(Constants.ROOMS).children.map { snapShot ->
-                snapShot.getValue(Room::class.java)
-            }
+        if(space.child(Constants.ROOMS).exists()) {
+            response.objectList =
+                space.child(Constants.ROOMS).children.map { snapShot ->
+                    val room = snapShot.getValue(Room::class.java)
+                    room?.key = snapShot.key.toString()
+                    room
+                }
+        } else{
+            response.objectList = listOf()
+        }
     }
 
     fun getSupplies(response: Response, space: DataSnapshot): Unit {
@@ -103,15 +111,11 @@ class FirebaseRepository {
     }
 
     fun sendDataToFireBase(imageBitmap: Bitmap,
-                           saveString: String,
-                           childName: String,
-                           tempID_key: String,
-                           dataClass: Any,
-                           putData: (uri: Uri, dataClass: Any, tempID_key: String, childName: String) -> (Unit)) {
+                           key: String,
+                           putData: (uri: Uri, key : String) -> (Unit)) {
         val imageByteArray = processImage(imageBitmap)
 
-        val profileImageRef = storageRef.child("RoomImages/$saveString.jpg")
-//            storageRef.child("RoomImages/" + viewModel.tempID.toString() + "_" + viewModel.roomMapping[viewModel.roomName].toString() + ".jpg")
+        val profileImageRef = storageRef.child("RoomImages/$key.jpg")
 
         profileImageRef.putBytes(imageByteArray).addOnFailureListener {
 //            Toast.makeText(context, "Room image upload to firebase was failed.", Toast.LENGTH_SHORT)
@@ -123,7 +127,7 @@ class FirebaseRepository {
             taskSnapshot.metadata?.reference?.downloadUrl?.addOnSuccessListener { uri: Uri ->
 //                TODO check if you spam button multiple times what happens.
 //                Note: This will only upload data if photo is also loaded. could also change this behavior.
-                putData(uri, dataClass, tempID_key, childName)
+                putData(uri, key)
 
 //                Handler(Looper.getMainLooper()).postDelayed({ binding.progressBar.progress = 0 }, 500)
 
@@ -141,14 +145,13 @@ class FirebaseRepository {
 //        }
 
     }
-    fun putRoom(uri: Uri, room: Room, tempID_key: String, childName: String){
-        room.imageUrl = uri.toString()
-        val key = spaceRef.push().key.toString()
-        spaceRef.child(tempID_key)
-            .child(childName)
-            .child(key)
-            .setValue(room)
-    }
+//    fun putRoom(uri: Uri, room: Room, tempID_key: String, childName: String, key : String){
+//        room.imageUrl = uri.toString()
+//        spaceRef.child(tempID_key)
+//            .child(childName)
+//            .child(key)
+//            .setValue(room)
+//    }
 
 
     fun removeListener(listener: ValueEventListener) {
