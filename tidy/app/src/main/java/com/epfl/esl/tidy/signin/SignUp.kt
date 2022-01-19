@@ -28,7 +28,9 @@ class SignUp : Fragment() {
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val profileRef: DatabaseReference = database.getReference("Profiles")
     var storageRef = Firebase.storage.reference
+    val spaceRef: DatabaseReference = database.getReference("Space_IDs")
     var key: String = ""
+    var space_key: String = ""
     var email: String = ""
     var password: String = ""
     var first_name : String = ""
@@ -77,6 +79,11 @@ class SignUp : Fragment() {
             .setValue("0")
         processImage((activity as MainActivity).loginInfo.image)
 
+        //Update space_ids
+        space_key = spaceRef.child("Users").push().key.toString()
+        spaceRef.child(space_id).child("Users").child(space_key).child("Key").setValue(key)
+        spaceRef.child(space_id).child("Users").child(space_key).child("First_Name").setValue(first_name)
+        spaceRef.child(space_id).child("Users").child(space_key).child("Last_Name").setValue(last_name)
     }
 
     fun processImage(image_URI: Uri?){

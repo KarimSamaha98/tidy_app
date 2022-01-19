@@ -83,17 +83,18 @@
             android:id="@+id/profile_pic"
             android:layout_width="239dp"
             android:layout_height="190dp"
-            android:layout_marginTop="284dp"
+            android:layout_marginTop="50dp"
             android:src="@drawable/user"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.122"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="Welcome to the Settings View. Here you can change your user information."
             android:textColor="#000000"
             android:textSize="16sp"
@@ -151,6 +152,7 @@
             android:id="@+id/email"
             android:layout_width="400dp"
             android:layout_height="45dp"
+            android:layout_marginTop="1dp"
             android:text="@string/Email"
             android:textSize="34sp"
             android:visibility="visible"
