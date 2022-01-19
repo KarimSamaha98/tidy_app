@@ -61,14 +61,13 @@ class AlarmReceiver : BroadcastReceiver() {
         val dayOfWeek = cal.get(Calendar.DAY_OF_WEEK)
         var assignNewTasks = false
 
-        //println("DAY $dayOfWeek")
-        if (dayOfWeek == reassignTaskDay){
-            assignNewTasks = true
-            val today = LocalDate.now()
-            println(today.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)))
-            dueDate = today.plusDays(1).toString() // set due date to be a week later
-            println(dueDate)
-        }
+        //println("DAY $dayOfWeek")//
+        assignNewTasks = true
+        val today = LocalDate.now()
+        println(today.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)))
+        dueDate = today.plusDays(1).toString() // set due date to be a week later
+        println(dueDate)
+   // }
         return assignNewTasks
     }
 

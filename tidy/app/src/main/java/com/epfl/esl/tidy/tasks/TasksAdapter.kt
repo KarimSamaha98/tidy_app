@@ -1,23 +1,20 @@
 package com.epfl.esl.tidy.tasks
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.epfl.esl.tidy.R
 import java.time.LocalDate
-import java.util.*
 import kotlin.collections.ArrayList
 
 class TasksAdapter (val context: Context?, var tasks : ArrayList<TasksAdapterClass>) :
     RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
-    private lateinit var calendar: Calendar
 
     /**
      * Inflates the item views which is designed in xml layout file
@@ -43,22 +40,21 @@ class TasksAdapter (val context: Context?, var tasks : ArrayList<TasksAdapterCla
         val itemPosition = tasks.get(position)
         val today = LocalDate.now()
         val dueDate : LocalDate = LocalDate.parse(itemPosition.due_date)
-
         // change color
         if (itemPosition.rank == 1){
             if (dueDate.isBefore(today)) {
-                holder.cardView.setCardBackgroundColor(Color.parseColor("#E57373"))
+                holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.egg_yellow))
             }
             else{
-                holder.cardView.setCardBackgroundColor(Color.parseColor("#90CAF9"))
+                holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.sky_blue))
             }
         }
         else {
             if (dueDate.isBefore(today)) {
-                holder.cardView.setCardBackgroundColor(Color.parseColor("#FFEBEE"))
+                holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.light_yellow))
             }
             else{
-                holder.cardView.setCardBackgroundColor(Color.parseColor("#E3F2FD"))
+                holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.light_blue))
             }
         }
 

@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setupWithNavController(navController)
         setBottomNavigationVisibility(View.GONE)
 
-        //setAlarm()
+        setAlarm()
     }
 
     public fun setBottomNavigationVisibility (visibility: Int){
@@ -42,9 +43,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setAlarm(){
+        calendar = Calendar.getInstance()
         // Set execution time to be 01:00:00 AM
-        calendar.set(Calendar.HOUR_OF_DAY, 1)
-        calendar.set(Calendar.MINUTE,0)
+        calendar.set(Calendar.HOUR_OF_DAY, 13)
+        calendar.set(Calendar.MINUTE,45)
         calendar.set(Calendar.SECOND,0)
 
         alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
@@ -55,5 +57,7 @@ class MainActivity : AppCompatActivity() {
             AlarmManager.RTC, calendar.timeInMillis,
             AlarmManager.INTERVAL_DAY, pendingIntent
         )
+
+        Toast.makeText(this, "Alarm set succesfully", Toast.LENGTH_SHORT     ).show()
     }
 }
