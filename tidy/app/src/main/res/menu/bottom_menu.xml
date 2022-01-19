@@ -3,12 +3,29 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/roomView"
-        android:title="Room View" />
+        android:id="@+id/HistoryFragment"
+        android:title="@string/history"
+        app:labelVisibilityMode="labeled"
+        android:icon="@drawable/ic_baseline_history_24"/>
+
+    <item
+        android:id="@+id/OverviewFragment"
+        android:title="@string/room_view"
+        app:labelVisibilityMode="labeled"
+        android:icon="@drawable/ic_baseline_house_24"/>
+    <item
+        android:id="@+id/TasksFragment"
+        android:title="@string/task_view"
+        app:labelVisibilityMode="labeled"
+        android:icon="@drawable/ic_baseline_format_list_bulleted_24"/>
     <item
         android:id="@+id/settings"
-        android:title="Settings" />
+        android:title="@string/settings"
+        app:labelVisibilityMode="labeled"
+        android:icon="@drawable/ic_baseline_settings_24"/>
     <item
         android:id="@+id/augmentedReality"
-        android:title="Augmented Reality" />
+        android:title="@string/augmented_reality"
+        app:labelVisibilityMode="labeled"
+        android:icon="@drawable/ic_baseline_camera_24"/>
 </menu>

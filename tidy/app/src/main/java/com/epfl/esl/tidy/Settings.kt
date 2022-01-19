@@ -144,15 +144,15 @@ class Settings : Fragment() {
 
     fun updateLogin(){
         if (binding.emailInput.text.toString() != "") {
-            (activity as MainActivity).loginInfo.email = binding.emailInput.text.toString()}
+        (activity as MainActivity).loginInfo.email = binding.emailInput.text.toString()}
         if (binding.passwordInput.text.toString() != "") {
-            (activity as MainActivity).loginInfo.password =  binding.passwordInput.text.toString()}
+        (activity as MainActivity).loginInfo.password =  binding.passwordInput.text.toString()}
         if (binding.firstNameInput.text.toString() != "") {
-            (activity as MainActivity).loginInfo.first_name =  binding.firstNameInput.text.toString()}
+        (activity as MainActivity).loginInfo.first_name =  binding.firstNameInput.text.toString()}
         if (binding.lastNameInput.text.toString() != "") {
-            (activity as MainActivity).loginInfo.last_name =  binding.lastNameInput.text.toString()}
+        (activity as MainActivity).loginInfo.last_name =  binding.lastNameInput.text.toString()}
         if (binding.spaceIdInput.text.toString() != "") {
-            (activity as MainActivity).loginInfo.space_id =  binding.spaceIdInput.text.toString()}
+        (activity as MainActivity).loginInfo.space_id =  binding.spaceIdInput.text.toString()}
     }
 
     fun switchToEdit(){
