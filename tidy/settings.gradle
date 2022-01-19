@@ -1,2 +1,3 @@
 rootProject.name = "tidy"
 include ':app'
+include ':tidy'

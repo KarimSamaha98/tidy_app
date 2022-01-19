@@ -1,20 +1,30 @@
 package com.epfl.esl.tidy
 
+import android.graphics.Bitmap
+import android.graphics.Matrix
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.epfl.esl.tidy.databinding.FragmentProfileLoginBinding
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.wearable.*
 import com.google.firebase.database.*
+import java.io.ByteArrayOutputStream
 
 
 class ProfileLogin : Fragment() {
 
     private lateinit var binding: FragmentProfileLoginBinding
+
+    private lateinit var dataClient: DataClient
+
 
     var email: String = ""
     var password: String = ""
@@ -37,6 +47,7 @@ class ProfileLogin : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile_login, container, false)
+        dataClient = Wearable.getDataClient(activity as AppCompatActivity)
 
         binding.toPassword.setOnClickListener{
             email = binding.email.text.toString()
@@ -108,6 +119,46 @@ class ProfileLogin : Fragment() {
         return binding.root
     }
 
+    private fun sendDataToWear() {
+
+        val matrix = Matrix()
+        matrix.postRotate(90F)
+
+        var imageBitmap = MediaStore.Images.Media.getBitmap(
+            getActivity()?.applicationContext?.contentResolver,
+            imageUri
+        )
+        var ratio: Float = 13F
+
+        val imageBitmapScaled = Bitmap.createScaledBitmap(
+            imageBitmap,
+            (imageBitmap.width / ratio).toInt(),
+            (imageBitmap.height / ratio).toInt(),
+            false
+        )
+        imageBitmap = Bitmap.createBitmap(
+            imageBitmapScaled,
+            0,
+            0,
+            (imageBitmap.width / ratio).toInt(),
+            (imageBitmap.height / ratio).toInt(),
+            matrix,
+            true
+        )
+
+        val stream = ByteArrayOutputStream()
+        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        val imageByteArray = stream.toByteArray()
+
+        val request: PutDataRequest = PutDataMapRequest.create("/userInfo").run {
+            dataMap.putByteArray("profileImage", imageByteArray)
+            dataMap.putString("username", username)
+            asPutDataRequest()
+        }
+
+        request.setUrgent()
+        val putTask: Task<DataItem> = dataClient.putDataItem(request)
+    }
 }
 
 //R.layout.fragment_profile_login

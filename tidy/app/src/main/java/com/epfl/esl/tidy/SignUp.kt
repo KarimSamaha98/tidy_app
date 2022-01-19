@@ -17,7 +17,9 @@ class SignUp : Fragment() {
     private lateinit var binding: FragmentSignUpBinding
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val profileRef: DatabaseReference = database.getReference("Profiles")
+    val spaceRef: DatabaseReference = database.getReference("Space_IDs")
     var key: String = ""
+    var space_key: String = ""
     var email: String = ""
     var password: String = ""
     var first_name : String = ""
@@ -52,6 +54,7 @@ class SignUp : Fragment() {
     }
 
     fun sendDataToFireBase(){
+        //Update profiles
         profileRef.child( key).child("Email")
             .setValue(email)
         profileRef.child( key).child("Password")
@@ -62,6 +65,12 @@ class SignUp : Fragment() {
             .setValue(last_name)
         profileRef.child( key).child("Space_Id")
             .setValue(space_id)
+
+        //Update space_ids
+        space_key = spaceRef.child("Users").push().key.toString()
+        spaceRef.child(space_id).child("Users").child(space_key).child("Key").setValue(key)
+        spaceRef.child(space_id).child("Users").child(space_key).child("First_Name").setValue(first_name)
+        spaceRef.child(space_id).child("Users").child(space_key).child("Last_Name").setValue(last_name)
     }
 
 }
