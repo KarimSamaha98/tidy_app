@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.admin.Room
@@ -14,19 +16,31 @@ import com.squareup.picasso.Picasso
 
 class RoomAdapter(val context: Context?,
                   val items: List<Room?>,
+                  val delete: Boolean,
                   private val listener : OnItemClickListener) :
     RecyclerView.Adapter<RoomAdapter.ViewHolder>() {
+    var clicked = -1
     /**
      * Inflates the item views which is designed in xml layout file
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            LayoutInflater.from(context).inflate(
-                R.layout.room_recycle,
-                parent,
-                false
+        if(delete) {
+            return ViewHolder(
+                LayoutInflater.from(context).inflate(
+                    R.layout.room_delete_recycle,
+                    parent,
+                    false
+                )
             )
-        )
+        } else {
+            return ViewHolder(
+                LayoutInflater.from(context).inflate(
+                    R.layout.room_recycle,
+                    parent,
+                    false
+                )
+            )
+        }
     }
 
     /**
@@ -47,7 +61,17 @@ class RoomAdapter(val context: Context?,
             .fit()
             .centerCrop()
             .into(holder.tvItem_2)
+//        holder.cardView.setOnClickListener{
+//            val previous_item = clicked
+//            clicked = position
+//            notifyItemChanged(previous_item)
+//            notifyItemChanged(clicked)
+//        }
+//        if(position==clicked){
+//            holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.teal_700))
+//        }
     }
+
 
     /**
      * Gets the number of items in the list
@@ -63,6 +87,7 @@ class RoomAdapter(val context: Context?,
         // Holds the TextView that will add each item to
         var tvItem = view.findViewById<TextView>(R.id.room_name)
         var tvItem_2 = view.findViewById<ImageView>(R.id.room_photo)
+        val cardView : CardView = view.findViewById(R.id.room_item)
 
         init {
             view.setOnClickListener(this)
@@ -74,6 +99,7 @@ class RoomAdapter(val context: Context?,
             if(position != RecyclerView.NO_POSITION) {
                 listener.onItemClick(position)
             }
+
         }
     }
 

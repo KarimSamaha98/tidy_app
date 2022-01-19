@@ -10,14 +10,51 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
 
+        <TextView
+            android:id="@+id/addRoomTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/add_rooms"
+            android:textSize="40dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/addRoomDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/add_room_description"
+            android:textSize="16dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addRoomTitle" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="143dp"
+            android:layout_height="85dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/broom"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageButton
             android:id="@+id/roomImage"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_marginHorizontal="150dp"
+            android:layout_marginVertical="80dp"
+            android:layout_height="300dp"
             android:adjustViewBounds="true"
             android:background="@null"
             android:scaleType="centerInside"
             android:text="@string/pick_image"
+            app:layout_constraintTop_toBottomOf="@+id/addRoomTitle"
             app:srcCompat="@drawable/pick_image" />
 
         <FrameLayout
@@ -34,6 +71,7 @@
                 android:id="@+id/EditTexts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="100dp"
                 android:orientation="vertical">
 
                 <EditText
@@ -64,10 +102,9 @@
             android:id="@+id/frameLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/frameLayout"
-            tools:layout_editor_absoluteX="20dp">
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout">
 
             <LinearLayout
                 android:id="@+id/AddClearLayout"
@@ -87,9 +124,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginEnd="20dp"
                     android:text="@string/add_room"
-                    android:textSize="20sp"
-                    android:layout_marginEnd="20dp"/>
+                    android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/ClearRoomButton"
@@ -128,6 +165,20 @@
 
         </FrameLayout>
 
+
+        <TextView
+            android:id="@+id/existingRoomTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:text="@string/existing_room"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/recycler_view_rooms"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout3" />
+
         <ProgressBar
             android:id="@+id/progress_circular"
             android:layout_width="wrap_content"
@@ -143,10 +194,10 @@
             android:layout_height="350dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frameLayout3" />
+            app:layout_constraintTop_toBottomOf="@+id/existingRoomTitle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

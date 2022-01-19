@@ -46,6 +46,7 @@ class OverviewFragment : Fragment(), RoomAdapter.OnItemClickListener {
                     context = context,
 //                  TODO: have to be careful this will give nullpointer exception if response.objectList doesnt get a value
                     items = response.objectList as List<Room?>,
+                    false,
                     this@OverviewFragment
                     )
                 binding.recyclerViewRooms.adapter = roomAdapter

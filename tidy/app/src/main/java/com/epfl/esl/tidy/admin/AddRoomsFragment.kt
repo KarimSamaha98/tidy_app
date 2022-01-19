@@ -167,6 +167,7 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
             context = context,
 //                 TODO: have to be careful this will give nullpointer exception if response.objectList doesnt get a value
             items = items,
+            false,
             this
         )
         binding.recyclerViewRooms.adapter = roomAdapter
@@ -175,7 +176,6 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        Toast.makeText(context, "Item $position clicked", Toast.LENGTH_SHORT).show()
         val clickedItem = viewModel.itemList?.get(position)
 
 //        TODO not sure why adding !! fixed this error here...
@@ -192,6 +192,8 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
 
         binding.UpdateLayout.visibility = View.VISIBLE
         binding.AddClearLayout.visibility = View.INVISIBLE
+
+
     }
 
     override fun onStop() {

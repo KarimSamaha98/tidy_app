@@ -29,6 +29,9 @@
     <string name="Space_ID">Space ID</string>
     <string name="Sign_Out">Sign Out</string>
     <string name="Administrator">Admin</string>
+    <string name="existing_room">Existing Rooms</string>
+    <string name="add_rooms">Add Rooms</string>
+    <string name="add_room_description">Add new rooms to your space</string>
 
     <string name="room_view">Rooms</string>
     <string name="task_view">Tasks</string>
