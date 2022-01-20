@@ -5,15 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.epfl.esl.tidy.R
-import java.time.LocalDate
-import kotlin.collections.ArrayList
 
-class TasksAdapter (val context: Context?, var tasks : ArrayList<TasksAdapterClass>) :
-    RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
+class HistoryAdapter (val context: Context?, var tasks : ArrayList<PastTaskClass>) :
+    RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     /**
      * Inflates the item views which is designed in xml layout file
@@ -21,7 +17,7 @@ class TasksAdapter (val context: Context?, var tasks : ArrayList<TasksAdapterCla
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(context).inflate(
-                R.layout.tasks_recycle,
+                R.layout.history_recycle,
                 parent,
                 false
             )
@@ -36,30 +32,14 @@ class TasksAdapter (val context: Context?, var tasks : ArrayList<TasksAdapterCla
      * layout file.
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val itemPosition = tasks.get(position)
-        val today = LocalDate.now()
-        val dueDate : LocalDate = LocalDate.parse(itemPosition.due_date)
-        // change color
-        if (itemPosition.rank == 1){
-            if (dueDate.isBefore(today)) {
-                holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.egg_yellow))
-            }
-            else{
-                holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.sky_blue))
-            }
-        }
-        else {
-            if (dueDate.isBefore(today)) {
-                holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.light_yellow))
-            }
-            else{
-                holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.light_blue))
-            }
-        }
 
-        holder.taskNames.text = itemPosition.task_name
-        holder.taskDueDates.text = "DUE DATE: ".plus(itemPosition.due_date)
+        val itemPosition = tasks.get(position)
+
+        holder.taskNames.text = itemPosition.task
+        holder.taskDueDates.text = "DUE".plus(itemPosition.date_due)
         holder.taskUsers.text = itemPosition.user
+        holder.taskCompleteDates.text = "COMPLETED".plus(itemPosition.date_complete)
+
     }
 
     /**
@@ -77,7 +57,7 @@ class TasksAdapter (val context: Context?, var tasks : ArrayList<TasksAdapterCla
         var taskNames: TextView = view.findViewById<TextView>(R.id.task_name)
         var taskDueDates: TextView = view.findViewById<TextView>(R.id.task_due_date)
         var taskUsers: TextView = view.findViewById<TextView>(R.id.task_user)
-        // holds cardView ref
-        val cardView : CardView = view.findViewById(R.id.tasks_view_item)
+        var taskCompleteDates: TextView = view.findViewById<TextView>(R.id.task_complete_date)
     }
+
 }

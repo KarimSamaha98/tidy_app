@@ -5,64 +5,42 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".tasks.HistoryFragment">
 
         <TextView
-            android:id="@+id/tasksTitle"
+            android:id="@+id/historyTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/tasks_title"
+            android:text="@string/task_history"
             android:textSize="40dp"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="143dp"
-            android:layout_height="85dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/broom"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
-            android:id="@+id/tasksDescription"
+            android:id="@+id/taskHistDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/tasks_main_description"
+            android:text="@string/task_hist_description"
             android:textSize="16dp"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tasksTitle" />
-
-        <Button
-            android:id="@+id/AddTaskButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/add_task"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tasksDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/historyTitle" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_tasks"
+            android:id="@+id/recycler_view_hist"
             android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_marginTop="50dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/AddTaskButton"
-            android:layout_height="0dp"/>
+            app:layout_constraintTop_toBottomOf="@+id/taskHistDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

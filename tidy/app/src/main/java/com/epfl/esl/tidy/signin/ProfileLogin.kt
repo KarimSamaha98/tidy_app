@@ -99,7 +99,7 @@ class ProfileLogin : Fragment() {
                         //Change Fragments
                         (activity as MainActivity).setBottomNavigationVisibility(View.VISIBLE)
                         Navigation.findNavController(view)
-                .navigate(R.id.action_profileLogin_to_OverviewFragment)}
+                .navigate(R.id.action_profileLogin_to_TasksFragment)}
                 }
 
                  override fun onCancelled(error: DatabaseError) {
