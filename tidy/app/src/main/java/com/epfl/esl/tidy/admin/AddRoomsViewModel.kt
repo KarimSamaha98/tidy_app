@@ -74,6 +74,7 @@ class AddRoomsViewModel(application: Application) : AndroidViewModel(application
                 val space = repository.checkSpaceId(dataSnapshot, tempID)
                 if (space != null) {
                     var isRegistered = false
+//                    TODO: Bug that the information is not being loaded because TEMPID is only set here.
                     tempID_key = space.key.toString()
                     loop@ for (rooms in space.child(Constants.ROOMS).children) {
                         if (roomMapping[roomName] == rooms.child(Constants.ROOMID)

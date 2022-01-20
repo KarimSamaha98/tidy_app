@@ -193,7 +193,7 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
         binding.UpdateLayout.visibility = View.VISIBLE
         binding.AddClearLayout.visibility = View.INVISIBLE
 
-
+        binding.recyclerViewRooms.adapter
     }
 
     override fun onStop() {
