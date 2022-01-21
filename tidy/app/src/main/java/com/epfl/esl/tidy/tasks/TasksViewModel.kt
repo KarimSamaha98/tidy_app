@@ -3,6 +3,7 @@ package com.epfl.esl.tidy.tasks
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
+import com.epfl.esl.tidy.MainActivity
 import com.epfl.esl.tidy.utils.Constants.CURRTASK
 import com.epfl.esl.tidy.utils.Constants.PREVTASK
 import com.epfl.esl.tidy.utils.Constants.SPACEIDS
@@ -13,8 +14,8 @@ import java.util.*
 class TasksViewModel : ViewModel() {
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val spaceRef: DatabaseReference = database.getReference(SPACEIDS)
-    val tempID : String = "12325345345erst22"
-    val myKey : String = "098327sdf0912"
+    var tempID : String = ""
+    var myKey : String = ""
 
     var displayTasksList = ArrayList<TasksAdapterClass>()
     var displayTask = TasksAdapterClass()
