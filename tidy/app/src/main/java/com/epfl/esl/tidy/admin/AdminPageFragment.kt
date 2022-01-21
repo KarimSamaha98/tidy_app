@@ -8,9 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
+import com.epfl.esl.tidy.MainActivity
 import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.databinding.AddRoomsFragmentBinding
 import com.epfl.esl.tidy.databinding.AdminPageFragmentBinding
+import com.epfl.esl.tidy.signin.UserDataClass
+import com.google.firebase.database.*
 
 class AdminPageFragment : Fragment() {
 
@@ -18,8 +23,11 @@ class AdminPageFragment : Fragment() {
         fun newInstance() = AdminPageFragment()
     }
 
-    private lateinit var viewModel: AdminPageViewModel
+//    private lateinit var viewModel: AdminPageViewModel
+    private val viewModel : AdminPageViewModel by activityViewModels()
     private lateinit var binding: AdminPageFragmentBinding
+    val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+    val spaceRef: DatabaseReference = database.getReference("Space_IDs")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,21 +37,41 @@ class AdminPageFragment : Fragment() {
             inflater, R.layout.admin_page_fragment,
             container, false
         )
-        viewModel = ViewModelProvider(this).get(AdminPageViewModel::class.java)
+//        viewModel = ViewModelProvider(this).get(AdminPageViewModel::class.java)
 
         binding.CreateNewSpaceButton.setOnClickListener{
-//            viewModel.createSpace()
-//            Move to next page
+            viewModel.spaceID = spaceRef.push().key.toString()
+            Navigation.findNavController(it).navigate(R.id.action_admin_page_fragment_to_adminPage2Fragment)
         }
 
         binding.EditExistingSpaceButton.setOnClickListener{
-            viewModel.spaceID = binding.spaceIdText.text.toString()
-//            if(viewModel.checkSpace()){
-////                move to next page
-//            } else{
-//                Toast.makeText(context, "Invalid SpaceID, try again", Toast.LENGTH_SHORT).show()
-//            }
+            if(binding.spaceIdText.text.toString() != "") {
+                viewModel.spaceID = binding.spaceIdText.text.toString()
+                spaceRef.child(viewModel.spaceID)
+                    .addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if (snapshot.exists()) {
+                                Navigation.findNavController(it)
+                                    .navigate(R.id.action_admin_page_fragment_to_adminPage2Fragment)
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "Invalid SpaceID, try again",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
 
+                        override fun onCancelled(error: DatabaseError) {
+                        }
+                    })
+            }else{
+                Toast.makeText(
+                    context,
+                    "SpaceID can't be blank.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         return binding.root
@@ -51,7 +79,7 @@ class AdminPageFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AdminPageViewModel::class.java)
+//        viewModel = ViewModelProvider(this).get(AdminPageViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

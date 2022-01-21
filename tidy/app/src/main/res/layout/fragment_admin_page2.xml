@@ -30,11 +30,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/adminDescription"
+            android:id="@+id/userIdHolder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/admin_description"
+            android:text="invalid"
             android:textSize="16dp"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,51 +42,52 @@
             app:layout_constraintTop_toBottomOf="@+id/adminTitle"/>
 
         <Button
-            android:id="@+id/CreateNewSpaceButton"
+            android:id="@+id/addRoomsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/create_new_space"
+            android:text="@string/add_rooms"
             android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/addItemsButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/adminDescription"
-            app:layout_constraintBottom_toTopOf="@id/OrDescription"/>
-
-        <TextView
-            android:id="@+id/OrDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/or"
-            android:textSize="24dp"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/CreateNewSpaceButton"
-            app:layout_constraintBottom_toTopOf="@id/EditExistingSpaceButton"/>
+            app:layout_constraintTop_toBottomOf="@+id/userIdHolder" />
 
         <Button
-            android:id="@+id/EditExistingSpaceButton"
+            android:id="@+id/addItemsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/edit_existing_space"
+            android:text="@string/add_items"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/addSuppliesButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/addRoomsButton"/>
+
+        <Button
+            android:id="@+id/addSuppliesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/add_supplies"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/addTasksButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addItemsButton"/>
+
+        <Button
+            android:id="@+id/addTasksButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/add_tasks"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/OrDescription" />
-
-        <EditText
-            android:id="@+id/spaceIdText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/enter_valid_id"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/EditExistingSpaceButton" />
+            app:layout_constraintTop_toBottomOf="@+id/addSuppliesButton"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
