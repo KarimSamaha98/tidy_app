@@ -23,16 +23,28 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/addRoomDescription"
+            android:id="@+id/spaceIdName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text=""
-            android:textSize="34dp"
+            android:text="@string/spaceID"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/spaceIdHolder"
+            app:layout_constraintEnd_toEndOf="@+id/spaceIdHolder"
+            app:layout_constraintStart_toStartOf="@+id/spaceIdHolder"
+            app:layout_constraintTop_toBottomOf="@id/addRoomTitle" />
+
+        <TextView
+            android:id="@+id/spaceIdHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:gravity="center"
+            android:text="invalid"
+            android:textSize="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addRoomTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/spaceIdName" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -47,14 +59,14 @@
         <ImageButton
             android:id="@+id/roomImage"
             android:layout_width="match_parent"
-            android:layout_marginHorizontal="150dp"
-            android:layout_marginVertical="80dp"
             android:layout_height="300dp"
+            android:layout_marginHorizontal="150dp"
+            android:layout_marginVertical="40dp"
             android:adjustViewBounds="true"
             android:background="@null"
             android:scaleType="centerInside"
             android:text="@string/pick_image"
-            app:layout_constraintTop_toBottomOf="@+id/addRoomTitle"
+            app:layout_constraintTop_toBottomOf="@+id/spaceIdHolder"
             app:srcCompat="@drawable/pick_image" />
 
         <FrameLayout

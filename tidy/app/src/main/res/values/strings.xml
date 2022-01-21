@@ -75,4 +75,5 @@
     <string name="add_items">Add Items</string>
     <string name="add_supplies">Add Supplies</string>
     <string name="add_tasks">Add Tasks</string>
+    <string name="spaceID"><u>spaceID:</u></string>
 </resources>

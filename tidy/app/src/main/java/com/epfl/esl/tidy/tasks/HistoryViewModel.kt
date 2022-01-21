@@ -9,7 +9,7 @@ import java.util.ArrayList
 class HistoryViewModel : ViewModel() {
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val spaceRef: DatabaseReference = database.getReference(Constants.SPACEIDS)
-    val tempID : String = "12325345345erst22"
+    var spaceID : String = ""
 
     var displayTasksList = ArrayList<PastTaskClass>()
     var displayTask = PastTaskClass()

@@ -51,7 +51,7 @@ class AdminPage2Fragment : Fragment() {
             container, false
         )
 //        viewModel = ViewModelProvider(this).get(AdminPageViewModel::class.java)
-        binding.userIdHolder.text = viewModel.spaceID
+        binding.spaceIdHolder.text = viewModel.spaceID
 
 
         binding.addRoomsButton.setOnClickListener{
