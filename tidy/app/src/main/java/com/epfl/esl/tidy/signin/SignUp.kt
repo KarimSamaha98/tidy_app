@@ -55,10 +55,21 @@ class SignUp : Fragment() {
             last_name = binding.lastName.text.toString()
             space_id = binding.spaceId.text.toString()
 
-            sendDataToFireBase()
-            (activity as MainActivity).setBottomNavigationVisibility(View.VISIBLE)
-            (activity as MainActivity).loginInfo = UserDataClass(email=email, password=password, first_name=first_name, last_name=last_name, space_id=space_id, key=key, admin="0")
-            Navigation.findNavController(view).navigate(R.id.action_signUp_to_profileLogin)
+            spaceRef.child(space_id).addListenerForSingleValueEvent(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()){
+                        sendDataToFireBase()
+                        (activity as MainActivity).setBottomNavigationVisibility(View.VISIBLE)
+                        (activity as MainActivity).loginInfo = UserDataClass(email=email, password=password, first_name=first_name, last_name=last_name, space_id=space_id, key=key, admin="0")
+                        Navigation.findNavController(view).navigate(R.id.action_signUp_to_profileLogin)
+                    } else{
+                        Toast.makeText(context, "SpaceID doesn't exist", Toast.LENGTH_LONG).show()
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
         }
 
         return binding.root

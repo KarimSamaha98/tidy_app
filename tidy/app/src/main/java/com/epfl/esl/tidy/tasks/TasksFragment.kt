@@ -63,7 +63,7 @@ class TasksFragment : Fragment() {
 
                     viewModel.displayTask.task_name = taskName.plus(" in ").plus(taskRoom.lowercase())
                     viewModel.displayTask.user = space.child(USERS).child(currentTask.user_key)
-                        .child("Name").getValue(String::class.java)!!
+                        .child("First_Name").getValue(String::class.java)!!
                     viewModel.displayTask.due_date = currentTask.due
                     viewModel.displayTask.task_key = task.key.toString()
                     if (currentTask.user_key == viewModel.myKey){

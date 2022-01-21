@@ -8,10 +8,10 @@
         <entry key="app/src/main/res/layout/add_supplies_fragment.xml" value="0.4671875" />
         <entry key="app/src/main/res/layout/fragment_augmented_reality.xml" value="0.5640625" />
         <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.48037041708879685" />
-        <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.471875" />
-        <entry key="app/src/main/res/layout/fragment_tasks.xml" value="0.471875" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.31953125" />
+        <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.27875" />
+        <entry key="app/src/main/res/layout/fragment_tasks.xml" value="0.31953125" />
         <entry key="app/src/main/res/layout/overview_fragment.xml" value="0.22864583333333333" />
-        <entry key="app/src/main/res/layout/room_delete_recycle.xml" value="0.375" />
         <entry key="app/src/main/res/layout/room_recycle.xml" value="0.5397727272727273" />
         <entry key="app/src/main/res/layout/supply_recycle.xml" value="0.48828125" />
       </map>
