@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
+import com.epfl.esl.tidy.MainActivity
 import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.Response
 import com.epfl.esl.tidy.admin.Room
@@ -36,6 +37,7 @@ class OverviewFragment : Fragment(), RoomAdapter.OnItemClickListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_overview,
             container, false)
         viewModel = ViewModelProvider(this)[OverviewViewModel::class.java]
+        viewModel.spaceID = (activity as MainActivity).loginInfo.space_id
 
         binding.recyclerViewRooms.layoutManager = GridLayoutManager(activity, 2)
         binding.recyclerViewSupplies.layoutManager = GridLayoutManager(activity, 3)

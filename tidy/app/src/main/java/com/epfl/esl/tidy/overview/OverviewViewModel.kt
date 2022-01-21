@@ -10,13 +10,13 @@ import com.epfl.esl.tidy.utils.Constants
 
 class OverviewViewModel : ViewModel() {
     private val repository: FirebaseRepository = FirebaseRepository()
-    val tempID: Int = 0
+    var spaceID: String = ""
 
     init {
     }
 
     fun getRoomDetails(onGetDataListener: onGetDataListener) {
-        repository.getSpaceIdSnapshot(tempID, onGetDataListener) { r, d ->
+        repository.getSpaceIdSnapshot(spaceID, onGetDataListener) { r, d ->
             repository.getRooms(r, d)
         }
     }

@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_settings_to_profileLogin"
             app:destination="@id/profileLogin" />
+        <action
+            android:id="@+id/action_settings_to_adminPageFragment"
+            app:destination="@id/admin_page_fragment" />
     </fragment>
     <fragment
         android:id="@+id/addRoomsFragment"
@@ -65,6 +68,10 @@
         android:id="@+id/addTasks"
         android:name="com.epfl.esl.tidy.tasks.AddNewTask"
         android:label="fragment_add_tasks"/>
+    <fragment
+        android:id="@+id/admin_page_fragment"
+        android:name="com.epfl.esl.tidy.admin.AdminPageFragment"
+        android:label="AdminPageFragment" />
 
 
 </navigation>

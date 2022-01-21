@@ -64,4 +64,12 @@
         <item>Rags</item>
         <item>Bucket</item>
     </string-array>
+
+<!--    Admin Title-->
+    <string name="admin_title">Admin</string>
+    <string name="or">OR</string>
+    <string name="create_new_space">Create a New Space</string>
+    <string name="edit_existing_space">Edit an Existing Space</string>
+    <string name="admin_description">Create new spaces and edit old ones.</string>
+    <string name="enter_valid_id">Enter a valid SpaceID</string>
 </resources>

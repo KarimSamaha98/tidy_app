@@ -66,6 +66,7 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
             container, false
         )
         viewModel = ViewModelProvider(this).get(AddRoomsViewModel::class.java)
+        viewModel.spaceID = (activity as MainActivity).loginInfo.space_id
 
         binding.recyclerViewRooms.layoutManager = GridLayoutManager(activity, 3)
 

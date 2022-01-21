@@ -27,16 +27,16 @@ class FirebaseRepository {
     private var storageRef: StorageReference = Firebase.storage.reference
 
 
-    fun checkSpaceId(snapshot: DataSnapshot, spaceID : Int) : DataSnapshot? {
-        for (space in snapshot.children) {
-            return if (space.child(Constants.SPACEID).getValue(Int::class.java)!! == spaceID)
-                space else null
-        }
-        return null
-    }
+//    fun checkSpaceId(snapshot: DataSnapshot, spaceID : Int) : DataSnapshot? {
+//        for (space in snapshot.children) {
+//            return if (space.child(Constants.SPACEID).getValue(Int::class.java)!! == spaceID)
+//                space else null
+//        }
+//        return null
+//    }
 
     fun getSpaceIdSnapshot(
-        spaceID: Int,
+        spaceID: String,
         onGetDataListener: onGetDataListener,
         pullData: (response: Response, space: DataSnapshot) -> (Unit)
     ): ValueEventListener {
@@ -44,9 +44,7 @@ class FirebaseRepository {
 
         var roomListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                checkSpaceId(snapshot, spaceID)?.let {
-                    pullData(response, it)
-                    Log.d(TAG, "Correct Space Key: ${it.key}")}
+                pullData(response, snapshot.child(spaceID))
                 onGetDataListener.onSuccess(response)
             }
 
