@@ -72,10 +72,16 @@ class FirebaseRepository {
     }
 
     fun getSupplies(response: Response, space: DataSnapshot): Unit {
-        response.objectList =space.child(Constants.SUPPLIES).children.map { snapShot ->
-            snapShot.getValue(Supply::class.java)
-
-            }
+        if(space.child(Constants.SUPPLIES).exists()) {
+            response.objectList =
+                space.child(Constants.SUPPLIES).children.map { snapShot ->
+                    val supply = snapShot.getValue(Supply::class.java)
+                    supply?.key = snapShot.key.toString()
+                    supply
+                }
+        } else{
+            response.objectList = listOf()
+        }
     }
 
     fun processImage(imageBitmap: Bitmap): ByteArray {

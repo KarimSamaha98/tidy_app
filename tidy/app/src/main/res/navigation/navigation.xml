@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/profileLogin">
+    app:startDestination="@id/addSuppliesFragment">
 
 
     <fragment
@@ -91,7 +91,14 @@
         <action
             android:id="@+id/action_adminPage2Fragment_to_addTasks"
             app:destination="@id/addTasks" />
+        <action
+            android:id="@+id/action_adminPage2Fragment_to_addSuppliesFragment"
+            app:destination="@id/addSuppliesFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addSuppliesFragment"
+        android:name="com.epfl.esl.tidy.admin.AddSuppliesFragment"
+        android:label="AddSuppliesFragment" />
 
 
 </navigation>

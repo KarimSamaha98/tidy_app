@@ -8,9 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.epfl.esl.tidy.R
+import com.epfl.esl.tidy.overview.RoomAdapter
 import com.squareup.picasso.Picasso
 
-class SupplyAdapter(val context: Context, val items: ArrayList<Supply>) :
+class SupplyAdapter(val context: Context?, val items: List<Supply?>,
+private val listener : OnItemClickListener) :
     RecyclerView.Adapter<SupplyAdapter.ViewHolder>() {
     /**
      * Inflates the item views which is designed in xml layout file
@@ -34,11 +36,11 @@ class SupplyAdapter(val context: Context, val items: ArrayList<Supply>) :
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val item_position : Supply = items.get(position)
+        val item_position : Supply? = items.get(position)
 
-        holder.tvItem.text = item_position.name
+        holder.tvItem.text = item_position?.name
         Picasso.with(context)
-            .load(item_position.logoUrl)
+            .load(item_position?.imageUrl)
             .placeholder(R.mipmap.ic_launcher)
             .fit()
             .centerCrop()
@@ -55,9 +57,26 @@ class SupplyAdapter(val context: Context, val items: ArrayList<Supply>) :
     /**
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
      */
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
         // Holds the TextView that will add each item to
         var tvItem = view.findViewById<TextView>(R.id.room_name)
         var tvItem_2 = view.findViewById<ImageView>(R.id.room_photo)
+
+        init {
+            view.setOnClickListener(this)
+        }
+
+        override fun onClick(p0: View?) {
+            val position : Int = bindingAdapterPosition
+//            Make sure position is not invalid, for example if deleting an element during animation.
+            if(position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
+            }
+
+        }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
     }
 }

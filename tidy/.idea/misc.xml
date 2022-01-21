@@ -4,8 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24270833333333333" />
-        <entry key="app/src/main/res/layout/add_rooms_fragment.xml" value="0.45" />
-        <entry key="app/src/main/res/layout/add_supplies_fragment.xml" value="0.4671875" />
+        <entry key="app/src/main/res/layout/add_rooms_fragment.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/add_supplies_fragment.xml" value="0.31213872832369943" />
         <entry key="app/src/main/res/layout/admin_page_fragment.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_add_tasks.xml" value="0.27578125" />
         <entry key="app/src/main/res/layout/fragment_admin_page2.xml" value="0.625" />

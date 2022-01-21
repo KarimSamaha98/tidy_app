@@ -142,7 +142,7 @@ class AddRoomsViewModel(application: Application) : AndroidViewModel(application
                 .setValue(room)
         }
     }
-
+}
 //    fun getRoomDetails2() {
 //        var roomListener = object : ValueEventListener {
 //            override fun onDataChange(snapshot: DataSnapshot) {
@@ -161,4 +161,3 @@ class AddRoomsViewModel(application: Application) : AndroidViewModel(application
 //        }
 //        repository.addEventListener(roomListener)
 //    }
-}
