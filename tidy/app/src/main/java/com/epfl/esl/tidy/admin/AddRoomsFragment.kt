@@ -20,6 +20,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.epfl.esl.tidy.admin.AddRoomsViewModel
 import com.epfl.esl.tidy.admin.Room
@@ -66,7 +67,8 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
             container, false
         )
         viewModel = ViewModelProvider(this).get(AddRoomsViewModel::class.java)
-        viewModel.spaceID = (activity as MainActivity).loginInfo.space_id
+        val args : AddRoomsFragmentArgs by navArgs()
+        viewModel.spaceID = args.spaceID
 
         binding.recyclerViewRooms.layoutManager = GridLayoutManager(activity, 3)
 
@@ -75,6 +77,7 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
             imgIntent.setType("image/*")
             resultLauncher.launch(imgIntent)
         }
+        binding.addRoomDescription.text = viewModel.spaceID
 
         binding.AddRoomButton.setOnClickListener {
             viewModel.roomName = binding.roomName.text.toString()

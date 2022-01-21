@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.databinding.AdminPageFragmentBinding
 import com.epfl.esl.tidy.databinding.FragmentAdminPage2Binding
@@ -51,6 +53,12 @@ class AdminPage2Fragment : Fragment() {
 //        viewModel = ViewModelProvider(this).get(AdminPageViewModel::class.java)
         binding.userIdHolder.text = viewModel.spaceID
 
+
+        binding.addRoomsButton.setOnClickListener{
+            val direction = AdminPage2FragmentDirections.actionAdminPage2FragmentToAddRoomsFragment(viewModel.spaceID)
+            findNavController().navigate(direction)
+
+        }
 
         return binding.root
     }

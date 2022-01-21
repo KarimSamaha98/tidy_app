@@ -62,7 +62,12 @@
     <fragment
         android:id="@+id/addRoomsFragment"
         android:name="com.epfl.esl.tidy.AddRoomsFragment"
-        android:label="AddRoomsFragment" />
+        android:label="AddRoomsFragment" >
+        <argument
+            android:name="spaceID"
+            app:argType="string"
+            android:defaultValue='"invalid"' />
+    </fragment>
 
     <fragment
         android:id="@+id/addTasks"
