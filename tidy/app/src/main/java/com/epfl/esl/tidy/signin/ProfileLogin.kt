@@ -5,7 +5,10 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,12 +22,16 @@ import androidx.navigation.Navigation
 import com.epfl.esl.tidy.MainActivity
 import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.databinding.FragmentProfileLoginBinding
+import com.epfl.esl.tidy.tasks.PastTaskClass
+import com.epfl.esl.tidy.utils.Constants
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.wearable.*
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.squareup.picasso.Picasso
 import java.io.ByteArrayOutputStream
+import java.util.ArrayList
 
 
 class ProfileLogin : Fragment() {
@@ -41,7 +48,18 @@ class ProfileLogin : Fragment() {
     var image: String = ""
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val profileRef: DatabaseReference = database.getReference("Profiles")
-    var storageRef = Firebase.storage.reference
+    val spaceRef: DatabaseReference = database.getReference("Space_IDs")
+    val user_taks_id: String = "098327sdf0912" //Remove
+
+    var task_keys = mutableListOf<String>()
+    var task_dates = mutableListOf<String>()
+    var task_names = mutableListOf<String>()
+    var task_places = mutableListOf<String>()
+
+    lateinit var task_dates_list : Array<String>
+    lateinit var task_names_list : Array<String>
+    lateinit var task_places_list : Array<String>
+    lateinit var task_keys_list : Array<String>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +75,7 @@ class ProfileLogin : Fragment() {
             R.layout.fragment_profile_login, container, false
         )
         dataClient = Wearable.getDataClient(activity as AppCompatActivity)
+
 
         binding.toPassword.setOnClickListener {
             email = binding.email.text.toString()
@@ -92,6 +111,8 @@ class ProfileLogin : Fragment() {
                                 space_id = user.child("Space_Id").getValue(String::class.java)!!
                                 admin = user.child("Admin").getValue(String::class.java)!!
                                 image = user.child("photo URL").getValue(String::class.java)!!
+                                getUserTasks()
+                                Handler().postDelayed({sendDataToWear()}, 3000)
                                 break
                             } else {
                                 correctUsername = true
@@ -122,14 +143,14 @@ class ProfileLogin : Fragment() {
                             key = key,
                             admin = admin
                         )
-                        //Send to Watch
-                        //sendDataToWear()
-                        lateinit var bmp : Bitmap
-                        bmp = loadImage(email)
+
                         //Change Fragments
-                        (activity as MainActivity).setBottomNavigationVisibility(View.VISIBLE)
-                        Navigation.findNavController(view)
-                            .navigate(R.id.action_profileLogin_to_TasksFragment)
+                        Handler().postDelayed({
+                            (activity as MainActivity).setBottomNavigationVisibility(View.VISIBLE)
+                            Navigation.findNavController(view)
+                                .navigate(R.id.action_profileLogin_to_TasksFragment)
+                        }, 5000)
+
                     }
                 }
 
@@ -151,45 +172,75 @@ class ProfileLogin : Fragment() {
     }
 
     //Wear API fun
-//    private fun sendDataToWear() {
-//
-//        var imageBitmap = loadImage(email)
-//        var ratio: Float = 13F
-//        val imageBitmapScaled = Bitmap.createScaledBitmap(
-//            imageBitmap,
-//            (imageBitmap.width / ratio).toInt(), (imageBitmap.height / ratio).toInt(), false
-//        )
-//
-//        val matrix = Matrix()
-//        matrix.postRotate(90F)
-//        imageBitmap = Bitmap.createBitmap(
-//            imageBitmapScaled, 0, 0,
-//            (imageBitmap.width / ratio).toInt(),
-//            (imageBitmap.height / ratio).toInt(), matrix, true
-//        )
-//
-//        val stream = ByteArrayOutputStream()
-//        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-//        val imageByteArray = stream.toByteArray()
-//
-//        val request: PutDataRequest = PutDataMapRequest.create("/userInfo").run {
-//            dataMap.putByteArray("profileImage", imageByteArray)
-//            dataMap.putString("firstName", first_name)
-//            asPutDataRequest()
-//        }
-//        request.setUrgent()
-//        val putTask: Task<DataItem> = dataClient.putDataItem(request)
-//    }
+    private fun sendDataToWear() {
 
-    fun loadImage(email: String): Bitmap {
-        lateinit var bmp : Bitmap
-        val imageRef = storageRef.child("ProfileImages/"+email+".jpg")
-        imageRef.getBytes(Long.MAX_VALUE).addOnSuccessListener { byteArray ->
-            try {
-                bmp = BitmapFactory.decodeByteArray(byteArray , 0, byteArray.size)
-            } catch (e: NullPointerException){
-            }}
-        return bmp
+        var imageUri: Uri? = Uri.parse("android.resource://com.epfl.esl.tidy/" + R.drawable.user)
+        var imageBitmap = MediaStore.Images.Media.getBitmap(getActivity()?.
+        applicationContext?.contentResolver, imageUri)
+
+        var ratio: Float = 1F
+        val imageBitmapScaled = Bitmap.createScaledBitmap(
+            imageBitmap,
+            (imageBitmap.width / ratio).toInt(), (imageBitmap.height / ratio).toInt(), false
+        )
+
+        val matrix = Matrix()
+        matrix.postRotate(0F)
+        imageBitmap = Bitmap.createBitmap(
+            imageBitmapScaled, 0, 0,
+            (imageBitmap.width / ratio).toInt(),
+            (imageBitmap.height / ratio).toInt(), matrix, true
+        )
+
+        val stream = ByteArrayOutputStream()
+        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        val imageByteArray = stream.toByteArray()
+
+        //Cast to list
+        task_dates_list = task_dates.toTypedArray()
+        task_places_list = task_places.toTypedArray()
+        task_names_list = task_names.toTypedArray()
+        task_keys_list = task_keys.toTypedArray()
+
+
+        val request: PutDataRequest = PutDataMapRequest.create("/userInfo").run {
+            dataMap.putByteArray("profileImage", imageByteArray!!)
+            dataMap.putString("username", first_name)
+            dataMap.putStringArray("taskname", task_names_list)
+            dataMap.putStringArray("taskplace", task_places_list)
+            dataMap.putStringArray("taskdate", task_dates_list)
+            dataMap.putStringArray("taskkey", task_keys_list)
+            asPutDataRequest()
+        }
+        request.setUrgent()
+        dataClient.putDataItem(request)
+    }
+
+    fun getUserTasks(){
+        spaceRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val space = dataSnapshot.child(space_id)
+                //get task keys
+                for (task in space.child("Current tasks").children) {
+                    if (task.child("user_key").getValue(String::class.java)!! == user_taks_id) {
+                        task_keys += task.child("task_key").getValue(String::class.java)!!
+                        task_dates += task.child("due").getValue(String::class.java)!!
+                    }}
+
+                val tasks = dataSnapshot.child(space_id).child("Tasks")
+                for (task in tasks.children) {
+                    for (task_key in task_keys) {
+                        if (task.key.toString() == task_key) {
+                            task_names += task.child("Name").getValue(String::class.java)!!
+                            task_places += task.child("Room").getValue(String::class.java)!!
+                        }
+                    }}
+                }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 }
 
