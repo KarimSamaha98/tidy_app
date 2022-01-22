@@ -11,4 +11,6 @@
     <color name="light_blue">#E3F2FD</color>
     <color name="egg_yellow">#FFE082</color>
     <color name="light_yellow">#FFF8E1</color>
+    <color name="tidy_primary">#24A19C</color>
+    <color name="tidy_secondary">#D96098</color>
 </resources>

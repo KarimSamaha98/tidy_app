@@ -1,5 +1,7 @@
 package com.epfl.esl.tidy.signin
 
+import android.graphics.Bitmap
+import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler

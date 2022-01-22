@@ -3,15 +3,18 @@ package com.epfl.esl.tidy.ar;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.epfl.esl.tidy.R;
+import com.epfl.esl.tidy.databinding.FragmentTidyArBinding;
 import com.google.ar.core.AugmentedImage;
 import com.google.ar.core.Frame;
 import com.google.ar.sceneform.AnchorNode;
@@ -34,8 +37,10 @@ public class TidyArFragment extends Fragment  {
 
 
     private ArFragment arFragment;
-    private ImageView fitToScanView;
+    private CardView arMessage;
     private ViewRenderable cardView;
+
+    private FragmentTidyArBinding binding;
 
 
     // Augmented image and its associated center pose anchor, keyed by the augmented image in
@@ -63,16 +68,28 @@ public class TidyArFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-    // Inflate the layout for this fragment
+        // Inflate the layout for this fragment
+        binding = FragmentTidyArBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
+        final Handler handler = new Handler();
+        final Runnable r = new Runnable() {
+            public void run() {
+                ShowMessage(view);
+            }
+        };
+
+        handler.postDelayed(r, 25+
+                00);
+
+        arMessage = view.findViewById(R.id.ar_message);
         arFragment = (ArFragment) getChildFragmentManager().findFragmentById(R.id.ux_fragment);
-        fitToScanView = getView().findViewById(R.id.image_view_fit_to_scan);
 
         arFragment.getArSceneView().getScene().addOnUpdateListener(this::onUpdateFrame);
 
         ViewRenderable.builder().setView(getContext(), R.layout.card_layout).build().thenAccept(renderable -> cardView = renderable);
 
-        return inflater.inflate(R.layout.fragment_tidy_ar, container, false);
+        return view;
     }
 
 
@@ -97,7 +114,7 @@ public class TidyArFragment extends Fragment  {
 
                 case TRACKING:
                     // Have to switch to UI Thread to update View.
-                    fitToScanView.setVisibility(View.GONE);
+                    arMessage.setVisibility(View.GONE);
 
                     // Create a new anchor for newly found images.
                     if (!augmentedImageMap.containsKey(augmentedImage)) {
@@ -121,5 +138,9 @@ public class TidyArFragment extends Fragment  {
                     break;
             }
         }
+    }
+
+    private void ShowMessage(View view) {
+        view.findViewById(R.id.ar_guide).setVisibility(View.VISIBLE);
     }
 }

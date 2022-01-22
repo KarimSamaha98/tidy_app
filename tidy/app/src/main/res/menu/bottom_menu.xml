@@ -24,7 +24,7 @@
         app:labelVisibilityMode="labeled"
         android:icon="@drawable/ic_baseline_settings_24"/>
     <item
-        android:id="@+id/TidyArFragment"
+        android:id="@+id/tidyArFragment"
         android:title="@string/augmented_reality"
         app:labelVisibilityMode="labeled"
         android:icon="@drawable/ic_baseline_camera_24"/>

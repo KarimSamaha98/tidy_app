@@ -84,4 +84,6 @@
     <string name="add_supply">Add Supply</string>
     <string name="update_supply">Update Supply</string>
     <string name="existing_supplies">Existing Supplies</string>
+    <string name="ar_welcome">Welcome to Tidy\'s AR Feature!</string>
+    <string name="ar_guide">Move around your space to get instant description and help one what needs to be done! Sleek right?</string>
 </resources>
