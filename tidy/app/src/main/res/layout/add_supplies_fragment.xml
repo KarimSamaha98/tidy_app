@@ -96,6 +96,8 @@
                     android:textSize="30sp" />
 
                 <!--TODO make this a dropdown menu, not open text.-->
+
+
                 <EditText
                     android:id="@+id/supplyDescription"
                     android:layout_width="match_parent"
