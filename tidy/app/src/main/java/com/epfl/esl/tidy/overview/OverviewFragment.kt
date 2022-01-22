@@ -31,15 +31,18 @@ class OverviewFragment : Fragment(), RoomAdapter.OnItemClickListener {
     private lateinit var viewModel: OverviewViewModel
     private lateinit var binding : FragmentOverviewBinding
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this)[OverviewViewModel::class.java]
+        viewModel.spaceID = MainActivity.loginInfo.space_id
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_overview,
             container, false)
-        viewModel = ViewModelProvider(this)[OverviewViewModel::class.java]
-        viewModel.spaceID = (activity as MainActivity).loginInfo.space_id
 
         binding.recyclerViewRooms.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
 

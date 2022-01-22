@@ -60,7 +60,9 @@ class SignUp : Fragment() {
                     if(snapshot.exists()){
                         sendDataToFireBase()
                         (activity as MainActivity).setBottomNavigationVisibility(View.VISIBLE)
-                        (activity as MainActivity).loginInfo = UserDataClass(email=email, password=password, first_name=first_name, last_name=last_name, space_id=space_id, key=key, admin="0")
+                        MainActivity.loginInfo = UserDataClass(email=email, password=password,
+                            first_name=first_name, last_name=last_name,
+                            space_id=space_id, key=key, admin="0")
                         Navigation.findNavController(view).navigate(R.id.action_signUp_to_profileLogin)
                     } else{
                         Toast.makeText(context, "SpaceID doesn't exist", Toast.LENGTH_LONG).show()
@@ -76,7 +78,7 @@ class SignUp : Fragment() {
     }
 
     fun sendDataToFireBase(){
-        profileRef.child( key).child("Email")
+        profileRef.child(key).child("Email")
             .setValue(email)
         profileRef.child( key).child("Password")
             .setValue(password)
@@ -88,7 +90,7 @@ class SignUp : Fragment() {
             .setValue(space_id)
         profileRef.child( key).child("Admin")
             .setValue("0")
-        processImage((activity as MainActivity).loginInfo.image)
+        processImage(MainActivity.loginInfo.image)
 
         //Update space_ids
         space_key = spaceRef.child("Users").push().key.toString()

@@ -87,6 +87,7 @@ class TasksAdapter (val context: Context?, var tasks : ArrayList<TasksAdapterCla
         var taskNames: TextView = view.findViewById<TextView>(R.id.task_name)
         var taskDueDates: TextView = view.findViewById<TextView>(R.id.task_due_date)
         var taskUsers: TextView = view.findViewById<TextView>(R.id.task_user)
+
         // holds cardView ref
         val cardView : CardView = view.findViewById(R.id.tasks_view_item)
     }

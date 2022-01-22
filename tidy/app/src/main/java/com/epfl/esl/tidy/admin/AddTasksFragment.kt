@@ -10,10 +10,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.navArgs
-import com.epfl.esl.tidy.AddRoomsFragment
 import com.epfl.esl.tidy.AddRoomsFragmentArgs
 import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.databinding.FragmentAddTasksBinding
+import com.epfl.esl.tidy.utils.Constants
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -37,49 +37,51 @@ class AddTasksFragment : Fragment() {
 
         binding.AddTaskButton.setOnClickListener {
             viewModel.newTask = binding.taskName.text.toString()
+            viewModel.newRoom = binding.taskRoom.text.toString()
             viewModel.taskDescription = binding.taskDescription.text.toString()
 
             if (viewModel.newTask == "") {
-                Toast.makeText(context, "Enter the tile of the task.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Please enter a task.", Toast.LENGTH_SHORT).show()
             }
             else {
-                viewModel.tasksRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                viewModel.spaceRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         var taskExists = false
-
+                        val space = dataSnapshot.child(viewModel.spaceID)
                         // Check if task already exists
-                        loop@ for (task in dataSnapshot.children) {
-                            if (task.child("Title")
+                        for (task in space.child(Constants.TASKS).children) {
+                            if (task.child("Name")
                                     .getValue(String::class.java)!! == viewModel.newTask
                             ) {
-                                taskExists = true
-
-                                if (task.child("Description")
-                                        .getValue(String::class.java)!! == viewModel.taskDescription){
-                                    Toast.makeText(
-                                        context, "Task and description already exists.",
-                                        Toast.LENGTH_SHORT).show()
-                                }
-                                else {
-                                    viewModel.taskKey = task.key.toString()
-                                    viewModel.tasksRef.child(viewModel.taskKey).child("Description")
-                                        .setValue(viewModel.taskDescription)
-                                    Toast.makeText(
-                                        context, "Task exists, updating description.",
-                                        Toast.LENGTH_SHORT).show()
-                                }
-                                break@loop
+                                if (task.child("Room")
+                                        .getValue(String::class.java)!! == viewModel.newRoom){
+                                    taskExists = true
+                                    if (task.child("Description")
+                                            .getValue(String::class.java)!! == viewModel.taskDescription){
+                                        Toast.makeText(
+                                            context, "Task and room combination already exists.",
+                                            Toast.LENGTH_SHORT).show()
+                                    }
+                                    else{
+                                        val taskKey = task.key.toString()
+                                        viewModel.spaceRef.child(viewModel.spaceID).child(Constants.TASKS)
+                                            .child(taskKey).child("Description")
+                                            .setValue(viewModel.taskDescription)
+                                        Toast.makeText(
+                                            context, "Description of existing task updated.",
+                                            Toast.LENGTH_SHORT).show()
+                                    }
                                 }
                             }
+                        }
 
                         // If task does not exist we create new task
                         if (!taskExists) {
-                            viewModel.taskKey = viewModel.tasksRef.push().key.toString()
                             // Send tasks data to firebase
                             viewModel.sendDataToFireBase()
 
                             Toast.makeText(
-                                context,"New task created",
+                                context,"New task created!",
                                 Toast.LENGTH_SHORT).show()
                         }
                     }
