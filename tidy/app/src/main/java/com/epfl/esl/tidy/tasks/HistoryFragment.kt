@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.epfl.esl.tidy.MainActivity
 import com.epfl.esl.tidy.databinding.FragmentHistoryBinding
 import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.admin.Supply
@@ -35,12 +36,12 @@ class HistoryFragment : Fragment() {
 
         binding.recyclerViewHist.layoutManager = LinearLayoutManager(context,
             LinearLayoutManager.VERTICAL, false)
-
+        viewModel.spaceID = (activity as MainActivity).loginInfo.space_id
 
         // Get all task histories
         viewModel.spaceRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val space = dataSnapshot.child(viewModel.tempID)
+                val space = dataSnapshot.child(viewModel.spaceID)
                 viewModel.displayTasksList = ArrayList<PastTaskClass>()
 
                 // Gets the previous tasks

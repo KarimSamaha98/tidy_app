@@ -1,10 +1,5 @@
 package com.epfl.esl.tidy.signin
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Matrix
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -41,11 +36,11 @@ class ProfileLogin : Fragment() {
     var email: String = ""
     var password: String = ""
     var key: String = ""
-    var first_name: String = ""
-    var last_name: String = ""
-    var space_id: String = ""
-    var admin: String = ""
-    var image: String = ""
+    var first_name : String = ""
+    var last_name : String = ""
+    var space_id : String = ""
+    var admin : String = ""
+    lateinit var image : Uri
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val profileRef: DatabaseReference = database.getReference("Profiles")
     val spaceRef: DatabaseReference = database.getReference("Space_IDs")
@@ -110,9 +105,7 @@ class ProfileLogin : Fragment() {
                                 last_name = user.child("Last_Name").getValue(String::class.java)!!
                                 space_id = user.child("Space_Id").getValue(String::class.java)!!
                                 admin = user.child("Admin").getValue(String::class.java)!!
-                                image = user.child("photo URL").getValue(String::class.java)!!
-                                getUserTasks()
-                                Handler().postDelayed({sendDataToWear()}, 3000)
+                                image = Uri.parse(user.child("photo URL").getValue(String::class.java)!!)
                                 break
                             } else {
                                 correctUsername = true
@@ -134,16 +127,7 @@ class ProfileLogin : Fragment() {
 
                     if (correctUsername && correctPassword) {
                         //Store Credential
-                        (activity as MainActivity).loginInfo = UserDataClass(
-                            email = email,
-                            password = password,
-                            first_name = first_name,
-                            last_name = last_name,
-                            space_id = space_id,
-                            key = key,
-                            admin = admin
-                        )
-
+                        (activity as MainActivity).loginInfo = UserDataClass(email=email, password=password, first_name=first_name, last_name=last_name, space_id=space_id, key=key, admin=admin, image=image)
                         //Change Fragments
                         Handler().postDelayed({
                             (activity as MainActivity).setBottomNavigationVisibility(View.VISIBLE)

@@ -1,6 +1,7 @@
 package com.epfl.esl.tidy.signin
 
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -10,6 +11,7 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -44,7 +46,6 @@ class Settings : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -82,7 +83,10 @@ class Settings : Fragment() {
             resultLauncher.launch(imgIntent)
         }
 
-
+        binding.admin.setOnClickListener(){view:View ->
+            Log.d(ContentValues.TAG, "Admin button clicked")
+            Navigation.findNavController(view).navigate(R.id.action_settings_to_adminPageFragment)
+        }
 
         return binding.root
     }

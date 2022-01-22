@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -15,9 +16,11 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.epfl.esl.tidy.MainActivity
 import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.utils.SwipeGesture
 import com.epfl.esl.tidy.databinding.FragmentTasksBinding
+import com.epfl.esl.tidy.signin.UserDataClass
 import com.epfl.esl.tidy.utils.Constants.CURRTASK
 import com.epfl.esl.tidy.utils.Constants.TASKS
 import com.epfl.esl.tidy.utils.Constants.USERS
@@ -33,6 +36,8 @@ class TasksFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         viewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
+        viewModel.tempID = (activity as MainActivity).loginInfo.space_id
+        viewModel.myKey = (activity as MainActivity).loginInfo.key
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tasks,
             container, false)
@@ -60,17 +65,26 @@ class TasksFragment : Fragment() {
                         .child("Name").getValue(String::class.java)!!
                     val taskRoom = space.child(TASKS).child(currentTask.task_key)
                         .child("Room").getValue(String::class.java)!!
+                    if(space.child(USERS).child(currentTask.user_key)
+                            .child("First_Name").getValue(String::class.java) != null) {
+                        viewModel.displayTask.task_name =
+                            taskName.plus(" in ").plus(taskRoom.lowercase())
+                        viewModel.displayTask.user = space.child(USERS).child(currentTask.user_key)
+                            .child("First_Name").getValue(String::class.java)!!
+                        viewModel.displayTask.due_date = currentTask.due
+                        viewModel.displayTask.task_key = task.key.toString()
+                        if (currentTask.user_key == viewModel.myKey) {
+                            viewModel.displayTask.rank = 1
+                        } else {
+                            viewModel.displayTask.rank = 0
+                        }
 
-                    viewModel.displayTask.task_name = taskName.plus(" in ").plus(taskRoom.lowercase())
-                    viewModel.displayTask.user = space.child(USERS).child(currentTask.user_key)
-                        .child("Name").getValue(String::class.java)!!
-                    viewModel.displayTask.due_date = currentTask.due
-                    viewModel.displayTask.task_key = task.key.toString()
-                    if (currentTask.user_key == viewModel.myKey){
-                        viewModel.displayTask.rank = 1
-                    }
-                    else{
-                        viewModel.displayTask.rank = 0
+                    }else{
+                        viewModel.displayTask.task_name =
+                            taskName.plus(" in ").plus(taskRoom.lowercase())
+                        viewModel.displayTask.user = "OLD_USER"
+                        viewModel.displayTask.due_date = currentTask.due
+                        viewModel.displayTask.task_key = task.key.toString()
                     }
 
                     viewModel.displayTasksList.add(viewModel.displayTask)

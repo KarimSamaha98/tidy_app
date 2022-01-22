@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
+import com.epfl.esl.tidy.MainActivity
 import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.Response
 import com.epfl.esl.tidy.admin.Room
@@ -19,7 +20,7 @@ import com.epfl.esl.tidy.onGetDataListener
 //TODO when you click on Tile it opens up the room page. Need onclick listeners for Recycler view
 
 
-class OverviewFragment : Fragment() {
+class OverviewFragment : Fragment(), RoomAdapter.OnItemClickListener {
 
     companion object {
         fun newInstance() = OverviewFragment()
@@ -36,6 +37,7 @@ class OverviewFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_overview,
             container, false)
         viewModel = ViewModelProvider(this)[OverviewViewModel::class.java]
+        viewModel.spaceID = (activity as MainActivity).loginInfo.space_id
 
         binding.recyclerViewRooms.layoutManager = GridLayoutManager(activity, 2)
         binding.recyclerViewSupplies.layoutManager = GridLayoutManager(activity, 3)
@@ -46,7 +48,9 @@ class OverviewFragment : Fragment() {
                     context = context,
 //                  TODO: have to be careful this will give nullpointer exception if response.objectList doesnt get a value
                     items = response.objectList as List<Room?>,
-                )
+                    false,
+                    this@OverviewFragment
+                    )
                 binding.recyclerViewRooms.adapter = roomAdapter
                 binding.progressCircular.visibility = View.INVISIBLE
             }
@@ -57,6 +61,9 @@ class OverviewFragment : Fragment() {
         })
 
         return binding.root
+    }
+
+    override fun onItemClick(position: Int) {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
