@@ -4,7 +4,10 @@ import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Matrix
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -122,7 +125,13 @@ class Settings : Fragment() {
         binding.email.text = email
         binding.password.text = password
         binding.spaceId.text = space_id
-        binding.profilePic.setImageURI(image)
+        val imageRef = storageRef.child("ProfileImages/"+email+".jpg")
+        imageRef.getBytes(Long.MAX_VALUE).addOnSuccessListener { byteArray ->
+            try {
+                val image: Drawable = BitmapDrawable((activity as MainActivity).resources, BitmapFactory.decodeByteArray(byteArray,0, byteArray.size))
+                binding.profilePic.setImageDrawable(image)
+            } catch (e: NullPointerException){
+            }}
         switchToDisplay()
     }
 
@@ -214,16 +223,8 @@ class Settings : Fragment() {
         }
 
     fun processImage(image_URI: Uri?){
-        val matrix = Matrix()
         var imageBitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver,
             image_URI)
-        val ratio:Float = 13F
-        val imageBitmapScaled = Bitmap.createScaledBitmap(imageBitmap,
-            (imageBitmap.width / ratio).toInt(), (imageBitmap.height / ratio).toInt(), false)
-        imageBitmap = Bitmap.createBitmap(imageBitmapScaled, 0, 0,
-            (imageBitmap.width / ratio).toInt(), (imageBitmap.height / ratio).toInt(),
-            matrix, true)
-
         val stream = ByteArrayOutputStream()
         imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
         val imageByteArray = stream.toByteArray()

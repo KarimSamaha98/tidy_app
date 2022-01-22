@@ -109,6 +109,10 @@
             app:argType="string"
             android:defaultValue="invalid" />
     </fragment>
+    <fragment
+        android:id="@+id/tidyArFragment"
+        android:name="com.epfl.esl.tidy.ar.TidyArFragment"
+        android:label="TidyArFragment" />
 
 
 </navigation>

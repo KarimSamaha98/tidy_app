@@ -51,6 +51,10 @@
     <string name="task_hist_description">Here are all the completed tasks!</string>
     <string name="history">History</string>
 
+    <string name="fit_image_to_scan">Fit image to scan</string>
+    <string name="sample_text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</string>
+    <string name="due_date">Due Date</string>
+
 
     <string-array name="supplies">
         <item>Vaccum Cleaner</item>
@@ -81,5 +85,7 @@
     <string name="update_supply">Update Supply</string>
     <string name="update_tasks">Update Tasks</string>
     <string name="existing_supplies">Existing Supplies</string>
+    <string name="ar_welcome">Welcome to Tidy\'s AR Feature!</string>
+    <string name="ar_guide">Move around your space to get instant description and help on what needs to be done! Sleek right?</string>
     <string name="existing_tasks">Existing Tasks</string>
 </resources>
