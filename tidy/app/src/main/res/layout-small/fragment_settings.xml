@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/space_id_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Space_ID"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toTopOf="@+id/view_5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.271"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password_label"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <View
+            android:id="@+id/view_5"
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/space_id_label"
+            app:layout_constraintTop_toBottomOf="@+id/email_label"
+            app:layout_constraintVertical_bias="0.353" />
+
+        <TextView
+            android:id="@+id/password_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Password"
+            android:textSize="10sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/view_4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.275"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email_label"
+            app:layout_constraintVertical_bias="1.0" />
+
+
+        <TextView
+            android:id="@+id/password"
+            android:layout_width="100dp"
+            android:layout_height="22.5dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/Password"
+            android:textSize="17sp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/password_label"
+            app:layout_constraintTop_toBottomOf="@+id/view_4" />
+
+        <EditText
+            android:id="@+id/password_input"
+            android:layout_width="200dp"
+            android:layout_height="22.5dp"
+            android:layout_marginTop="4dp"
+            android:hint="@string/Password"
+            android:textSize="17sp"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/password_label"
+            app:layout_constraintTop_toBottomOf="@+id/password_label" />
+
+        <View
+            android:id="@+id/view_4"
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/password_label"
+            app:layout_constraintTop_toBottomOf="@+id/email_label"
+            app:layout_constraintVertical_bias="0.167" />
+
+        <ImageView
+            android:id="@+id/profile_pic"
+            android:layout_width="100dp"
+            android:layout_height="98dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/user"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.125"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Welcome to the Settings View. Here you can change your user information."
+            android:textColor="#000000"
+            android:textSize="8sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="68dp"
+            android:text="Settings"
+            android:textColor="@color/tidy_primary"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/first_name"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="75dp"
+            android:text="@string/First_Name"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toStartOf="@+id/last_name"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/first_name_label"
+            app:layout_constraintTop_toTopOf="@+id/profile_pic" />
+
+        <EditText
+            android:id="@+id/first_name_input"
+            android:layout_width="75dp"
+            android:layout_height="17dp"
+            android:layout_marginTop="16dp"
+            android:hint="@string/First_Name"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/first_name_label"
+            app:layout_constraintTop_toTopOf="@+id/first_name_label" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="200dp"
+            android:layout_height="22.5dp"
+            android:layout_marginTop="1dp"
+            android:text="@string/Email"
+            android:textSize="17sp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/email_label"
+            app:layout_constraintTop_toBottomOf="@+id/email_label" />
+
+        <EditText
+            android:id="@+id/email_input"
+            android:layout_width="200dp"
+            android:layout_height="22.5dp"
+            android:hint="@string/Email"
+            android:textSize="17sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/password"
+            app:layout_constraintStart_toStartOf="@+id/email_label"
+            app:layout_constraintTop_toBottomOf="@+id/email_label"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/space_id"
+            android:layout_width="200dp"
+            android:layout_height="22.5dp"
+            android:text="@string/Space_ID"
+            android:textSize="17sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/space_id_label" />
+
+        <EditText
+            android:id="@+id/space_id_input"
+            android:layout_width="200dp"
+            android:layout_height="22.5dp"
+            android:layout_marginTop="12dp"
+            android:hint="@string/Space_ID"
+            android:textSize="17sp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/space_id_label"
+            app:layout_constraintTop_toTopOf="@+id/space_id_label" />
+
+        <Button
+            android:id="@+id/sign_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/Sign_Out"
+            android:textSize="17sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/space_id_input" />
+
+        <Button
+            android:id="@+id/admin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/Administrator"
+            android:textSize="17sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sign_out" />
+
+        <TextView
+            android:id="@+id/last_name"
+            android:layout_width="75dp"
+            android:layout_height="17dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/Last_Name"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/last_name_input"
+            app:layout_constraintTop_toTopOf="@+id/first_name" />
+
+        <EditText
+            android:id="@+id/last_name_input"
+            android:layout_width="75dp"
+            android:layout_height="17dp"
+            android:hint="@string/Last_Name"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/last_name_label"
+            app:layout_constraintTop_toBottomOf="@+id/last_name_label" />
+
+        <ImageButton
+            android:id="@+id/edit_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="#00000000"
+            android:scaleType="fitCenter"
+            android:scrollbarSize="1dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/pencil" />
+
+        <ImageButton
+            android:id="@+id/save_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:background="#00000000"
+            android:scaleType="fitCenter"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/edit_button"
+            app:layout_constraintTop_toTopOf="@+id/edit_button"
+            app:srcCompat="@drawable/check" />
+
+        <ImageButton
+            android:id="@+id/cancel_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#00000000"
+            android:scaleType="fitCenter"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/edit_button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/close" />
+
+        <TextView
+            android:id="@+id/email_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="@string/Email"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.29"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_pic" />
+
+        <TextView
+            android:id="@+id/first_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:text="@string/First_Name"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/profile_pic"
+            app:layout_constraintTop_toTopOf="@+id/profile_pic" />
+
+        <Button
+            android:id="@+id/profile_pic_button"
+            android:layout_width="100dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="8dp"
+            android:text="Change"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.125"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_pic" />
+
+        <View
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/email_label"
+            app:layout_constraintTop_toBottomOf="@+id/email_label"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/view_2"
+            android:layout_width="50dp"
+            android:layout_height="1dp"
+            android:layout_marginEnd="312dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/first_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/first_name"
+            app:layout_constraintTop_toBottomOf="@+id/first_name_label"
+            app:layout_constraintVertical_bias="0.076" />
+
+        <View
+            android:id="@+id/view_3"
+            android:layout_width="50dp"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/last_name"
+            app:layout_constraintEnd_toEndOf="@+id/last_name_label"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/last_name_label"
+            app:layout_constraintTop_toBottomOf="@+id/last_name_label"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/last_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Last_Name"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/first_name_label"
+            app:layout_constraintTop_toTopOf="@+id/first_name_label" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

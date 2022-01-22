@@ -166,6 +166,7 @@ class Settings : Fragment() {
         binding.lastName.visibility = View.INVISIBLE
         binding.spaceId.visibility = View.INVISIBLE
 
+
         binding.emailInput.visibility = View.VISIBLE
         binding.passwordInput.visibility = View.VISIBLE
         binding.firstNameInput.visibility = View.VISIBLE
@@ -190,6 +191,7 @@ class Settings : Fragment() {
         binding.firstName.visibility = View.VISIBLE
         binding.lastName.visibility = View.VISIBLE
         binding.spaceId.visibility = View.VISIBLE
+
 
         binding.emailInput.visibility = View.INVISIBLE
         binding.passwordInput.visibility = View.INVISIBLE
