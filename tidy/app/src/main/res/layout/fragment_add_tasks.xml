@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -9,48 +10,93 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
 
+        <TextView
+            android:id="@+id/addTasksTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/add_tasks"
+            android:textSize="40dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/spaceIdName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/spaceID"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/spaceIdHolder"
+            app:layout_constraintEnd_toEndOf="@+id/spaceIdHolder"
+            app:layout_constraintStart_toStartOf="@+id/spaceIdHolder"
+            app:layout_constraintTop_toBottomOf="@id/addTasksTitle" />
+
+        <TextView
+            android:id="@+id/spaceIdHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:text="invalid"
+            android:textSize="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spaceIdName" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="143dp"
+            android:layout_height="85dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/broom"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="32dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:orientation="vertical"
-            android:gravity="center"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/imageView">
 
             <LinearLayout
                 android:id="@+id/EditTexts"
                 android:layout_width="match_parent"
-                android:layout_height="176dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="100dp"
                 android:orientation="vertical">
-
-                <!--TODO make this a dropdown menu, not open text.-->
 
                 <EditText
                     android:id="@+id/taskName"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:gravity="center"
-                    android:hint="Task"
+                    android:hint="@string/task_name"
                     android:inputType="textPersonName"
-                    android:textSize="20sp" />
+                    android:textSize="30sp" />
 
                 <EditText
-                    android:id="@+id/roomName"
+                    android:id="@+id/taskRoom"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="100dp"
                     android:gravity="center"
-                    android:hint="Room"
-                    android:inputType="textPersonName"
+                    android:hint="@string/task_room"
+                    android:inputType="textLongMessage"
                     android:textSize="20sp" />
 
+                <!--TODO make this a dropdown menu, not open text.-->
                 <EditText
                     android:id="@+id/taskDescription"
                     android:layout_width="match_parent"
-                    android:layout_height="121dp"
+                    android:layout_height="100dp"
                     android:gravity="center"
                     android:hint="@string/task_description"
                     android:inputType="textLongMessage"
@@ -62,32 +108,92 @@
 
 
         <FrameLayout
+            android:id="@+id/frameLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/frameLayout">
 
             <LinearLayout
-                android:id="@+id/SignInSignUpButtons"
+                android:id="@+id/AddClearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/AddTaskButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/add_task"
-                    android:textSize="20sp"/>
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/add_tasks"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/ClearTasksButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/clear"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/UpdateLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/UpdateTasksButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/update_tasks"
+                    android:textSize="20sp" />
+
             </LinearLayout>
 
         </FrameLayout>
+
+
+        <TextView
+            android:id="@+id/existingTasksTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:text="@string/existing_tasks"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/recycler_view_tasks"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout3" />
+
+        <ProgressBar
+            android:id="@+id/progress_circular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recycler_view_tasks"
+            app:layout_constraintBottom_toBottomOf="@+id/recycler_view_tasks"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_tasks"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/existingTasksTitle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

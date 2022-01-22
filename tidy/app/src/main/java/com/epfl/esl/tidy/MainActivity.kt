@@ -35,14 +35,14 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setupWithNavController(navController)
         setBottomNavigationVisibility(View.GONE)
 
-        setAlarm()
+        setAlarm(loginInfo.space_id)
     }
 
     public fun setBottomNavigationVisibility (visibility: Int){
         bottomNavigationView.visibility = visibility
     }
 
-    private fun setAlarm(){
+    private fun setAlarm(spaceID : String){
         calendar = Calendar.getInstance()
         // Set execution time to be 01:00:00 AM
         calendar.set(Calendar.HOUR_OF_DAY, 15)
@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
         val intent = Intent(this, AlarmReceiver::class.java)
+        intent.putExtra("spaceID", spaceID)
         pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
 
         alarmManager.setInexactRepeating( // use bc exact time isn't important
@@ -58,6 +59,6 @@ class MainActivity : AppCompatActivity() {
             AlarmManager.INTERVAL_DAY, pendingIntent
         )
 
-        Toast.makeText(this, "Alarm set successfully", Toast.LENGTH_SHORT     ).show()
+        Toast.makeText(this, "New tasks will be assigned!", Toast.LENGTH_SHORT).show()
     }
 }

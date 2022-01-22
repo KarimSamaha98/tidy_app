@@ -38,9 +38,6 @@
         android:id="@+id/TasksFragment"
         android:name="com.epfl.esl.tidy.tasks.TasksFragment"
         android:label="TasksFragment" >
-        <action
-            android:id="@+id/action_TasksFragment_to_addTasks"
-            app:destination="@id/addTasks" />
     </fragment>
     <fragment
         android:id="@+id/HistoryFragment"
@@ -70,9 +67,15 @@
     </fragment>
 
     <fragment
-        android:id="@+id/addTasks"
-        android:name="com.epfl.esl.tidy.tasks.AddNewTask"
-        android:label="fragment_add_tasks"/>
+        android:id="@+id/addTasksFragment"
+        android:name="com.epfl.esl.tidy.admin.AddTasksFragment"
+        android:label="fragment_add_tasks">
+        <argument
+            android:name="spaceID"
+            app:argType="string"
+            android:defaultValue='"invalid"' />
+    </fragment>
+
     <fragment
         android:id="@+id/admin_page_fragment"
         android:name="com.epfl.esl.tidy.admin.AdminPageFragment"
@@ -81,6 +84,7 @@
             android:id="@+id/action_admin_page_fragment_to_adminPage2Fragment"
             app:destination="@id/adminPage2Fragment" />
     </fragment>
+
     <fragment
         android:id="@+id/adminPage2Fragment"
         android:name="com.epfl.esl.tidy.admin.AdminPage2Fragment"
@@ -89,12 +93,13 @@
             android:id="@+id/action_adminPage2Fragment_to_addRoomsFragment"
             app:destination="@id/addRoomsFragment" />
         <action
-            android:id="@+id/action_adminPage2Fragment_to_addTasks"
-            app:destination="@id/addTasks" />
-        <action
             android:id="@+id/action_adminPage2Fragment_to_addSuppliesFragment"
             app:destination="@id/addSuppliesFragment" />
+        <action
+            android:id="@+id/action_adminPage2Fragment_to_addTasksFragment"
+            app:destination="@id/addTasksFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/addSuppliesFragment"
         android:name="com.epfl.esl.tidy.admin.AddSuppliesFragment"
