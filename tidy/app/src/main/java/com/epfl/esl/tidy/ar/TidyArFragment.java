@@ -79,8 +79,7 @@ public class TidyArFragment extends Fragment  {
             }
         };
 
-        handler.postDelayed(r, 25+
-                00);
+        handler.postDelayed(r, 2000);
 
         arMessage = view.findViewById(R.id.ar_message);
         arFragment = (ArFragment) getChildFragmentManager().findFragmentById(R.id.ux_fragment);

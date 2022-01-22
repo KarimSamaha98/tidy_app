@@ -86,6 +86,6 @@
     <string name="update_tasks">Update Tasks</string>
     <string name="existing_supplies">Existing Supplies</string>
     <string name="ar_welcome">Welcome to Tidy\'s AR Feature!</string>
-    <string name="ar_guide">Move around your space to get instant description and help one what needs to be done! Sleek right?</string>
+    <string name="ar_guide">Move around your space to get instant description and help on what needs to be done! Sleek right?</string>
     <string name="existing_tasks">Existing Tasks</string>
 </resources>

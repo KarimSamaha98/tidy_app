@@ -58,7 +58,7 @@ xmlns:tools="http://schemas.android.com/tools">
                 android:gravity="center"
                 android:text="@string/ar_guide"
                 android:textSize="28sp"
-                android:visibility="visible" />
+                android:visibility="invisible" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

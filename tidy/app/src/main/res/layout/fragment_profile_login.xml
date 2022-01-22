@@ -21,12 +21,8 @@
             android:layout_height="45dp"
             android:hint="@string/Password"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.356"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.531" />
+            app:layout_constraintBottom_toBottomOf="@id/email"
+            app:layout_constraintEnd_toEndOf="@id/email" />
 
         <EditText
             android:id="@+id/email"
@@ -45,15 +41,11 @@
             android:id="@+id/toTask"
             android:layout_width="61dp"
             android:layout_height="48dp"
+            android:backgroundTint="@color/tidy_primary"
             android:text="@string/NextButton"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.352"
-            app:layout_constraintStart_toEndOf="@+id/password"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.53"
-            android:backgroundTint="@color/tidy_primary"/>
+            app:layout_constraintBottom_toBottomOf="@id/toPassword"
+            app:layout_constraintEnd_toEndOf="@id/toPassword" />
 
         <Button
             android:id="@+id/toPassword"
