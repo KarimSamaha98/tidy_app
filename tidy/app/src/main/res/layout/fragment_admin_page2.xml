@@ -60,22 +60,10 @@
             android:gravity="center"
             android:text="@string/add_rooms"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/addItemsButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spaceIdHolder" />
-
-        <Button
-            android:id="@+id/addItemsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/add_items"
-            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/addSuppliesButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/addRoomsButton"/>
+            app:layout_constraintTop_toBottomOf="@+id/spaceIdHolder" />
 
         <Button
             android:id="@+id/addSuppliesButton"
@@ -87,7 +75,7 @@
             app:layout_constraintBottom_toTopOf="@+id/addTasksButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addItemsButton"/>
+            app:layout_constraintTop_toBottomOf="@+id/addRoomsButton"/>
 
         <Button
             android:id="@+id/addTasksButton"

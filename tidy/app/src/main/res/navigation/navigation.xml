@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/addSuppliesFragment">
+    app:startDestination="@id/profileLogin">
 
 
     <fragment
@@ -98,7 +98,12 @@
     <fragment
         android:id="@+id/addSuppliesFragment"
         android:name="com.epfl.esl.tidy.admin.AddSuppliesFragment"
-        android:label="AddSuppliesFragment" />
+        android:label="AddSuppliesFragment" >
+        <argument
+            android:name="spaceID"
+            app:argType="string"
+            android:defaultValue="invalid" />
+    </fragment>
 
 
 </navigation>

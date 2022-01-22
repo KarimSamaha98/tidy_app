@@ -63,9 +63,9 @@ class AddSuppliesFragment : Fragment(), SupplyAdapter.OnItemClickListener {
             container, false
         )
         viewModel = ViewModelProvider(this).get(AddSuppliesViewModel::class.java)
-//      TODO
-//        val args : AddRoomsFragmentArgs by navArgs()
-//        viewModel.spaceID = args.spaceID
+
+        val args : AddSuppliesFragmentArgs by navArgs()
+        viewModel.spaceID = args.spaceID
 
         binding.recyclerViewRooms.layoutManager = GridLayoutManager(activity, 3)
 

@@ -77,7 +77,7 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
             imgIntent.setType("image/*")
             resultLauncher.launch(imgIntent)
         }
-        binding.spaceIdName.text = viewModel.spaceID
+        binding.spaceIdHolder.text = viewModel.spaceID
 
         binding.AddRoomButton.setOnClickListener {
             viewModel.roomName = binding.roomName.text.toString()

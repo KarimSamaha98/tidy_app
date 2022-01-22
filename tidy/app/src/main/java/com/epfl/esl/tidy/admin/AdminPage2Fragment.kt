@@ -57,7 +57,11 @@ class AdminPage2Fragment : Fragment() {
         binding.addRoomsButton.setOnClickListener{
             val direction = AdminPage2FragmentDirections.actionAdminPage2FragmentToAddRoomsFragment(viewModel.spaceID)
             findNavController().navigate(direction)
+        }
 
+        binding.addSuppliesButton.setOnClickListener{
+            val direction = AdminPage2FragmentDirections.actionAdminPage2FragmentToAddSuppliesFragment(viewModel.spaceID)
+            findNavController().navigate(direction)
         }
 
         return binding.root
