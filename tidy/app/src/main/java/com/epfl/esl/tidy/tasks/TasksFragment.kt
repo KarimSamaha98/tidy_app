@@ -1,7 +1,6 @@
 package com.epfl.esl.tidy.tasks
 
 import android.content.ContentValues.TAG
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -31,7 +29,6 @@ class TasksFragment : Fragment() {
     private lateinit var binding : FragmentTasksBinding
     private lateinit var viewModel: TasksViewModel
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -44,11 +41,6 @@ class TasksFragment : Fragment() {
 
         binding.recyclerViewTasks.layoutManager = LinearLayoutManager(context,
             LinearLayoutManager.VERTICAL, false)
-
-        binding.AddTaskButton.setOnClickListener {view: View ->
-            Navigation.findNavController(view).navigate(R.id.action_TasksFragment_to_addTasks)
-        }
-
 
         // Get all current tasks
         viewModel.spaceRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -117,7 +109,6 @@ class TasksFragment : Fragment() {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
     }

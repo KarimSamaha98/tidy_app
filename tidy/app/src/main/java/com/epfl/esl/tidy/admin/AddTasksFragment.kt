@@ -1,4 +1,4 @@
-package com.epfl.esl.tidy.tasks
+package com.epfl.esl.tidy.admin
 
 
 import androidx.lifecycle.ViewModelProvider
@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.navArgs
+import com.epfl.esl.tidy.AddRoomsFragment
+import com.epfl.esl.tidy.AddRoomsFragmentArgs
 import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.databinding.FragmentAddTasksBinding
 import com.google.firebase.database.DataSnapshot
@@ -16,9 +19,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import java.util.*
 
-class AddNewTask : Fragment() {
+class AddTasksFragment : Fragment() {
+
     private lateinit var binding: FragmentAddTasksBinding
-    private lateinit var viewModel: AddNewTaskViewModel
+    private lateinit var viewModel: AddTasksViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -26,6 +30,10 @@ class AddNewTask : Fragment() {
             inflater, R.layout.fragment_add_tasks,
             container, false
         )
+
+        val args : AddRoomsFragmentArgs by navArgs()
+        viewModel = ViewModelProvider(this).get(AddTasksViewModel::class.java)
+        viewModel.spaceID = args.spaceID
 
         binding.AddTaskButton.setOnClickListener {
             viewModel.newTask = binding.taskName.text.toString()
@@ -84,6 +92,6 @@ class AddNewTask : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AddNewTaskViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(AddTasksViewModel::class.java)
     }
 }

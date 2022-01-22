@@ -1,5 +1,6 @@
 package com.epfl.esl.tidy.tasks
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +10,15 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.epfl.esl.tidy.R
-import java.time.LocalDate
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.collections.ArrayList
 
 class TasksAdapter (val context: Context?, var tasks : ArrayList<TasksAdapterClass>) :
     RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
+
+    @SuppressLint("SimpleDateFormat")
+    val sdf = SimpleDateFormat("dd-MM-yyyy")
 
     /**
      * Inflates the item views which is designed in xml layout file
@@ -35,13 +40,18 @@ class TasksAdapter (val context: Context?, var tasks : ArrayList<TasksAdapterCla
      * of the given type. You can either create a new View manually or inflate it from an XML
      * layout file.
      */
+    @SuppressLint("SimpleDateFormat")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val itemPosition = tasks.get(position)
-        val today = LocalDate.now()
-        val dueDate : LocalDate = LocalDate.parse(itemPosition.due_date)
-        // change color
+
+        val cal : Calendar = Calendar.getInstance()
+        val today = cal
+        cal.setTime(sdf.parse(itemPosition.due_date))
+        val dueDate = cal
+
+            // change color
         if (itemPosition.rank == 1){
-            if (dueDate.isBefore(today)) {
+            if (dueDate.before(today)) {
                 holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.egg_yellow))
             }
             else{
@@ -49,7 +59,7 @@ class TasksAdapter (val context: Context?, var tasks : ArrayList<TasksAdapterCla
             }
         }
         else {
-            if (dueDate.isBefore(today)) {
+            if (dueDate.before(today)) {
                 holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.light_yellow))
             }
             else{
