@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.epfl.esl.tidy.MainActivity
 import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.Response
@@ -39,18 +41,14 @@ class OverviewFragment : Fragment(), RoomAdapter.OnItemClickListener {
         viewModel = ViewModelProvider(this)[OverviewViewModel::class.java]
         viewModel.spaceID = (activity as MainActivity).loginInfo.space_id
 
-        binding.recyclerViewRooms.layoutManager = GridLayoutManager(activity, 2)
-        binding.recyclerViewSupplies.layoutManager = GridLayoutManager(activity, 3)
+        binding.recyclerViewRooms.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
 
         viewModel.getRoomDetails(object : onGetDataListener {
             override fun onSuccess(response: Response) {
-                val roomAdapter = RoomAdapter(
-                    context = context,
-//                  TODO: have to be careful this will give nullpointer exception if response.objectList doesnt get a value
-                    items = response.objectList as List<Room?>,
-                    false,
-                    this@OverviewFragment
-                    )
+                val roomAdapter = OverviewAdapter(context = context)
+                roomAdapter.setData(response.objectList as List<DataModel>)
+
+
                 binding.recyclerViewRooms.adapter = roomAdapter
                 binding.progressCircular.visibility = View.INVISIBLE
             }
