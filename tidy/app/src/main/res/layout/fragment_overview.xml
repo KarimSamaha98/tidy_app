@@ -31,18 +31,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/overviewTitle" />
 
-        <TextView
-            android:id="@+id/roomText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/rooms"
-            android:layout_marginStart="50dp"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/recycler_view_rooms"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/overviewDescription" />
-
         <ProgressBar
             android:id="@+id/progress_circular"
             android:layout_width="wrap_content"
@@ -55,36 +43,13 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_rooms"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/overviewDescription" />
 
-        <TextView
-            android:id="@+id/suppliesText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/supplies"
-            android:layout_marginStart="50dp"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/recycler_view_supplies"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recycler_view_rooms" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_supplies"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recycler_view_rooms" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
