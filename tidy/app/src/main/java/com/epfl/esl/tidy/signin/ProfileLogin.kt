@@ -1,5 +1,6 @@
 package com.epfl.esl.tidy.signin
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -26,7 +27,7 @@ class ProfileLogin : Fragment() {
     var last_name : String = ""
     var space_id : String = ""
     var admin : String = ""
-
+    lateinit var image : Uri
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val profileRef: DatabaseReference = database.getReference("Profiles")
 
@@ -77,6 +78,7 @@ class ProfileLogin : Fragment() {
                                 last_name = user.child("Last_Name").getValue(String::class.java)!!
                                 space_id = user.child("Space_Id").getValue(String::class.java)!!
                                 admin = user.child("Admin").getValue(String::class.java)!!
+                                image = Uri.parse(user.child("photo URL").getValue(String::class.java)!!)
                                 break
                             }
                             else {
@@ -95,7 +97,7 @@ class ProfileLogin : Fragment() {
 
                     if (correctUsername && correctPassword) {
                         //Store Credential
-                        (activity as MainActivity).loginInfo = UserDataClass(email=email, password=password, first_name=first_name, last_name=last_name, space_id=space_id, key=key, admin=admin)
+                        (activity as MainActivity).loginInfo = UserDataClass(email=email, password=password, first_name=first_name, last_name=last_name, space_id=space_id, key=key, admin=admin, image=image)
                         //Change Fragments
                         (activity as MainActivity).setBottomNavigationVisibility(View.VISIBLE)
                         Navigation.findNavController(view)
