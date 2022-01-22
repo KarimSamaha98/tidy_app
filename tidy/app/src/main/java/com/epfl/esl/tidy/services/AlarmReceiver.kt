@@ -5,8 +5,8 @@ import android.content.BroadcastReceiver
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.util.Log
+import android.widget.Toast
 import com.epfl.esl.tidy.tasks.CurrentTaskClass
 import com.epfl.esl.tidy.utils.Constants
 import com.google.firebase.database.*
@@ -21,11 +21,13 @@ class AlarmReceiver : BroadcastReceiver() {
     var allTasks : MutableSet<String> = mutableSetOf()
     var allUsers : MutableList<String> = mutableListOf()
     var unfinishedTasks : MutableSet<String> = mutableSetOf()
+
     @SuppressLint("SimpleDateFormat")
     val sdf = SimpleDateFormat("dd-MM-yyyy")
 
     override fun onReceive(context: Context?, intent: Intent?) {
         spaceID = intent!!.getStringExtra("spaceID").toString()
+        Toast.makeText(context, "New tasks will be assigned!", Toast.LENGTH_SHORT).show()
         assignTasks()
     }
 

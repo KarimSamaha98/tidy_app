@@ -32,11 +32,6 @@ class ProfileLogin : Fragment() {
     val profileRef: DatabaseReference = database.getReference("Profiles")
 
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -97,7 +92,8 @@ class ProfileLogin : Fragment() {
 
                     if (correctUsername && correctPassword) {
                         //Store Credential
-                        (activity as MainActivity).loginInfo = UserDataClass(email=email, password=password, first_name=first_name, last_name=last_name, space_id=space_id, key=key, admin=admin, image=image)
+
+                        MainActivity.loginInfo = UserDataClass(email=email, password=password, first_name=first_name, last_name=last_name, space_id=space_id, key=key, admin=admin, image=image)
                         //Change Fragments
                         (activity as MainActivity).setBottomNavigationVisibility(View.VISIBLE)
                         Navigation.findNavController(view)
@@ -105,7 +101,7 @@ class ProfileLogin : Fragment() {
                 }
 
                  override fun onCancelled(error: DatabaseError) {
-                     Log.d(TAG, "DatabaseError: $error")
+                     Log.d(TAG, "Database Error: $error")
                      Toast.makeText(context,"Database Error: $error",
                          Toast.LENGTH_LONG).show()
                  }
@@ -118,7 +114,4 @@ class ProfileLogin : Fragment() {
         }
         return binding.root
     }
-
 }
-
-//R.layout.fragment_profile_login

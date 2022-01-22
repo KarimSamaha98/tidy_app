@@ -1,16 +1,15 @@
 package com.epfl.esl.tidy.tasks
 
 import android.content.ContentValues.TAG
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,12 +28,17 @@ class TasksFragment : Fragment() {
     private lateinit var binding : FragmentTasksBinding
     private lateinit var viewModel: TasksViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
-        viewModel.tempID = (activity as MainActivity).loginInfo.space_id
-        viewModel.myKey = (activity as MainActivity).loginInfo.key
+        viewModel.spaceID = MainActivity.loginInfo.space_id
+        viewModel.myKey = MainActivity.loginInfo.key
+
+    }
+
+    override fun onCreateView(
+
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tasks,
             container, false)
@@ -46,7 +50,7 @@ class TasksFragment : Fragment() {
         viewModel.spaceRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 viewModel.displayTasksList = ArrayList<TasksAdapterClass>()
-                val space = dataSnapshot.child(viewModel.tempID)
+                val space = dataSnapshot.child(viewModel.spaceID)
                 // Gets the current tasks
                 for (task in space.child(CURRTASK).children) {
                     viewModel.displayTask = TasksAdapterClass()
@@ -107,9 +111,5 @@ class TasksFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(binding.recyclerViewTasks)
 
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
     }
 }

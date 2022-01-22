@@ -13,30 +13,31 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.epfl.esl.tidy.MainActivity
 import com.epfl.esl.tidy.databinding.FragmentHistoryBinding
 import com.epfl.esl.tidy.R
-import com.epfl.esl.tidy.admin.Supply
-import com.epfl.esl.tidy.utils.Constants
 import com.epfl.esl.tidy.utils.Constants.PREVTASK
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.epfl.esl.tidy.tasks.PastTaskClass
 import java.util.ArrayList
 
 class HistoryFragment : Fragment() {
     private lateinit var binding : FragmentHistoryBinding
     private lateinit var viewModel: HistoryViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(HistoryViewModel::class.java)
+        viewModel.spaceID = MainActivity.loginInfo.space_id
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        viewModel = ViewModelProvider(this).get(HistoryViewModel::class.java)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_history,
             container, false)
 
         binding.recyclerViewHist.layoutManager = LinearLayoutManager(context,
             LinearLayoutManager.VERTICAL, false)
-        viewModel.spaceID = (activity as MainActivity).loginInfo.space_id
+        //viewModel.spaceID = (activity as MainActivity).loginInfo.space_id
 
         // Get all task histories
         viewModel.spaceRef.addListenerForSingleValueEvent(object : ValueEventListener {

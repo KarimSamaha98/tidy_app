@@ -20,6 +20,7 @@ import androidx.navigation.Navigation
 import com.epfl.esl.tidy.MainActivity
 import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.databinding.FragmentSettingsBinding
+import com.epfl.esl.tidy.utils.Constants
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -28,22 +29,17 @@ import java.io.ByteArrayOutputStream
 
 
 class Settings : Fragment() {
-
     private lateinit var binding: FragmentSettingsBinding
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-    val profileRef: DatabaseReference = database.getReference("Profiles")
-    lateinit var key: String
-    lateinit var email: String
-    lateinit var first_name: String
-    lateinit var last_name: String
-    lateinit var space_id: String
-    lateinit var password: String
-    lateinit var image: Uri
-    var storageRef = Firebase.storage.reference
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val profileRef: DatabaseReference = database.getReference(Constants.PROFILES)
+    //lateinit var key: String
+    //lateinit var email: String
+    //lateinit var first_name: String
+    //lateinit var last_name: String
+    //lateinit var space_id: String
+    //lateinit var password: String
+    //lateinit var image: Uri
+    private var storageRef = Firebase.storage.reference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -89,68 +85,50 @@ class Settings : Fragment() {
     }
 
     fun sendDataToFireBase(){
-        key = (activity as MainActivity).loginInfo.key
-        space_id = (activity as MainActivity).loginInfo.space_id
-        first_name = (activity as MainActivity).loginInfo.first_name
-        last_name = (activity as MainActivity).loginInfo.last_name
-        email = (activity as MainActivity).loginInfo.email
-        password = (activity as MainActivity).loginInfo.password
+        val key = MainActivity.loginInfo.key
 
         profileRef.child(key).child("Email")
-            .setValue(email)
+            .setValue(MainActivity.loginInfo.email)
         profileRef.child(key).child("Password")
-            .setValue(password)
+            .setValue(MainActivity.loginInfo.password)
         profileRef.child( key).child("First_Name")
-            .setValue(first_name)
+            .setValue(MainActivity.loginInfo.first_name)
         profileRef.child(key).child("Last_Name")
-            .setValue(last_name)
+            .setValue(MainActivity.loginInfo.last_name)
         profileRef.child(key).child("Space_Id")
-            .setValue(space_id)
+            .setValue(MainActivity.loginInfo.space_id)
     }
 
     fun updateView(){
-        key = (activity as MainActivity).loginInfo.key
-        space_id = (activity as MainActivity).loginInfo.space_id
-        first_name = (activity as MainActivity).loginInfo.first_name
-        last_name = (activity as MainActivity).loginInfo.last_name
-        email = (activity as MainActivity).loginInfo.email
-        password = (activity as MainActivity).loginInfo.password
-        image = (activity as MainActivity).loginInfo.image ?: Uri.parse("android.resource://com.epfl.esl.tidy/" + R.drawable.user)
+        val image = MainActivity.loginInfo.image ?: Uri.parse("android.resource://com.epfl.esl.tidy/" + R.drawable.user)
 
-        binding.firstName.text = first_name
-        binding.lastName.text = last_name
-        binding.email.text = email
-        binding.password.text = password
-        binding.spaceId.text = space_id
+        binding.firstName.text = MainActivity.loginInfo.first_name
+        binding.lastName.text = MainActivity.loginInfo.last_name
+        binding.email.text = MainActivity.loginInfo.email
+        binding.password.text = MainActivity.loginInfo.password
+        binding.spaceId.text = MainActivity.loginInfo.space_id
         binding.profilePic.setImageURI(image)
         switchToDisplay()
     }
 
     fun clearLogin(){
-        (activity as MainActivity).loginInfo.key = ""
-        (activity as MainActivity).loginInfo.email = ""
-        (activity as MainActivity).loginInfo.password = ""
-        (activity as MainActivity).loginInfo.first_name = ""
-        (activity as MainActivity).loginInfo.last_name = ""
-        (activity as MainActivity).loginInfo.space_id = ""
-        (activity as MainActivity).loginInfo.admin = ""
-        (activity as MainActivity).loginInfo.image = Uri.parse("android.resource://com.epfl.esl.tidy/" + R.drawable.user)
+        MainActivity.loginInfo = UserDataClass(email="", password="", first_name="", last_name="", key="", space_id="")
     }
 
     fun updateLogin(){
         if (binding.emailInput.text.toString() != "") {
-        (activity as MainActivity).loginInfo.email = binding.emailInput.text.toString()}
+        MainActivity.loginInfo.email = binding.emailInput.text.toString()}
         if (binding.passwordInput.text.toString() != "") {
-        (activity as MainActivity).loginInfo.password =  binding.passwordInput.text.toString()}
+            MainActivity.loginInfo.password =  binding.passwordInput.text.toString()}
         if (binding.firstNameInput.text.toString() != "") {
-        (activity as MainActivity).loginInfo.first_name =  binding.firstNameInput.text.toString()}
+            MainActivity.loginInfo.first_name =  binding.firstNameInput.text.toString()}
         if (binding.lastNameInput.text.toString() != "") {
-        (activity as MainActivity).loginInfo.last_name =  binding.lastNameInput.text.toString()}
+            MainActivity.loginInfo.last_name =  binding.lastNameInput.text.toString()}
         if (binding.spaceIdInput.text.toString() != "") {
-        (activity as MainActivity).loginInfo.space_id =  binding.spaceIdInput.text.toString()}
+            MainActivity.loginInfo.space_id =  binding.spaceIdInput.text.toString()}
     }
 
-    fun switchToEdit(){
+    private fun switchToEdit(){
         binding.email.visibility = View.INVISIBLE
         binding.password.visibility = View.INVISIBLE
         binding.firstName.visibility = View.INVISIBLE
@@ -163,11 +141,12 @@ class Settings : Fragment() {
         binding.lastNameInput.visibility = View.VISIBLE
         binding.spaceIdInput.visibility = View.VISIBLE
 
-        binding.emailInput.hint = email
-        binding.passwordInput.hint = password
-        binding.firstNameInput.hint = first_name
-        binding.lastNameInput.hint = last_name
-        binding.spaceIdInput.hint = space_id
+        val userData = MainActivity.loginInfo
+        binding.emailInput.hint = userData.email
+        binding.passwordInput.hint = userData.password
+        binding.firstNameInput.hint = userData.first_name
+        binding.lastNameInput.hint = userData.last_name
+        binding.spaceIdInput.hint = userData.space_id
 
         binding.cancelButton.visibility = View.VISIBLE
         binding.saveButton.visibility = View.VISIBLE
@@ -188,13 +167,12 @@ class Settings : Fragment() {
         binding.lastNameInput.visibility = View.INVISIBLE
         binding.spaceIdInput.visibility = View.INVISIBLE
 
-
         binding.cancelButton.visibility = View.INVISIBLE
         binding.saveButton.visibility = View.INVISIBLE
         binding.editButton.visibility = View.VISIBLE
         binding.profilePicButton.visibility = View.INVISIBLE
 
-        if ((activity as MainActivity).loginInfo.admin == "1"){
+        if (MainActivity.loginInfo.admin == "1"){
             binding.admin.visibility = View.VISIBLE
         }
         else {
@@ -207,7 +185,7 @@ class Settings : Fragment() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val imageUri: Uri? = result.data?.data
-                (activity as MainActivity).loginInfo.image = imageUri
+                MainActivity.loginInfo.image = imageUri
                 processImage(imageUri)
                 binding.profilePic.setImageURI(imageUri)
             }
@@ -215,9 +193,11 @@ class Settings : Fragment() {
 
     fun processImage(image_URI: Uri?){
         val matrix = Matrix()
+        val userData = MainActivity.loginInfo
+
         var imageBitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver,
             image_URI)
-        val ratio:Float = 13F
+        val ratio = 13F
         val imageBitmapScaled = Bitmap.createScaledBitmap(imageBitmap,
             (imageBitmap.width / ratio).toInt(), (imageBitmap.height / ratio).toInt(), false)
         imageBitmap = Bitmap.createBitmap(imageBitmapScaled, 0, 0,
@@ -228,12 +208,12 @@ class Settings : Fragment() {
         imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
         val imageByteArray = stream.toByteArray()
 
-        val profileImageRef = storageRef.child("ProfileImages/"+ email +".jpg")
+        val profileImageRef = storageRef.child("ProfileImages/"+ userData.email +".jpg")
         val uploadProfileImage = profileImageRef.putBytes(imageByteArray)
 
         uploadProfileImage.addOnFailureListener {
             Toast.makeText(context,"Profile image upload to firebase was failed.", Toast.LENGTH_SHORT).show()
-        }.addOnSuccessListener { taskSnapshot -> profileRef.child(key).child("photo URL").setValue((FirebaseStorage.getInstance().getReference()).toString()+"ProfileImages/"+ email +".jpg")
+        }.addOnSuccessListener { taskSnapshot -> profileRef.child(userData.key).child("photo URL").setValue((FirebaseStorage.getInstance().getReference()).toString()+"ProfileImages/"+ userData.email +".jpg")
         }
     }
 
