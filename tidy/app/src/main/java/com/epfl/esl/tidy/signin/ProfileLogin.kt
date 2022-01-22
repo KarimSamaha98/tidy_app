@@ -46,7 +46,7 @@ class ProfileLogin : Fragment() {
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val profileRef: DatabaseReference = database.getReference("Profiles")
     val spaceRef: DatabaseReference = database.getReference("Space_IDs")
-    val user_taks_id: String = "098327sdf0912" //Remove
+    val user_taks_id: String = "-Mtns7ndzDT9gSlJNSyi" //TODORemove
 
     var task_keys = mutableListOf<String>()
     var task_dates = mutableListOf<String>()
@@ -108,6 +108,8 @@ class ProfileLogin : Fragment() {
                                 space_id = user.child("Space_Id").getValue(String::class.java)!!
                                 admin = user.child("Admin").getValue(String::class.java)!!
                                 image = Uri.parse(user.child("photo URL").getValue(String::class.java)!!)
+                                getUserTasks()
+//                                Handler().postDelayed({sendDataToWear()}, 3000)
                                 break
                             } else {
                                 correctUsername = true
@@ -128,7 +130,7 @@ class ProfileLogin : Fragment() {
                     }
 
                     if (correctUsername && correctPassword) {
-                        //Store Credential
+                            //Store Credential
                         (activity as MainActivity).loginInfo = UserDataClass(email=email, password=password, first_name=first_name, last_name=last_name, space_id=space_id, key=key, admin=admin, image=image)
                         //Change Fragments
                         Handler().postDelayed({
@@ -207,7 +209,7 @@ class ProfileLogin : Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val space = dataSnapshot.child(space_id)
                 //get task keys
-                for (task in space.child("Current tasks").children) {
+                for (task in space.child(Constants.CURRTASK).children) {
                     if (task.child("user_key").getValue(String::class.java)!! == user_taks_id) {
                         task_keys += task.child("task_key").getValue(String::class.java)!!
                         task_dates += task.child("due").getValue(String::class.java)!!
@@ -221,6 +223,7 @@ class ProfileLogin : Fragment() {
                             task_places += task.child("Room").getValue(String::class.java)!!
                         }
                     }}
+                sendDataToWear()
                 }
 
             override fun onCancelled(error: DatabaseError) {
@@ -229,5 +232,3 @@ class ProfileLogin : Fragment() {
         })
     }
 }
-
-//R.layout.fragment_profile_login

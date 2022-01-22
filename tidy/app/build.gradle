@@ -13,11 +13,11 @@ plugins {
 
 android {
     compileSdkVersion 31
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.0"
 
     defaultConfig {
         applicationId "com.epfl.esl.tidy"
-        minSdkVersion 24
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"

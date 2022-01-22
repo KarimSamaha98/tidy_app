@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -11,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.w3c.dom.Text
 
 class ItemAdapter(val context: Context, val task_name: Array<String>,
-                  val task_place: Array<String>, val task_date: Array<String>) :
+                  val task_place: Array<String>, val task_date: Array<String>,) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     /**
@@ -65,7 +66,7 @@ class ItemAdapter(val context: Context, val task_name: Array<String>,
      * A ViewHolder describes an item view and metadata about
     its place within the RecyclerView.
      */
-    inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         // Holds the TextView that will add each item to
         var task_name_text : TextView
         var task_date_text : TextView
@@ -76,17 +77,25 @@ class ItemAdapter(val context: Context, val task_name: Array<String>,
             task_date_text = view.findViewById<TextView>(R.id.taskDate)
             task_place_image = view.findViewById<ImageView>(R.id.taskPlace)
 
-            view.setOnClickListener {
-                val position: Int = adapterPosition
-                //Remove Element from the List and Notify the Tablet of Completion
-            }
+//            view.setOnClickListener(this)
+        }
 
-    }
+//        override fun onClick(p0: View?){
+//            val position : Int = bindingAdapterPosition
+//            if(position != RecyclerView.NO_POSITION) {
+//                listener.onItemClick(position)
+//            }
+//        }
     }
     fun append(arr: Array<String>, element: String): Array<String> {
         val list: MutableList<String> = arr.toMutableList()
         list.add(element)
         return list.toTypedArray()
     }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
     }
 
