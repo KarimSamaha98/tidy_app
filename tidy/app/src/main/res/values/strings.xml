@@ -46,6 +46,10 @@
     <string name="task_hist_description">Here are all the completed tasks!</string>
     <string name="history">History</string>
 
+    <string name="fit_image_to_scan">Fit image to scan</string>
+    <string name="sample_text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</string>
+    <string name="due_date">Due Date</string>
+
 
     <string-array name="supplies">
         <item>Vaccum Cleaner</item>

@@ -15,7 +15,8 @@
                 android:layout_weight="9"
                 app:defaultNavHost="true"
                 app:navGraph="@navigation/navigation"
-                android:layout_above = "@+id/bottomMenuView"/>
+                android:layout_above = "@+id/bottomMenuView"
+                android:visibility = "visible"/>
 
 
             <com.google.android.material.bottomnavigation.BottomNavigationView

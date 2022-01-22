@@ -6,6 +6,9 @@ plugins {
 //    Passing arguments between fragments
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
+
+
+
 }
 
 android {
@@ -79,4 +82,8 @@ dependencies {
 
     // android wear
     implementation 'com.google.android.gms:play-services-wearable:17.0.0'
+
+    // ARCore
+    implementation "com.google.ar.sceneform.ux:sceneform-ux:1.15.0"
+    implementation 'com.google.android.material:material:1.0.0'
 }
