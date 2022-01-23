@@ -61,6 +61,7 @@ class HistoryFragment : Fragment() {
                     viewModel.displayTasksList.add(viewModel.displayTask)
                 }
 
+                viewModel.displayTasksList.reverse()
                 // Adapter class is initialized and list is passed in the param.
                 val histAdapter = HistoryAdapter(context = context,
                     viewModel.displayTasksList.asReversed())

@@ -60,10 +60,12 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener {
 
     private fun setAlarm(){
         calendar = Calendar.getInstance()
-        // Set execution time to be 01:00:00 AM
-        calendar.set(Calendar.HOUR_OF_DAY, 14)
-        calendar.set(Calendar.MINUTE, 15)
+        // Set execution time to be 03:00:00 AM on MONDAY MORNING
+        calendar.set(Calendar.HOUR_OF_DAY, 3)
+        calendar.set(Calendar.MINUTE, 0)
         calendar.set(Calendar.SECOND,0)
+
+        //val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) //Sunday is day 7
 
         alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
         val intent = Intent(this, AlarmReceiver::class.java)
@@ -73,7 +75,6 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener {
             AlarmManager.RTC, calendar.timeInMillis,
             AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent
         )
-        Toast.makeText(this, "New tasks will be assigned!", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDataChanged(dataEvents: DataEventBuffer) {
