@@ -12,23 +12,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.epfl.esl.tidy.MainActivity
 import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.databinding.FragmentProfileLoginBinding
-import com.epfl.esl.tidy.tasks.PastTaskClass
 import com.epfl.esl.tidy.utils.Constants
-import com.google.android.gms.tasks.Task
 import com.google.android.gms.wearable.*
 import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
-import com.squareup.picasso.Picasso
 import java.io.ByteArrayOutputStream
-import java.util.ArrayList
 
 
 class ProfileLogin : Fragment() {
@@ -46,7 +39,7 @@ class ProfileLogin : Fragment() {
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val profileRef: DatabaseReference = database.getReference("Profiles")
     val spaceRef: DatabaseReference = database.getReference("Space_IDs")
-    val user_taks_id: String = "-Mtns7ndzDT9gSlJNSyi" //TODORemove
+//    val user_tasks_id: String = "-Mtns7ndzDT9gSlJNSyi" //TODORemove
 
     var task_keys = mutableListOf<String>()
     var task_dates = mutableListOf<String>()
@@ -190,6 +183,7 @@ class ProfileLogin : Fragment() {
         task_names_list = task_names.toTypedArray()
         task_keys_list = task_keys.toTypedArray()
 
+        val random = java.util.UUID.randomUUID().toString()
 
         val request: PutDataRequest = PutDataMapRequest.create("/userInfo").run {
             dataMap.putByteArray("profileImage", imageByteArray!!)
@@ -198,6 +192,7 @@ class ProfileLogin : Fragment() {
             dataMap.putStringArray("taskplace", task_places_list)
             dataMap.putStringArray("taskdate", task_dates_list)
             dataMap.putStringArray("taskkey", task_keys_list)
+            dataMap.putString("random", random)
             asPutDataRequest()
         }
         request.setUrgent()
@@ -208,19 +203,28 @@ class ProfileLogin : Fragment() {
         spaceRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val space = dataSnapshot.child(space_id)
+                var new_key = ""
+                val task_keys_for_task = mutableListOf<String>()
                 //get task keys
+                for(user in space.child(Constants.USERS).children){
+                    if (user.child(Constants.KEY).getValue(String::class.java) == key){
+                        new_key = user.key.toString()
+                    }
+                }
+
                 for (task in space.child(Constants.CURRTASK).children) {
-                    if (task.child("user_key").getValue(String::class.java)!! == user_taks_id) {
-                        task_keys += task.child("task_key").getValue(String::class.java)!!
-                        task_dates += task.child("due").getValue(String::class.java)!!
+                    if (task.child(Constants.USER_KEY).getValue(String::class.java)!! == new_key) {
+                        task_keys += task.key.toString()
+                        task_keys_for_task += task.child(Constants.TASK_KEY).getValue(String::class.java)!!
+                        task_dates += task.child(Constants.DUE).getValue(String::class.java)!!
                     }}
 
-                val tasks = dataSnapshot.child(space_id).child("Tasks")
+                val tasks = dataSnapshot.child(space_id).child(Constants.TASKS)
                 for (task in tasks.children) {
-                    for (task_key in task_keys) {
+                    for (task_key in task_keys_for_task) {
                         if (task.key.toString() == task_key) {
-                            task_names += task.child("Name").getValue(String::class.java)!!
-                            task_places += task.child("Room").getValue(String::class.java)!!
+                            task_names += task.child(Constants.NAME).getValue(String::class.java)!!
+                            task_places += task.child(Constants.ROOM).getValue(String::class.java)!!
                         }
                     }}
                 sendDataToWear()

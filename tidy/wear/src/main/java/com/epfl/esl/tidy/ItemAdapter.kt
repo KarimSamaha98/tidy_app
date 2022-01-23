@@ -11,8 +11,8 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import org.w3c.dom.Text
 
-class ItemAdapter(val context: Context, val task_name: Array<String>,
-                  val task_place: Array<String>, val task_date: Array<String>,) :
+class ItemAdapter(val context: Context, val task_name: ArrayList<String>,
+                  val task_place: ArrayList<String>, val task_date: ArrayList<String>,) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     /**
@@ -43,7 +43,7 @@ class ItemAdapter(val context: Context, val task_name: Array<String>,
         val task_place_position = task_place.get(position)
 
 
-        holder.task_name_text.text = task_name_position
+        holder.task_name_text.text = task_name_position.plus(" in ").plus(task_place_position.lowercase())
         holder.task_date_text.text = task_date_position
         when (task_place_position) {
             "Kitchen" -> holder.task_place_image.setImageResource(R.drawable.chef)

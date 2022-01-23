@@ -83,12 +83,13 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener {
                 val taskName = DataMapItem.fromDataItem(event.dataItem).dataMap.getString("taskname")
                 val taskDate = DataMapItem.fromDataItem(event.dataItem).dataMap.getString("taskdate")
                 val taskUser = DataMapItem.fromDataItem(event.dataItem).dataMap.getString("taskuser")
+                val taskPlace = DataMapItem.fromDataItem(event.dataItem).dataMap.getString("taskplace")
 
-                completeTask(taskID, taskName, taskDate, taskUser)
+                completeTask(taskID, taskName, taskDate, taskUser, taskPlace)
             }
     }
 
-    fun completeTask(taskID : String, taskName : String, taskDate : String, taskUser : String){
+    fun completeTask(taskID : String, taskName : String, taskDate : String, taskUser : String, taskPlace: String){
         // add completed task to history in Firebase
         @SuppressLint("SimpleDateFormat")
         val sdf = SimpleDateFormat("dd-MM-yyyy")
@@ -96,7 +97,7 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener {
         val cal: Calendar = Calendar.getInstance()
         val todayDate = sdf.format(cal.time)
 
-        val completedTask = PastTaskClass(taskName,
+        val completedTask = PastTaskClass(taskName.plus(" in ").plus(taskPlace.lowercase()),
             taskUser,
             todayDate,
             taskDate)

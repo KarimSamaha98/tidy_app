@@ -2,6 +2,7 @@ package com.epfl.esl.tidy.utils
 
 object Constants {
     const val ROOMS: String = "Rooms"
+    const val ROOM: String = "Room"
     const val SPACEIDS: String = "Space_IDs"
     const val SPACEID: String = "Space_ID"
     const val PROFILES: String = "Profiles"
@@ -11,4 +12,9 @@ object Constants {
     const val CURRTASK: String = "Current tasks"
     const val PREVTASK: String = "Previous tasks"
     const val ROOMID: String = "roomID"
+    const val KEY: String = "Key"
+    const val USER_KEY: String = "user_key"
+    const val TASK_KEY: String = "task_key"
+    const val DUE: String = "due"
+    const val NAME: String = "Name"
 }
