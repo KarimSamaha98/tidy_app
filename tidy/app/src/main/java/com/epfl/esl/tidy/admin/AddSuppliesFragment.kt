@@ -9,28 +9,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
-import com.epfl.esl.tidy.AddRoomsFragmentArgs
 import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.Response
 import com.epfl.esl.tidy.databinding.AddSuppliesFragmentBinding
 import com.epfl.esl.tidy.onGetDataListener
-import com.epfl.esl.tidy.overview.RoomAdapter
 import com.squareup.picasso.Picasso
 
 class AddSuppliesFragment : Fragment(), SupplyAdapter.OnItemClickListener {
-
-    companion object {
-        fun newInstance() = AddSuppliesFragment()
-    }
 
 //    private val supplyList = mapOf("Vaccum Cleaner" to 0,
 //                                    "Broom" to 1,
@@ -54,6 +46,11 @@ class AddSuppliesFragment : Fragment(), SupplyAdapter.OnItemClickListener {
             }
         }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(AddSuppliesViewModel::class.java)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,7 +59,10 @@ class AddSuppliesFragment : Fragment(), SupplyAdapter.OnItemClickListener {
             inflater, R.layout.add_supplies_fragment,
             container, false
         )
-        viewModel = ViewModelProvider(this).get(AddSuppliesViewModel::class.java)
+
+        val supplies = resources.getStringArray(R.array.supplies)
+        val suppliesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, supplies)
+        binding.addSuppliesDropdown.setAdapter(suppliesAdapter)
 
         val args : AddSuppliesFragmentArgs by navArgs()
         viewModel.spaceID = args.spaceID
@@ -77,7 +77,7 @@ class AddSuppliesFragment : Fragment(), SupplyAdapter.OnItemClickListener {
         binding.spaceIdHolder.text = viewModel.spaceID
 
         binding.AddSupplyButton.setOnClickListener {
-            viewModel.supplyName = binding.supplyName.text.toString()
+            viewModel.supplyName = binding.addSuppliesDropdown.text.toString()
             viewModel.supplyDescription = binding.supplyDescription.text.toString()
 
             if (viewModel.supplyName == "") {
@@ -93,7 +93,7 @@ class AddSuppliesFragment : Fragment(), SupplyAdapter.OnItemClickListener {
         }
 
         binding.UpdateSupplyButton.setOnClickListener{
-            viewModel.supplyName = binding.supplyName.text.toString()
+            viewModel.supplyName = binding.addSuppliesDropdown.text.toString()
             viewModel.supplyDescription = binding.supplyDescription.text.toString()
 
             if (viewModel.supplyName == "") {
@@ -137,7 +137,7 @@ class AddSuppliesFragment : Fragment(), SupplyAdapter.OnItemClickListener {
         viewModel.imageUri = null
         viewModel.supplyKey = ""
 
-        binding.supplyName.setText(viewModel.supplyName)
+        binding.addSuppliesDropdown.setText(viewModel.supplyName)
         binding.supplyDescription.setText(viewModel.supplyDescription)
 //        TODO Not sure why its not just letting me set it.
         binding.supplyImage.setImageDrawable(getResources().getDrawable(R.drawable.pick_image))
@@ -185,7 +185,7 @@ class AddSuppliesFragment : Fragment(), SupplyAdapter.OnItemClickListener {
         viewModel.supplyDescription = clickedItem.description
         viewModel.supplyKey = clickedItem.key
 
-        binding.supplyName.setText(viewModel.supplyName)
+        binding.addSuppliesDropdown.setText(viewModel.supplyName)
         binding.supplyDescription.setText(viewModel.supplyDescription)
         Picasso.with(context)
             .load(viewModel.imageUrl)

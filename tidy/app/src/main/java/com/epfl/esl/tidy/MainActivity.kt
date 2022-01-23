@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
         alarmManager.setInexactRepeating( // use bc exact time isn't important
             AlarmManager.RTC, calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY*2, pendingIntent
+            AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent
         )
     }
 }

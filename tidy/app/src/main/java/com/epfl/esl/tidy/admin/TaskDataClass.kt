@@ -1,3 +1,3 @@
 package com.epfl.esl.tidy.admin
 
-class TaskDataClass(var Name: String, var Room: String, var Description: String?) {}
+class TaskDataClass(var name: String, var room: String, var description: String?) {}

@@ -1,6 +1,5 @@
 package com.epfl.esl.tidy.admin
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,13 +11,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.epfl.esl.tidy.MainActivity
 import com.epfl.esl.tidy.R
-import com.epfl.esl.tidy.databinding.AddRoomsFragmentBinding
 import com.epfl.esl.tidy.databinding.AdminPageFragmentBinding
-import com.epfl.esl.tidy.signin.UserDataClass
 import com.google.firebase.database.*
 
 class AdminPageFragment : Fragment() {
-
     companion object {
         fun newInstance() = AdminPageFragment()
     }
@@ -44,9 +40,11 @@ class AdminPageFragment : Fragment() {
             Navigation.findNavController(it).navigate(R.id.action_admin_page_fragment_to_adminPage2Fragment)
         }
 
+        binding.spaceIdText.setText(MainActivity.loginInfo.space_id)
         binding.EditExistingSpaceButton.setOnClickListener{
             if(binding.spaceIdText.text.toString() != "") {
                 viewModel.spaceID = binding.spaceIdText.text.toString()
+
                 spaceRef.child(viewModel.spaceID)
                     .addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
