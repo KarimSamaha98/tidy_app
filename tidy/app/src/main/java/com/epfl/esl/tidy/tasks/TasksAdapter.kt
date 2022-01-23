@@ -55,7 +55,7 @@ class TasksAdapter (val context: Context?, var tasks : ArrayList<TasksAdapterCla
                 holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.egg_yellow))
             }
             else{
-                holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.sky_blue))
+                holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.tidy_tertiary))
             }
         }
         else {
@@ -63,7 +63,7 @@ class TasksAdapter (val context: Context?, var tasks : ArrayList<TasksAdapterCla
                 holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.light_yellow))
             }
             else{
-                holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.light_blue))
+                holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.tidy_background))
             }
         }
 

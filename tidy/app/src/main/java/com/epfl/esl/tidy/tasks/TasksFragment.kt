@@ -67,7 +67,9 @@ class TasksFragment : Fragment() {
 
                     viewModel.displayTask.due_date = currentTask.due
                     viewModel.displayTask.task_key = task.key.toString()
-                    if (currentTask.user_key == viewModel.myKey) {
+                    var currentUserKey = space.child(USERS).child(currentTask.user_key)
+                        .child("Key").getValue(String::class.java)!!
+                    if (currentUserKey == viewModel.myKey) {
                         viewModel.displayTask.rank = 1
                     } else {
                         viewModel.displayTask.rank = 0

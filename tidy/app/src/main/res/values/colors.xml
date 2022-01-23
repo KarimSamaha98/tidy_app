@@ -14,4 +14,5 @@
     <color name="tidy_primary">#24A19C</color>
     <color name="tidy_secondary">#D96098</color>
     <color name="tidy_tertiary">#FAEEE7</color>
+    <color name="tidy_background">#325288</color>
 </resources>

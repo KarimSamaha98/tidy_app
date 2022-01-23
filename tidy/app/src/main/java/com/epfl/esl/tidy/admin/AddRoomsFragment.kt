@@ -42,9 +42,6 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
             }
         }
 
-    companion object{
-        var allRooms : ArrayList<String> = ArrayList()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,7 +83,6 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
                 Toast.makeText(context, "Pick an image for the room", Toast.LENGTH_SHORT).show()
             } else {
                 viewModel.checkExistingRooms()
-                allRooms.add(viewModel.roomName)
             }
         }
 

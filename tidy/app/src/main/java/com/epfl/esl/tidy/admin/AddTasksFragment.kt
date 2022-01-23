@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.navArgs
-import com.epfl.esl.tidy.AddRoomsFragment
 import com.epfl.esl.tidy.AddRoomsFragmentArgs
 import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.databinding.FragmentAddTasksBinding
