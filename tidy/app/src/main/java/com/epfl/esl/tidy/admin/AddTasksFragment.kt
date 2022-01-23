@@ -59,13 +59,13 @@ class AddTasksFragment : Fragment() {
                         val space = dataSnapshot.child(viewModel.spaceID)
                         // Check if task already exists
                         for (task in space.child(Constants.TASKS).children) {
-                            if (task.child("Name")
+                            if (task.child(Constants.TASK_NAME)
                                     .getValue(String::class.java)!! == viewModel.newTask
                             ) {
-                                if (task.child("Room")
+                                if (task.child(Constants.TASK_ROOM)
                                         .getValue(String::class.java)!! == viewModel.newRoom){
                                     taskExists = true
-                                    if (task.child("Description")
+                                    if (task.child(Constants.TASK_DESCRIPTION)
                                             .getValue(String::class.java)!! == viewModel.taskDescription){
                                         Toast.makeText(
                                             context, "Task and room combination already exists.",
@@ -74,7 +74,7 @@ class AddTasksFragment : Fragment() {
                                     else{
                                         val taskKey = task.key.toString()
                                         viewModel.spaceRef.child(viewModel.spaceID).child(Constants.TASKS)
-                                            .child(taskKey).child("Description")
+                                            .child(taskKey).child(Constants.TASK_DESCRIPTION)
                                             .setValue(viewModel.taskDescription)
                                         Toast.makeText(
                                             context, "Description of existing task updated.",

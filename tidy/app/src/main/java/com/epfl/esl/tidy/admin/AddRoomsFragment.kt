@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
@@ -49,6 +50,11 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
             inflater, R.layout.add_rooms_fragment,
             container, false
         )
+
+        val rooms = resources.getStringArray(R.array.rooms)
+        val roomsAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, rooms)
+        binding.addRoomsDropdown.setAdapter(roomsAdapter)
+
         viewModel = ViewModelProvider(this).get(AddRoomsViewModel::class.java)
         val args : AddRoomsFragmentArgs by navArgs()
         viewModel.spaceID = args.spaceID

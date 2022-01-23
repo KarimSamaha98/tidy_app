@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">tidy</string>
     <string name="overview_title">Overview</string>
-    <string name="overview_desc">You can find all of the rooms and items to clean!</string>
+    <string name="overview_desc">You can find all of the rooms and supplies to clean with.</string>
     <string name="pick_image">Pick image</string>
 
 
@@ -63,6 +63,7 @@
     <string name="update_tasks">Update Tasks</string>
     <string name="existing_supplies">Existing Supplies</string>
     <string name="existing_room">Existing Rooms</string>
+    <string name="existing_tasks">Existing Tasks</string>
     <string name="room_description">Add a description of the room</string>
     <string name="supply_description">Add a description of the supply</string>
     <string name="clear">Clear</string>
@@ -104,5 +105,10 @@
         <item>Common area</item>
     </string-array>
 
-
+    <!--  AR  -->
+    <string name="fit_image_to_scan">Fit image to scan</string>
+    <string name="sample_text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</string>
+    <string name="ar_welcome">Welcome to Tidy\'s AR Feature!</string>
+    <string name="ar_guide">Move around your space to get instant description and help on what needs to be done! Sleek right?</string>
+    <string name="repeat_every">Repeat Every</string>
 </resources>
