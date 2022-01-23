@@ -130,7 +130,7 @@ class ProfileLogin : Fragment() {
                             (activity as MainActivity).setBottomNavigationVisibility(View.VISIBLE)
                             Navigation.findNavController(view)
                                 .navigate(R.id.action_profileLogin_to_TasksFragment)
-                        }, 5000)
+                        }, 2000)
 
                     }
                 }

@@ -65,14 +65,15 @@
         </androidx.cardview.widget.CardView>
 
         <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="78dp"
-            android:layout_height="81dp"
-            android:layout_marginStart="16dp"
+            android:id="@+id/imageView"
+            android:layout_width="143dp"
+            android:layout_height="85dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
+            android:src="@drawable/broom"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/broom" />
+            app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

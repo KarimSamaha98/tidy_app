@@ -13,7 +13,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/add_supplies"
-            android:textSize="40sp"
+            android:textColor="@color/tidy_primary"
+            android:textSize="60sp"
+            android:textStyle="bold"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -21,8 +23,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="143dp"
+            android:layout_height="85dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/broom"
@@ -35,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginHorizontal="80dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/addSupplyTitle"
@@ -47,13 +49,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@id/addSupplyTitle"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginTop="40dp">
+
                 <TextView
                     android:id="@+id/spaceIdName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/spaceID"
-                    android:textSize="20sp"
+                    android:textColor="@color/tidy_primary"
+                    android:textSize="16sp"
                     android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/spaceIdHolder"
@@ -61,7 +66,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4sp"
                     android:hint="@string/invalid"
-                    android:textSize="20sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
             </LinearLayout>
 
             <ImageButton
