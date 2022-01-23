@@ -17,6 +17,7 @@ class AddTasksViewModel : ViewModel() {
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val spaceRef: DatabaseReference = database.getReference(Constants.SPACEIDS)
 
+    var allRooms : ArrayList<String> = ArrayList()
 
     fun sendDataToFireBase() {
         val key = spaceRef.push().key.toString()

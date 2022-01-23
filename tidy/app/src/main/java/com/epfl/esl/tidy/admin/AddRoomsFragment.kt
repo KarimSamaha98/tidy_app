@@ -42,9 +42,6 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
             }
         }
 
-    companion object{
-        var allRooms : ArrayList<String> = ArrayList()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +52,7 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
             container, false
         )
 
-        val rooms = resources.getStringArray(R.array.rooms)
+        val rooms = resources.getStringArray(R.array.rooms).toMutableList()
         val roomsAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, rooms)
         binding.addRoomsDropdown.setAdapter(roomsAdapter)
 
@@ -86,7 +83,6 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
                 Toast.makeText(context, "Pick an image for the room", Toast.LENGTH_SHORT).show()
             } else {
                 viewModel.checkExistingRooms()
-                allRooms.add(viewModel.roomName)
             }
         }
 
