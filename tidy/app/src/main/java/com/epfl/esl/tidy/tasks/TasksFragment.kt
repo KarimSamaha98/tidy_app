@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -28,6 +29,10 @@ import java.util.ArrayList
 class TasksFragment : Fragment() {
     private lateinit var binding : FragmentTasksBinding
     private lateinit var viewModel: TasksViewModel
+
+    companion object{
+        var tasksList  = arrayListOf<TasksAdapterClass>()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +88,8 @@ class TasksFragment : Fragment() {
                 val tasksAdapter = TasksAdapter(context = context,
                     viewModel.displayTasksList)
 
+                tasksList = viewModel.displayTasksList
+
                 binding.recyclerViewTasks.adapter = tasksAdapter
             }
             override fun onCancelled(databaseError: DatabaseError) {
@@ -94,8 +101,12 @@ class TasksFragment : Fragment() {
         val swipeGesture = object : SwipeGesture(){
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                viewModel.completeTask(position)
-                binding.recyclerViewTasks.adapter?.notifyItemRemoved(position)
+                //only allow users to complete their own tasks
+                if (tasksList[position].rank == 1){
+                    viewModel.completeTask(position)
+                    binding.recyclerViewTasks.adapter?.notifyItemRemoved(position)
+                    Toast.makeText(context, "Task completed!", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
