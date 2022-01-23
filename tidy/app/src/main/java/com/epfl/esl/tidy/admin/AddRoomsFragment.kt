@@ -42,6 +42,10 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
             }
         }
 
+    companion object{
+        var allRooms : ArrayList<String> = ArrayList()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -74,14 +78,16 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
 
             if (viewModel.roomName == "") {
                 Toast.makeText(context, "Enter a room name.", Toast.LENGTH_SHORT).show()
-            } else if (viewModel.roomDescription == "") {
-                Toast.makeText(context, "Enter a room description.", Toast.LENGTH_SHORT).show()
-            } else if (viewModel.imageUri == null && viewModel.imageUrl == "") {
+            }
+            //else if (viewModel.roomDescription == "") {
+             //   Toast.makeText(context, "Enter a room description.", Toast.LENGTH_SHORT).show()
+           // }
+            else if (viewModel.imageUri == null && viewModel.imageUrl == "") {
                 Toast.makeText(context, "Pick an image for the room", Toast.LENGTH_SHORT).show()
             } else {
                 viewModel.checkExistingRooms()
+                allRooms.add(viewModel.roomName)
             }
-
         }
 
         binding.UpdateRoomButton.setOnClickListener{

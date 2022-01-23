@@ -83,7 +83,6 @@ class AddRoomsViewModel(application: Application) : AndroidViewModel(application
                 sendImagetoFirebase(imageBitmap)
 //                }
             }
-
             override fun onCancelled(databaseError: DatabaseError) {}
         })
     }

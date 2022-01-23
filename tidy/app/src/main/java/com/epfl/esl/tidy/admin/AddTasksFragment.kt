@@ -84,6 +84,7 @@ class AddTasksFragment : Fragment() {
                             }
                         }
 
+
                         // If task does not exist we create new task
                         if (!taskExists) {
                             // Send tasks data to firebase
