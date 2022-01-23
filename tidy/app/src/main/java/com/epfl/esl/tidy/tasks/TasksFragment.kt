@@ -34,7 +34,6 @@ class TasksFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
         viewModel.spaceID = MainActivity.loginInfo.space_id
         viewModel.myKey = MainActivity.loginInfo.key
-
     }
 
     override fun onCreateView(
@@ -57,31 +56,21 @@ class TasksFragment : Fragment() {
                     viewModel.displayTask = TasksAdapterClass()
                     // get current task info
                     val currentTask = task.getValue(CurrentTaskClass::class.java)!!
-
                     val taskName = space.child(TASKS).child(currentTask.task_key)
                         .child(Constants.TASK_NAME).getValue(String::class.java)!!
                     val taskRoom = space.child(TASKS).child(currentTask.task_key)
                         .child(Constants.TASK_ROOM).getValue(String::class.java)!!
-                    if(space.child(USERS).child(currentTask.user_key)
-                            .child("First_Name").getValue(String::class.java) != null) {
-                        viewModel.displayTask.task_name =
-                            taskName.plus(" in ").plus(taskRoom.lowercase())
-                        viewModel.displayTask.user = space.child(USERS).child(currentTask.user_key)
-                            .child("First_Name").getValue(String::class.java)!!
-                        viewModel.displayTask.due_date = currentTask.due
-                        viewModel.displayTask.task_key = task.key.toString()
-                        if (currentTask.user_key == viewModel.myKey) {
-                            viewModel.displayTask.rank = 1
-                        } else {
-                            viewModel.displayTask.rank = 0
-                        }
+                    viewModel.displayTask.task_name =
+                        taskName.plus(" in ").plus(taskRoom.lowercase())
+                    viewModel.displayTask.user = space.child(USERS).child(currentTask.user_key)
+                        .child("First_Name").getValue(String::class.java)!!
 
-                    }else{
-                        viewModel.displayTask.task_name =
-                            taskName.plus(" in ").plus(taskRoom.lowercase())
-                        viewModel.displayTask.user = "OLD USER"
-                        viewModel.displayTask.due_date = currentTask.due
-                        viewModel.displayTask.task_key = task.key.toString()
+                    viewModel.displayTask.due_date = currentTask.due
+                    viewModel.displayTask.task_key = task.key.toString()
+                    if (currentTask.user_key == viewModel.myKey) {
+                        viewModel.displayTask.rank = 1
+                    } else {
+                        viewModel.displayTask.rank = 0
                     }
 
                     viewModel.displayTasksList.add(viewModel.displayTask)

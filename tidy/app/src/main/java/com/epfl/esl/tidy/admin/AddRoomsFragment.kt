@@ -55,7 +55,7 @@ class AddRoomsFragment : Fragment(), RoomAdapter.OnItemClickListener {
             container, false
         )
 
-        val rooms = resources.getStringArray(R.array.rooms)
+        val rooms = resources.getStringArray(R.array.rooms).toMutableList()
         val roomsAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, rooms)
         binding.addRoomsDropdown.setAdapter(roomsAdapter)
 

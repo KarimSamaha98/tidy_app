@@ -68,7 +68,7 @@ class TasksAdapter (val context: Context?, var tasks : ArrayList<TasksAdapterCla
         }
 
         holder.taskNames.text = itemPosition.task_name
-        holder.taskDueDates.text = "DUE DATE: ".plus(itemPosition.due_date)
+        holder.taskDueDates.text = context.getString(R.string.task_due_date_title).plus(itemPosition.due_date)
         holder.taskUsers.text = itemPosition.user
     }
 
