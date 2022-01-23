@@ -1,23 +1,26 @@
 package com.epfl.esl.tidy.admin
 
 import androidx.lifecycle.ViewModel
+import com.epfl.esl.tidy.utils.Constants
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 
 class AddTasksViewModel : ViewModel() {
-    var roomKey: String = ""
-    var taskKey: String = ""
     var newTask: String = ""
-    var taskRoom: String = ""
+    var newRoom: String = ""
     var taskDescription: String = ""
     var spaceID: String = ""
 
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-    val tasksRef: DatabaseReference = database.getReference("Tasks")
+    //val tasksRef: DatabaseReference = database.getReference("Tasks")
+
+    val spaceRef: DatabaseReference = database.getReference(Constants.SPACEIDS)
 
     fun sendDataToFireBase() {
-        tasksRef.child(taskKey).child("Title").setValue(newTask)
-        tasksRef.child(taskKey).child("Description").setValue(taskDescription)
+        val key = spaceRef.push().key.toString()
+
+        val myNewTask = TaskDataClass(newTask, newRoom, taskDescription)
+        spaceRef.child(spaceID).child(Constants.TASKS).child(key).setValue(myNewTask)
     }
 }

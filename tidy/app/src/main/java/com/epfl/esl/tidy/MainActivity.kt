@@ -5,6 +5,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -39,8 +40,11 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener {
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     private val spaceRef: DatabaseReference = database.getReference(Constants.SPACEIDS)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    companion object{
+        var loginInfo = UserDataClass(email="", password="", first_name="", last_name="", key="", space_id="", admin="")
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         val navController = this.findNavController(R.id.mainFragment)
@@ -58,8 +62,8 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener {
     private fun setAlarm(spaceID : String){
         calendar = Calendar.getInstance()
         // Set execution time to be 01:00:00 AM
-        calendar.set(Calendar.HOUR_OF_DAY, 15)
-        calendar.set(Calendar.MINUTE,45)
+        calendar.set(Calendar.HOUR_OF_DAY, 2)
+        calendar.set(Calendar.MINUTE, 0)
         calendar.set(Calendar.SECOND,0)
 
         alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
@@ -69,10 +73,8 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener {
 
         alarmManager.setInexactRepeating( // use bc exact time isn't important
             AlarmManager.RTC, calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY, pendingIntent
+            AlarmManager.INTERVAL_DAY*2, pendingIntent
         )
-
-        Toast.makeText(this, "New tasks will be assigned!", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDataChanged(dataEvents: DataEventBuffer) {

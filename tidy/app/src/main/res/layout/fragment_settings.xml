@@ -12,7 +12,7 @@
             android:layout_height="wrap_content"
             android:text="@string/Space_ID"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/view2"
+            app:layout_constraintBottom_toTopOf="@+id/view_5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.271"
             app:layout_constraintStart_toStartOf="parent"
@@ -20,7 +20,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <View
-            android:id="@+id/view2"
+            android:id="@+id/view_5"
             android:layout_width="400dp"
             android:layout_height="1dp"
             android:layout_marginEnd="204dp"
@@ -37,7 +37,7 @@
             android:text="@string/Password"
             android:textSize="20sp"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/view"
+            app:layout_constraintBottom_toTopOf="@+id/view_4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.275"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +56,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.482"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@+id/view_4" />
 
         <EditText
             android:id="@+id/password_input"
@@ -70,7 +70,7 @@
             app:layout_constraintTop_toTopOf="@+id/password_label" />
 
         <View
-            android:id="@+id/view"
+            android:id="@+id/view_4"
             android:layout_width="400dp"
             android:layout_height="1dp"
             android:layout_marginEnd="200dp"
@@ -326,7 +326,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <View
-            android:id="@+id/view5"
+            android:id="@+id/view_2"
             android:layout_width="100dp"
             android:layout_height="1dp"
             android:layout_marginEnd="312dp"
@@ -339,7 +339,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <View
-            android:id="@+id/view6"
+            android:id="@+id/view_3"
             android:layout_width="100dp"
             android:layout_height="1dp"
             android:background="@color/black"
