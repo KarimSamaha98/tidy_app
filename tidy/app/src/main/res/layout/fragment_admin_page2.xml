@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/admin_title"
-            android:textSize="40dp"
+            android:textSize="40sp"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,65 +29,84 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/spaceIdName"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/spaceIDInfo"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/spaceID"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/spaceIdHolder"
-            app:layout_constraintEnd_toEndOf="@+id/spaceIdHolder"
-            app:layout_constraintStart_toStartOf="@+id/spaceIdHolder"
-            app:layout_constraintTop_toBottomOf="@id/adminTitle" />
-
-        <TextView
-            android:id="@+id/spaceIdHolder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/adminTitle"
             android:gravity="center"
-            android:text="invalid"
-            android:textSize="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spaceIdName" />
+            android:layout_marginTop="20dp">
+            <TextView
+                android:id="@+id/spaceIdName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/spaceID"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/spaceIdHolder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:hint="@string/invalid"
+                android:textSize="20sp" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/addRoomsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:id="@+id/buttons"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
             android:gravity="center"
-            android:text="@string/add_room"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/addSuppliesButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spaceIdHolder" />
+            app:layout_constraintTop_toBottomOf="@id/spaceIDInfo"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <Button
-            android:id="@+id/addSuppliesButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/add_supplies"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/addTasksButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addRoomsButton"/>
+            <Button
+                android:id="@+id/addRoomsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="50dp"
+                android:paddingVertical="20dp"
+                android:gravity="center"
+                android:text="@string/add_room"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/addSuppliesButton"
+                app:layout_constraintTop_toBottomOf="@+id/spaceIDInfo" />
 
-        <Button
-            android:id="@+id/addTasksButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/add_tasks"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addSuppliesButton"/>
+            <Button
+                android:id="@+id/addSuppliesButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="50dp"
+                android:paddingVertical="20dp"
+                android:gravity="center"
+                android:text="@string/add_supplies"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/addTasksButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addRoomsButton"/>
+
+            <Button
+                android:id="@+id/addTasksButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="50dp"
+                android:paddingVertical="20dp"
+                android:gravity="center"
+                android:text="@string/add_tasks"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addSuppliesButton"/>
+
+        </LinearLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

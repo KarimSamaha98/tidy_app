@@ -5,46 +5,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-
-        <TextView
-            android:id="@+id/addRoomTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/add_room"
-            android:textSize="40dp"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-            android:id="@+id/spaceIDInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/addRoomTitle"
-            android:gravity="center"
-            android:layout_marginTop="20dp">
-            <TextView
-                android:id="@+id/spaceIdName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/spaceID"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
-            <TextView
-                android:id="@+id/spaceIdHolder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4sp"
-                android:hint="@string/invalid"
-                android:textSize="20sp" />
-        </LinearLayout>
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/imageView"
@@ -56,154 +17,183 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/roomImage"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginHorizontal="150dp"
-            android:layout_marginVertical="40dp"
-            android:adjustViewBounds="true"
-            android:background="@null"
-            android:scaleType="centerInside"
-            android:text="@string/pick_image"
-            app:layout_constraintTop_toBottomOf="@+id/spaceIDInfo"
-            app:srcCompat="@drawable/pick_image" />
-
+        <TextView
+            android:id="@+id/addRoomTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/add_room"
+            android:textSize="40sp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:id="@+id/addRooms"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
+            android:layout_height="0dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/roomImage">
+            android:layout_marginHorizontal="80dp"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/addRoomTitle">
 
-            <com.google.android.material.textfield.TextInputLayout
-                style = "@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            <LinearLayout
+                android:id="@+id/spaceIDInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:layout_editor_absoluteX="1dp">
+                android:orientation="horizontal"
+                android:gravity="center">
 
-                <AutoCompleteTextView
-                    android:id="@+id/addRoomsDropdown"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/room" />
-            </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:id="@+id/spaceIdName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/spaceID"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/spaceIdHolder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4sp"
+                    android:hint="@string/invalid"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/roomDescription"
+            <ImageButton
+                android:id="@+id/roomImage"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center"
-                android:hint="@string/task_description"
-                android:inputType="textLongMessage"
-                android:textSize="16sp"/>
+                android:layout_height="300dp"
+                android:layout_marginHorizontal="150dp"
+                android:layout_marginVertical="40dp"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:scaleType="centerInside"
+                android:text="@string/pick_image"
+                app:layout_constraintTop_toBottomOf="@+id/spaceIDInfo"
+                app:srcCompat="@drawable/pick_image" />
 
-        </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/addRooms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="50dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/roomImage">
 
-        <FrameLayout
-            android:id="@+id/frameLayout3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/addRooms">
+                <com.google.android.material.textfield.TextInputLayout
+                    style = "@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:layout_editor_absoluteX="1dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/addRoomsDropdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/room" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <EditText
+                    android:id="@+id/roomDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:hint="@string/task_description"
+                    android:inputType="textLongMessage"
+                    android:textSize="16sp"/>
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/AddClearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal">
-                <!--                <ProgressBar-->
-                <!--                    android:id="@+id/progressBar"-->
-                <!--                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginBottom="16dp" />-->
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
+
 
                 <Button
                     android:id="@+id/AddRoomButton"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginEnd="20dp"
-                    android:text="@string/add_room"
+                    android:layout_weight="1"
+                    android:text="@string/add"
+                    android:paddingVertical="20dp"
                     android:textSize="20sp" />
-
                 <Button
                     android:id="@+id/ClearRoomButton"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:text="@string/clear"
-                    android:textSize="20sp" />
+                    android:paddingVertical="20dp"
+                    android:textSize="20sp"  />
 
-                <!--                <Button-->
-                <!--                    android:id="@+id/SignUpButton"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="match_parent"-->
-                <!--                    android:text="@string/sign_up"-->
-                <!--                    android:textColor="@color/purple_200"-->
-                <!--                    app:backgroundTint="@color/white" />-->
-            </LinearLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/UpdateLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <Button
-                    android:id="@+id/UpdateRoomButton"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/UpdateLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/update_room"
-                    android:textSize="20sp" />
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
-            </LinearLayout>
+                    <Button
+                        android:id="@+id/UpdateRoomButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/update_room"
+                        android:textSize="20sp" />
 
-        </FrameLayout>
+                </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/existingRoomTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:text="@string/existing_room"
-            android:textSize="30dp"
-            app:layout_constraintBottom_toTopOf="@+id/recycler_view_rooms"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frameLayout3" />
 
-        <ProgressBar
-            android:id="@+id/progress_circular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/recycler_view_rooms"
-            app:layout_constraintBottom_toBottomOf="@+id/recycler_view_rooms"/>
+            <TextView
+                android:id="@+id/existingRoomTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:text="@string/existing_room"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toTopOf="@+id/recycler_view_rooms"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout3" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_rooms"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/existingRoomTitle" />
+            <ProgressBar
+                android:id="@+id/progress_circular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/recycler_view_rooms"
+                app:layout_constraintBottom_toBottomOf="@+id/recycler_view_rooms"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_rooms"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/existingRoomTitle" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

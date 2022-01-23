@@ -36,6 +36,8 @@ class AddTasksFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(AddTasksViewModel::class.java)
         viewModel.spaceID = args.spaceID
 
+        binding.spaceIdHolder.text = viewModel.spaceID
+
         // Add adapters for dropdown menu
         val tasks = resources.getStringArray(R.array.tasks)
         val tasksAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, tasks)
@@ -70,7 +72,6 @@ class AddTasksFragment : Fragment() {
                 viewModel.spaceRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         var taskExists = false
-                        var roomExists = false
                         val space = dataSnapshot.child(viewModel.spaceID)
                         // Check if task already exists
                         for (task in space.child(Constants.TASKS).children) {
@@ -99,7 +100,6 @@ class AddTasksFragment : Fragment() {
                             }
                         }
 
-
                         // If task does not exist we create new task
                         if (!taskExists) {
                             // Send tasks data to firebase
@@ -114,6 +114,13 @@ class AddTasksFragment : Fragment() {
                 })
             }
         }
+
+        binding.ClearTasksButton.setOnClickListener{
+            binding.addRoomsDropdown.setText("")
+            binding.addTasksDropdown.setText("")
+            binding.taskDescription.setText("")
+        }
+
         return binding.root
     }
 
