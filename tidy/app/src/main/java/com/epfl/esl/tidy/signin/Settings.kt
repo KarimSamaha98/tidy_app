@@ -171,6 +171,7 @@ class Settings : Fragment() {
         binding.saveButton.visibility = View.INVISIBLE
         binding.editButton.visibility = View.VISIBLE
         binding.profilePicButton.visibility = View.INVISIBLE
+        binding.profilePic.visibility = View.VISIBLE
 
         if (MainActivity.loginInfo.admin == "1"){
             binding.admin.visibility = View.VISIBLE

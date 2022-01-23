@@ -36,9 +36,9 @@ class HistoryAdapter (val context: Context?, var tasks : ArrayList<PastTaskClass
         val itemPosition = tasks.get(position)
 
         holder.taskNames.text = itemPosition.task
-        holder.taskDueDates.text = "DUE: ".plus(itemPosition.date_due)
+        holder.taskDueDates.text = ("due on the ").plus(itemPosition.date_due)
         holder.taskUsers.text = itemPosition.user
-        holder.taskCompleteDates.text = "COMPLETED: ".plus(itemPosition.date_complete)
+        holder.taskCompleteDates.text = (itemPosition.date_complete)
 
     }
 

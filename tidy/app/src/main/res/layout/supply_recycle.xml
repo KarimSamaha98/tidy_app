@@ -5,11 +5,14 @@
     tools:context=".overview.OverviewFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/supply_item"
+        android:id="@+id/room_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
-        android:padding="16dp">
+        android:padding="16dp"
+        app:cardCornerRadius='20dp'
+        android:backgroundTint="@color/tidy_tertiary"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,6 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0px"
                 android:layout_weight="3"
+                android:layout_margin="30dp"
                 android:adjustViewBounds="true"
                 app:srcCompat="@drawable/pick_image" />
 
@@ -30,8 +34,10 @@
                 android:layout_height="0px"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="30sp"
-                android:text="Supply 1" />
+                android:textSize="24sp"
+                android:text="Supply 1"
+                android:textColor="@color/tidy_primary"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 

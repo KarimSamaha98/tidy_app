@@ -7,14 +7,25 @@
         android:layout_height="match_parent"
         tools:context=".tasks.HistoryFragment">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="143dp"
+            android:layout_height="85dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/broom"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/historyTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/task_history"
-            android:textSize="40dp"
-            android:gravity="center"
+            android:textColor="@color/tidy_primary"
+            android:textSize="60sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -25,8 +36,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/task_hist_description"
-            android:textSize="16dp"
             android:gravity="center"
+            android:textColor="@color/tidy_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/historyTitle" />

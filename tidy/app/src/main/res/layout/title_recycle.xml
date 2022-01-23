@@ -9,7 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:backgroundTint="@color/tidy_tertiary"
+        app:cardCornerRadius='20dp'>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,6 +25,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textSize="30sp"
+                android:textColor="@color/tidy_primary"
+                android:textStyle="bold"
                 android:text="Room 1" />
 
         </LinearLayout>

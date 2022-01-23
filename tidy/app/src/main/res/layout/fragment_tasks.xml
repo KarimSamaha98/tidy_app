@@ -11,13 +11,15 @@
             android:id="@+id/tasksTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="@string/tasks_title"
-            android:textSize="40dp"
-            android:gravity="center"
+            android:textColor="@color/tidy_primary"
+            android:textSize="60sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp"
+            android:gravity="center"/>
 
         <ImageView
             android:id="@+id/imageView"
@@ -35,7 +37,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/tasks_main_description"
-            android:textSize="16dp"
+            android:textColor="@color/tidy_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +49,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_tasks"
             android:layout_width="match_parent"
+            android:layout_marginTop="50dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             app:layout_constraintBottom_toBottomOf="parent"

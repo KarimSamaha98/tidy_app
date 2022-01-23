@@ -52,23 +52,35 @@ class TasksAdapter (val context: Context?, var tasks : ArrayList<TasksAdapterCla
             // change color
         if (itemPosition.rank == 1){
             if (dueDate.before(today)) {
-                holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.egg_yellow))
+                //holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.tidy_secondary))
+                holder.taskNames.setTextColor(getColor(context!!, R.color.tidy_secondary))
+                holder.taskUsers.setTextColor(getColor(context!!, R.color.tidy_secondary))
+                holder.taskDueDates.setTextColor(getColor(context!!, R.color.tidy_secondary))
             }
             else{
-                holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.tidy_tertiary))
+                //holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.tidy_secondary_light))
+                holder.taskNames.setTextColor(getColor(context!!, R.color.tidy_secondary_light))
+                holder.taskUsers.setTextColor(getColor(context!!, R.color.tidy_secondary_light))
+                holder.taskDueDates.setTextColor(getColor(context!!, R.color.tidy_secondary_light))
             }
         }
         else {
             if (dueDate.before(today)) {
-                holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.light_yellow))
+                //holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.tidy_quaternary))
+                holder.taskNames.setTextColor(getColor(context!!, R.color.tidy_quaternary))
+                holder.taskUsers.setTextColor(getColor(context!!, R.color.tidy_quaternary))
+                holder.taskDueDates.setTextColor(getColor(context!!, R.color.tidy_quaternary))
             }
             else{
-                holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.tidy_background))
+                //holder.cardView.setCardBackgroundColor(getColor(context!!, R.color.tidy_quaternary_light))
+                holder.taskNames.setTextColor(getColor(context!!, R.color.tidy_quaternary_light))
+                holder.taskUsers.setTextColor(getColor(context!!, R.color.tidy_quaternary_light))
+                holder.taskDueDates.setTextColor(getColor(context!!, R.color.tidy_quaternary_light))
             }
         }
 
         holder.taskNames.text = itemPosition.task_name
-        holder.taskDueDates.text = context.getString(R.string.task_due_date_title).plus(itemPosition.due_date)
+        holder.taskDueDates.text = ("due on the ").plus(itemPosition.due_date)
         holder.taskUsers.text = itemPosition.user
     }
 

@@ -13,6 +13,9 @@
     <color name="light_yellow">#FFF8E1</color>
     <color name="tidy_primary">#24A19C</color>
     <color name="tidy_secondary">#D96098</color>
-    <color name="tidy_tertiary">#FAEEE7</color>
+    <color name="tidy_secondary_light">#D39DB6</color>
+    <color name="tidy_tertiary">#F8F4F2</color>
     <color name="tidy_background">#325288</color>
+    <color name="tidy_quaternary">#325288</color>
+    <color name="tidy_quaternary_light">#54647E</color>
 </resources>
