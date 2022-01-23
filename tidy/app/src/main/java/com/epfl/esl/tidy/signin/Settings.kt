@@ -105,7 +105,6 @@ class Settings : Fragment() {
     fun updateView(){
 
         binding.firstName.text = MainActivity.loginInfo.first_name
-        binding.profilePic.setImageResource(R.drawable.user)
         binding.lastName.text = MainActivity.loginInfo.last_name
         binding.email.text = MainActivity.loginInfo.email
         binding.password.text = MainActivity.loginInfo.password
@@ -117,7 +116,6 @@ class Settings : Fragment() {
                 binding.profilePic.setImageDrawable(image)
             } catch (e: NullPointerException){
             }}
-        binding.profilePic.setImageURI(image)
         switchToDisplay()
     }
 
@@ -181,7 +179,6 @@ class Settings : Fragment() {
         binding.saveButton.visibility = View.INVISIBLE
         binding.editButton.visibility = View.VISIBLE
         binding.profilePicButton.visibility = View.INVISIBLE
-        binding.profilePic.visibility = View.VISIBLE
 
         if (MainActivity.loginInfo.admin == "1"){
             binding.admin.visibility = View.VISIBLE

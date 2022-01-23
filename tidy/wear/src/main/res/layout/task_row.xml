@@ -6,7 +6,7 @@
     android:layout_height="45dp"
     android:layout_gravity="center"
     app:cardCornerRadius="25dp"
-    app:cardBackgroundColor="@color/white"
+    app:cardBackgroundColor="@color/tidy_tertiary"
     android:id="@+id/cardView">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
             android:layout_width="110dp"
             android:layout_height="21dp"
             android:text="@string/task_name"
-            android:textColor="@color/b"
+            android:textColor="@color/tidy_primary"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
