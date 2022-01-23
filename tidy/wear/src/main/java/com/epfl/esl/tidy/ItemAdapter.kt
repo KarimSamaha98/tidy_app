@@ -4,14 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import org.w3c.dom.Text
 
-class ItemAdapter(val context: Context, val task_name: Array<String>,
-                  val task_place: Array<String>, val task_date: Array<String>) :
+class ItemAdapter(val context: Context, val task_name: ArrayList<String>,
+                  val task_place: ArrayList<String>, val task_date: ArrayList<String>,) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     /**
@@ -42,13 +43,15 @@ class ItemAdapter(val context: Context, val task_name: Array<String>,
         val task_place_position = task_place.get(position)
 
 
-        holder.task_name_text.text = task_name_position
+        holder.task_name_text.text = task_name_position.plus(" in ").plus(task_place_position.lowercase())
         holder.task_date_text.text = task_date_position
         when (task_place_position) {
             "Kitchen" -> holder.task_place_image.setImageResource(R.drawable.chef)
-            "Living Room" -> holder.task_place_image.setImageResource(R.drawable.sofa)
-            "Room" -> holder.task_place_image.setImageResource(R.drawable.bed)
-            "Toilet" -> holder.task_place_image.setImageResource(R.drawable.wc)
+            "Living room" -> holder.task_place_image.setImageResource(R.drawable.sofa)
+            "Bedroom" -> holder.task_place_image.setImageResource(R.drawable.bed)
+            "Bathroom" -> holder.task_place_image.setImageResource(R.drawable.wc)
+            "Hallway" -> holder.task_place_image.setImageResource(R.drawable.hallway)
+            "Common area" -> holder.task_place_image.setImageResource(R.drawable.prison)
             else -> { // Note the block
                 holder.task_place_image.setImageResource(R.drawable.unknown)
             }
@@ -65,7 +68,7 @@ class ItemAdapter(val context: Context, val task_name: Array<String>,
      * A ViewHolder describes an item view and metadata about
     its place within the RecyclerView.
      */
-    inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         // Holds the TextView that will add each item to
         var task_name_text : TextView
         var task_date_text : TextView
@@ -76,17 +79,25 @@ class ItemAdapter(val context: Context, val task_name: Array<String>,
             task_date_text = view.findViewById<TextView>(R.id.taskDate)
             task_place_image = view.findViewById<ImageView>(R.id.taskPlace)
 
-            view.setOnClickListener {
-                val position: Int = adapterPosition
-                //Remove Element from the List and Notify the Tablet of Completion
-            }
+//            view.setOnClickListener(this)
+        }
 
-    }
+//        override fun onClick(p0: View?){
+//            val position : Int = bindingAdapterPosition
+//            if(position != RecyclerView.NO_POSITION) {
+//                listener.onItemClick(position)
+//            }
+//        }
     }
     fun append(arr: Array<String>, element: String): Array<String> {
         val list: MutableList<String> = arr.toMutableList()
         list.add(element)
         return list.toTypedArray()
     }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
     }
 
