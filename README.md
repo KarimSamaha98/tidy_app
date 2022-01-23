@@ -1,9 +1,5 @@
 # tidy_app
 
-![Screenshot](design.png)
-
-
-
 ## Objective
 Develop an app to help people living in a colocation organize the cleaning of their space. 
 
@@ -12,6 +8,8 @@ Android Tablet, Watch
 
 ## Description
 The application is made primarily for organizations and landlords that rent out colocation spaces. These administrators, or Admins, can set up spaces within the colocation, add cleaning supplies available, and add tasks that need to be done regularly. Then, the app is used day to day by people who inhabit the colocation, the Tenants,  to remain organized and track cleaning progress within the flatshare. This helps ensure that cleaning of common spaces is done regularly, fairly, and to the standards of the landlord. 
+
+![Screenshot](design.png)
 
 ## Firebase
 We used firebase as the cloud storage for this project. To access the firebase of this project you can login using these credentials.
