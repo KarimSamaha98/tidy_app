@@ -1,25 +1,19 @@
 package com.epfl.esl.tidy.admin
 
 import android.app.Application
-import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.epfl.esl.tidy.Event
 import com.epfl.esl.tidy.Response
 import com.epfl.esl.tidy.datalayer.FirebaseRepository
 import com.epfl.esl.tidy.onGetDataListener
 import com.epfl.esl.tidy.utils.Constants
 import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.ktx.storage
 
 class AddRoomsViewModel(application: Application) : AndroidViewModel(application) {
     private val TAG = "AddRoomsViewModel"
@@ -89,7 +83,6 @@ class AddRoomsViewModel(application: Application) : AndroidViewModel(application
                 sendImagetoFirebase(imageBitmap)
 //                }
             }
-
             override fun onCancelled(databaseError: DatabaseError) {}
         })
     }

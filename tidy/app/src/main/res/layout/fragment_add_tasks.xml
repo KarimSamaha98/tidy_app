@@ -16,95 +16,96 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/add_tasks"
-            android:textSize="40dp"
+            android:textSize="40sp"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/spaceIdName"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/spaceIDInfo"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/spaceID"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/spaceIdHolder"
-            app:layout_constraintEnd_toEndOf="@+id/spaceIdHolder"
-            app:layout_constraintStart_toStartOf="@+id/spaceIdHolder"
-            app:layout_constraintTop_toBottomOf="@id/addTasksTitle" />
-
-        <TextView
-            android:id="@+id/spaceIdHolder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/addTasksTitle"
             android:gravity="center"
-            android:text="invalid"
-            android:textSize="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spaceIdName" />
+            android:layout_marginTop="20dp">
+            <TextView
+                android:id="@+id/spaceIdName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/spaceID"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/spaceIdHolder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:hint="@string/invalid"
+                android:textSize="20sp" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="143dp"
-            android:layout_height="85dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/broom"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-        <FrameLayout
-            android:id="@+id/frameLayout"
+        <LinearLayout
+            android:id="@+id/dropDowns"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginHorizontal="50dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/spaceIdName">
+            android:layout_marginTop="100dp"
+            app:layout_constraintTop_toBottomOf="@+id/spaceIDInfo">
 
-            <LinearLayout
-                android:id="@+id/EditTexts"
+            <com.google.android.material.textfield.TextInputLayout
+                style = "@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="100dp"
-                android:orientation="vertical">
+                tools:layout_editor_absoluteX="1dp">
 
-                <EditText
-                    android:id="@+id/taskName"
+                <AutoCompleteTextView
+                    android:id="@+id/addTasksDropdown"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:gravity="center"
-                    android:hint="@string/task_name"
-                    android:inputType="textPersonName"
-                    android:textSize="30sp" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/task_name" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/taskRoom"
+            <com.google.android.material.textfield.TextInputLayout
+                style = "@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="1dp"
+                app:layout_constraintTop_toBottomOf="@+id/taskRoom">
+
+                <AutoCompleteTextView
+                    android:id="@+id/addRoomsDropdown"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:gravity="center"
-                    android:hint="@string/task_room"
-                    android:inputType="textLongMessage"
-                    android:textSize="20sp" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/room" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <!--TODO make this a dropdown menu, not open text.-->
-                <EditText
-                    android:id="@+id/taskDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:gravity="center"
-                    android:hint="@string/task_description"
-                    android:inputType="textLongMessage"
-                    android:textSize="20sp" />
+            <EditText
+                android:id="@+id/taskDescription"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:hint="@string/task_description"
+                android:inputType="textLongMessage"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView"
+                android:importantForAutofill="no" />
 
-            </LinearLayout>
-
-        </FrameLayout>
+        </LinearLayout>
 
 
         <FrameLayout
@@ -113,7 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/frameLayout">
+            app:layout_constraintTop_toBottomOf="@+id/dropDowns">
 
             <LinearLayout
                 android:id="@+id/AddClearLayout"
@@ -160,6 +161,8 @@
             </LinearLayout>
 
         </FrameLayout>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

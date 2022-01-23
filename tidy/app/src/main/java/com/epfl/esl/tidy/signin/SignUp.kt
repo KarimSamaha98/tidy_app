@@ -99,7 +99,7 @@ class SignUp : Fragment() {
         spaceRef.child(space_id).child("Users").child(space_key).child("Last_Name").setValue(last_name)
     }
 
-    fun processImage(image_URI: Uri?){
+    fun processImage(image_URI: Uri?){123
         val matrix = Matrix()
         var imageBitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver,
             image_URI)

@@ -4,11 +4,9 @@ import android.app.Application
 import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.epfl.esl.tidy.Event
 import com.epfl.esl.tidy.Response
 import com.epfl.esl.tidy.datalayer.FirebaseRepository

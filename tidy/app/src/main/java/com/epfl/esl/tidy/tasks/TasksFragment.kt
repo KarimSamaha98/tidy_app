@@ -18,6 +18,7 @@ import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.utils.SwipeGesture
 import com.epfl.esl.tidy.databinding.FragmentTasksBinding
 import com.epfl.esl.tidy.signin.UserDataClass
+import com.epfl.esl.tidy.utils.Constants
 import com.epfl.esl.tidy.utils.Constants.CURRTASK
 import com.epfl.esl.tidy.utils.Constants.TASKS
 import com.epfl.esl.tidy.utils.Constants.USERS
@@ -58,9 +59,9 @@ class TasksFragment : Fragment() {
                     val currentTask = task.getValue(CurrentTaskClass::class.java)!!
 
                     val taskName = space.child(TASKS).child(currentTask.task_key)
-                        .child("Name").getValue(String::class.java)!!
+                        .child(Constants.TASK_NAME).getValue(String::class.java)!!
                     val taskRoom = space.child(TASKS).child(currentTask.task_key)
-                        .child("Room").getValue(String::class.java)!!
+                        .child(Constants.TASK_ROOM).getValue(String::class.java)!!
                     if(space.child(USERS).child(currentTask.user_key)
                             .child("First_Name").getValue(String::class.java) != null) {
                         viewModel.displayTask.task_name =
@@ -78,7 +79,7 @@ class TasksFragment : Fragment() {
                     }else{
                         viewModel.displayTask.task_name =
                             taskName.plus(" in ").plus(taskRoom.lowercase())
-                        viewModel.displayTask.user = "OLD_USER"
+                        viewModel.displayTask.user = "OLD USER"
                         viewModel.displayTask.due_date = currentTask.due
                         viewModel.displayTask.task_key = task.key.toString()
                     }

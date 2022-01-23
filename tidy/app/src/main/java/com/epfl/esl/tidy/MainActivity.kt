@@ -3,7 +3,6 @@ package com.epfl.esl.tidy
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Intent
-import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -37,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setupWithNavController(navController)
         setBottomNavigationVisibility(View.INVISIBLE)
 
-        setAlarm(loginInfo.space_id)
+        setAlarm()
     }
 
     public fun setBottomNavigationVisibility (visibility: Int){
@@ -45,21 +44,21 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun setAlarm(spaceID : String){
+    private fun setAlarm(){
         calendar = Calendar.getInstance()
         // Set execution time to be 01:00:00 AM
-        calendar.set(Calendar.HOUR_OF_DAY, 2)
-        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.HOUR_OF_DAY, 14)
+        calendar.set(Calendar.MINUTE, 15)
         calendar.set(Calendar.SECOND,0)
 
         alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
         val intent = Intent(this, AlarmReceiver::class.java)
-        intent.putExtra("spaceID", spaceID)
         pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
 
         alarmManager.setInexactRepeating( // use bc exact time isn't important
             AlarmManager.RTC, calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY*2, pendingIntent
+            AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent
         )
+        Toast.makeText(this, "New tasks will be assigned!", Toast.LENGTH_SHORT).show()
     }
 }
