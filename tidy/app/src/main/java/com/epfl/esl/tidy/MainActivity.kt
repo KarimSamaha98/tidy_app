@@ -30,8 +30,6 @@ import java.util.*
 
 class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener {
 
-    public var loginInfo = UserDataClass(email="", password="", first_name="", last_name="", key="", space_id="", admin="")
-
     private lateinit var binding: ActivityMainBinding
     public lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var calendar: Calendar

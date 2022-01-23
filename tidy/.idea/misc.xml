@@ -18,7 +18,7 @@
         <entry key="app/src/main/res/layout/room_recycle.xml" value="0.5397727272727273" />
         <entry key="app/src/main/res/layout/supply_recycle.xml" value="0.48828125" />
         <entry key="wear/src/main/res/layout/activity_main.xml" value="0.346875" />
-        <entry key="wear/src/main/res/layout/task_row.xml" value="0.346875" />
+        <entry key="wear/src/main/res/layout/task_row.xml" value="0.9" />
       </map>
     </option>
   </component>

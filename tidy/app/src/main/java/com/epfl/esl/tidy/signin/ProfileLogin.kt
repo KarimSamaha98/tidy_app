@@ -223,8 +223,8 @@ class ProfileLogin : Fragment() {
                 for (task in tasks.children) {
                     for (task_key in task_keys_for_task) {
                         if (task.key.toString() == task_key) {
-                            task_names += task.child(Constants.NAME).getValue(String::class.java)!!
-                            task_places += task.child(Constants.ROOM).getValue(String::class.java)!!
+                            task_names += task.child(Constants.TASK_NAME).getValue(String::class.java)!!
+                            task_places += task.child(Constants.TASK_ROOM).getValue(String::class.java)!!
                         }
                     }}
                 sendDataToWear()
