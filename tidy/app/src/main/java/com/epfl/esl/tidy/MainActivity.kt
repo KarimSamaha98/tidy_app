@@ -47,8 +47,8 @@ class MainActivity : AppCompatActivity() {
     private fun setAlarm(){
         calendar = Calendar.getInstance()
         // Set execution time to be 01:00:00 AM
-        calendar.set(Calendar.HOUR_OF_DAY, 13)
-        calendar.set(Calendar.MINUTE, 50)
+        calendar.set(Calendar.HOUR_OF_DAY, 14)
+        calendar.set(Calendar.MINUTE, 15)
         calendar.set(Calendar.SECOND,0)
 
         alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager

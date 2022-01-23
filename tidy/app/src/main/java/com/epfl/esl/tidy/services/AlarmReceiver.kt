@@ -77,10 +77,6 @@ class AlarmReceiver : BroadcastReceiver() {
                 for (currentTask in space.child(Constants.CURRTASK).children){
                     unfinishedTasks.add(currentTask.child("task_key").getValue(String::class.java)!!)
                 }
-                // Get all existing rooms
-                for (room in space.child(Constants.ROOMS).children){
-                    allRooms.add(room.key.toString())
-                }
                 addTaskToFirebase()
             }
             override fun onCancelled(databaseError: DatabaseError) {
