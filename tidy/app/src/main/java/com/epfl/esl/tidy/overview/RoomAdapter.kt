@@ -1,14 +1,12 @@
 package com.epfl.esl.tidy.overview
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.admin.Room

@@ -23,7 +23,7 @@ import com.epfl.esl.tidy.onGetDataListener
 class OverviewFragment : Fragment(), RoomAdapter.OnItemClickListener {
 
     companion object {
-        fun newInstance() = OverviewFragment()
+        //fun newInstance() = OverviewFragment()
     }
     private val TAG = "OverviewFragment"
     private lateinit var viewModel: OverviewViewModel
