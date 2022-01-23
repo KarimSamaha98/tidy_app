@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener {
 
         alarmManager.setInexactRepeating( // use bc exact time isn't important
             AlarmManager.RTC, calendar.timeInMillis,
-            AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent
+            AlarmManager.INTERVAL_DAY, pendingIntent
         )
     }
 
