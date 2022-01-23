@@ -10,8 +10,8 @@
             android:id="@+id/imageView2"
             android:layout_width="300dp"
             android:layout_height="255dp"
+            android:layout_marginTop="220dp"
             android:src="@drawable/broom"
-            app:layout_constraintBottom_toTopOf="@+id/email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -39,27 +39,24 @@
             android:id="@+id/email"
             android:layout_width="300dp"
             android:layout_height="45dp"
+            android:layout_marginEnd="52dp"
             android:hint="@string/Email_Address"
             android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.227"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.52" />
+            app:layout_constraintEnd_toStartOf="@+id/toTask"
+            app:layout_constraintTop_toTopOf="@+id/toTask" />
 
         <Button
             android:id="@+id/toPassword"
             android:layout_width="61dp"
             android:layout_height="48dp"
-            android:layout_marginStart="276dp"
+            android:layout_marginStart="300dp"
             android:backgroundTint="@color/tidy_primary"
             android:text="@string/NextButton"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.522" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            app:layout_constraintVertical_bias="0.134" />
 
         <Button
             android:id="@+id/sign_up"

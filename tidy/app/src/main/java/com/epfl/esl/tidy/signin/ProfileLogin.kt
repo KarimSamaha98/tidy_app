@@ -43,8 +43,8 @@ class ProfileLogin : Fragment() {
             email = binding.email.text.toString()
 
             //Move to password entry
-            binding.email.visibility = View.GONE
-            binding.toPassword.visibility = View.GONE
+            binding.email.visibility = View.INVISIBLE
+            binding.toPassword.visibility = View.INVISIBLE
             binding.toTask.visibility = View.VISIBLE
             binding.password.visibility = View.VISIBLE
         }
