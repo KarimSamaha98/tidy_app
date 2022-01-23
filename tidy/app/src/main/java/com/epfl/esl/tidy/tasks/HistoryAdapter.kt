@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.epfl.esl.tidy.R
 
-class HistoryAdapter (val context: Context?, var tasks : ArrayList<PastTaskClass>) :
+class HistoryAdapter (val context: Context?, var tasks : MutableList<PastTaskClass>) :
     RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     /**
