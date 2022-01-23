@@ -32,13 +32,13 @@ class Settings : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     private val profileRef: DatabaseReference = database.getReference(Constants.PROFILES)
-    //lateinit var key: String
-    //lateinit var email: String
-    //lateinit var first_name: String
-    //lateinit var last_name: String
-    //lateinit var space_id: String
-    //lateinit var password: String
-    //lateinit var image: Uri
+    lateinit var key: String
+    lateinit var email: String
+    lateinit var first_name: String
+    lateinit var last_name: String
+    lateinit var space_id: String
+    lateinit var password: String
+    lateinit var image: Uri
     private var storageRef = Firebase.storage.reference
 
     override fun onCreateView(

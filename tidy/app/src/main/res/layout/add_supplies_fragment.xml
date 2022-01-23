@@ -5,10 +5,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/addSupplyTitle"
@@ -22,102 +19,97 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/spaceIDInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/addSupplyTitle"
-            android:gravity="center"
-            android:layout_marginTop="20dp">
-            <TextView
-                android:id="@+id/spaceIdName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/spaceID"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
-            <TextView
-                android:id="@+id/spaceIdHolder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4sp"
-                android:hint="@string/invalid"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/broom"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/supplyImage"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginVertical="20dp"
-            android:adjustViewBounds="true"
-            android:background="@null"
-            android:scaleType="centerInside"
-            android:text="@string/pick_image"
-            app:layout_constraintTop_toBottomOf="@+id/spaceIDInfo"
-            app:srcCompat="@drawable/pick_image" />
 
         <LinearLayout
-            android:id="@+id/addSupplies"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="80dp"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/supplyImage">
+            app:layout_constraintTop_toBottomOf="@+id/addSupplyTitle"
+            app:layout_constraintEnd_toEndOf="parent">
 
-            <com.google.android.material.textfield.TextInputLayout
-                style = "@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            <LinearLayout
+                android:id="@+id/spaceIDInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/addSupplyTitle"
+                android:gravity="center"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:id="@+id/spaceIdName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/spaceID"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/spaceIdHolder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4sp"
+                    android:hint="@string/invalid"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/supplyImage"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginVertical="20dp"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:scaleType="centerInside"
+                android:text="@string/pick_image"
+                app:srcCompat="@drawable/pick_image"
+                app:layout_constraintTop_toBottomOf="@+id/spaceIDInfo"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/taskRoom"
                 tools:layout_editor_absoluteX="1dp"
-                app:layout_constraintTop_toBottomOf="@+id/taskRoom">
+                android:layout_marginHorizontal="50dp">
 
                 <AutoCompleteTextView
                     android:id="@+id/addSuppliesDropdown"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/supply" />
+                    android:text="@string/supply"
+                    tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <EditText
                 android:id="@+id/supplyDescription"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:layout_marginHorizontal="50dp"
                 android:gravity="center"
                 android:hint="@string/supply_description"
                 android:inputType="textLongMessage"
                 android:textSize="16sp" />
-
-        </LinearLayout>
-
-        <FrameLayout
-            android:id="@+id/frameLayout3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/addSupplies">
 
             <LinearLayout
                 android:id="@+id/AddClearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
                 <!--                <ProgressBar-->
                 <!--                    android:id="@+id/progressBar"-->
                 <!--                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
@@ -127,28 +119,25 @@
 
                 <Button
                     android:id="@+id/AddSupplyButton"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginEnd="20dp"
-                    android:text="@string/add_supply"
+                    android:layout_weight="1"
+                    android:text="@string/add"
+                    android:paddingVertical="20dp"
                     android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/ClearSupplyButton"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:text="@string/clear"
+                    android:paddingVertical="20dp"
                     android:textSize="20sp" />
 
-                <!--                <Button-->
-                <!--                    android:id="@+id/SignUpButton"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="match_parent"-->
-                <!--                    android:text="@string/sign_up"-->
-                <!--                    android:textColor="@color/purple_200"-->
-                <!--                    app:backgroundTint="@color/white" />-->
             </LinearLayout>
 
             <LinearLayout
@@ -169,41 +158,42 @@
 
             </LinearLayout>
 
-        </FrameLayout>
 
 
-        <TextView
-            android:id="@+id/existingSupplyTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:text="@string/existing_supplies"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@+id/recycler_view_rooms"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frameLayout3" />
+            <TextView
+                android:id="@+id/existingSupplyTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:text="@string/existing_supplies"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/recycler_view_rooms"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout3" />
 
-        <ProgressBar
-            android:id="@+id/progress_circular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/recycler_view_rooms"
-            app:layout_constraintBottom_toBottomOf="@+id/recycler_view_rooms"/>
+            <ProgressBar
+                android:id="@+id/progress_circular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/recycler_view_rooms"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/recycler_view_rooms" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_rooms"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/existingSupplyTitle" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_rooms"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/existingSupplyTitle" />
+        </LinearLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

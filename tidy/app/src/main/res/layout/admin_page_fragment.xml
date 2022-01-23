@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/admin_title"
-            android:textSize="40dp"
+            android:textSize="40sp"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,59 +35,74 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/admin_description"
-            android:textSize="16dp"
+            android:textSize="20sp"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/adminTitle"/>
 
-        <Button
-            android:id="@+id/CreateNewSpaceButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:id="@+id/buttons"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
             android:gravity="center"
-            android:text="@string/create_new_space"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/adminDescription"
-            app:layout_constraintBottom_toTopOf="@id/OrDescription"/>
+            app:layout_constraintTop_toBottomOf="@id/adminDescription"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:id="@+id/OrDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/or"
-            android:textSize="24dp"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/CreateNewSpaceButton"
-            app:layout_constraintBottom_toTopOf="@id/EditExistingSpaceButton"/>
+            <Button
+                android:id="@+id/CreateNewSpaceButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/create_new_space"
+                android:textSize="16sp"
+                android:paddingVertical="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/adminDescription"
+                app:layout_constraintBottom_toTopOf="@id/OrDescription"/>
 
-        <Button
-            android:id="@+id/EditExistingSpaceButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/edit_existing_space"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/OrDescription" />
+            <TextView
+                android:id="@+id/OrDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:text="@string/or"
+                android:textSize="20sp"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/CreateNewSpaceButton"
+                app:layout_constraintBottom_toTopOf="@id/EditExistingSpaceButton"/>
 
-        <EditText
-            android:id="@+id/spaceIdText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/enter_valid_id"
-            android:layout_marginBottom="8dp"
+            <EditText
+                android:id="@+id/spaceIdText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_valid_id"
+                android:layout_marginBottom="8dp"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/EditExistingSpaceButton" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/EditExistingSpaceButton" />
+
+            <Button
+                android:id="@+id/EditExistingSpaceButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/edit_existing_space"
+                android:textSize="16sp"
+                android:paddingVertical="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spaceIdText" />
+
+
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -49,7 +49,7 @@
     <string name="or">OR</string>
     <string name="create_new_space">Create a New Space</string>
     <string name="edit_existing_space">Edit Existing Space</string>
-    <string name="admin_description">Create new spaces and edit old ones.</string>
+    <string name="admin_description">Create or edit spaces.</string>
     <string name="enter_valid_id">Enter a valid Space ID</string>
     <string name="add_items">Add Items</string>
     <string name="add_supplies">Add Supply</string>
@@ -69,6 +69,7 @@
     <string name="clear">Clear</string>
     <string name="update_room">Update Room</string>
     <string name="invalid">invalid</string>
+    <string name="add">Add</string>
 
     <string-array name="supplies">
         <item>Vacuum Cleaner</item>
