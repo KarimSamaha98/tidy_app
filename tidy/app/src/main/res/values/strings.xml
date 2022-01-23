@@ -88,4 +88,6 @@
     <string name="ar_welcome">Welcome to Tidy\'s AR Feature!</string>
     <string name="ar_guide">Move around your space to get instant description and help on what needs to be done! Sleek right?</string>
     <string name="existing_tasks">Existing Tasks</string>
+    <string name="room_name">Room Name</string>
+    <string name="repeat_every">Repeat Every</string>
 </resources>

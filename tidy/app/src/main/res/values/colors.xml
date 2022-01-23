@@ -13,4 +13,5 @@
     <color name="light_yellow">#FFF8E1</color>
     <color name="tidy_primary">#24A19C</color>
     <color name="tidy_secondary">#D96098</color>
+    <color name="tidy_tertiary">#FAEEE7</color>
 </resources>
