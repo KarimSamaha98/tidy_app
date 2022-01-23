@@ -13,21 +13,9 @@ The application is made primarily for organizations and landlords that rent out 
 
 ## Firebase
 We used firebase as the cloud storage for this project. To access the firebase of this project you can login using these credentials.
-Username: tidy.app.2021
-Password: @tidy_app
 
 ## Sign Up/ Login
-All users of the app must create an account in order to sign into the app. During sign up, the user must provide a unique Space ID that links the user with a particular space on Firebase. This means that Tenants can only create an account if there is already an existing space. Admins can create the space by logging in using a special Space ID code “ADMINSPACEID”. We have created two accounts that you can use yourself. 
-
-User and Admin Login
-Username: k
-Password: k
-spaceID being logged into: -Mu5nW8kiwQRoE1tsy38
-
-Valid SpaceID's to use:
--Mu5nW8kiwQRoE1tsy38
-
-Feel free to create your own accounts as well. You will need to use a valid spaceID. Also note usually for new accounts no tasks will be assigned until the next assignment cycle (1 week). But we have set the cycle to be every day for testing purposes. You can also set up new spaceIDs with the Admin account and create new users in these spaces. 
+All users of the app must create an account in order to sign into the app. During sign up, the user must provide a unique Space ID that links the user with a particular space on Firebase. This means that Tenants can only create an account if there is already an existing space. 
 
 ## Setting Up Spaces
 The space can be set up by those with administrative rights. 
