@@ -47,9 +47,11 @@ class ItemAdapter(val context: Context, val task_name: ArrayList<String>,
         holder.task_date_text.text = task_date_position
         when (task_place_position) {
             "Kitchen" -> holder.task_place_image.setImageResource(R.drawable.chef)
-            "Living Room" -> holder.task_place_image.setImageResource(R.drawable.sofa)
-            "Room" -> holder.task_place_image.setImageResource(R.drawable.bed)
-            "Toilet" -> holder.task_place_image.setImageResource(R.drawable.wc)
+            "Living room" -> holder.task_place_image.setImageResource(R.drawable.sofa)
+            "Bedroom" -> holder.task_place_image.setImageResource(R.drawable.bed)
+            "Bathroom" -> holder.task_place_image.setImageResource(R.drawable.wc)
+            "Hallway" -> holder.task_place_image.setImageResource(R.drawable.hallway)
+            "Common area" -> holder.task_place_image.setImageResource(R.drawable.prison)
             else -> { // Note the block
                 holder.task_place_image.setImageResource(R.drawable.unknown)
             }
