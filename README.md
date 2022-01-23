@@ -9,16 +9,17 @@ Android Tablet, Watch
 ## Description
 The application is made primarily for organizations and landlords that rent out colocation spaces. These administrators, or Admins, can set up spaces within the colocation, add cleaning supplies available, and add tasks that need to be done regularly. Then, the app is used day to day by people who inhabit the colocation, the Tenants,  to remain organized and track cleaning progress within the flatshare. This helps ensure that cleaning of common spaces is done regularly, fairly, and to the standards of the landlord. 
 
+## Design Concept
 ![Screenshot](design.png)
 
 ## Firebase
 We used firebase as the cloud storage for this project. To access the firebase of this project you can login using these credentials.
 
-## Sign Up/ Login
+## Sign Up / Login
 All users of the app must create an account in order to sign into the app. During sign up, the user must provide a unique Space ID that links the user with a particular space on Firebase. This means that Tenants can only create an account if there is already an existing space. 
 
 ## Setting Up Spaces
-The space can be set up by those with administrative rights. 
+The space can be set up by those with administrative rights. This is indicated by a value of "1" for the "admin" attribute of users in Firebase.
 
 1. Go to  “Settings”, where only Admins can see a button titled “Admin”
 2. Click on “Admin” button
