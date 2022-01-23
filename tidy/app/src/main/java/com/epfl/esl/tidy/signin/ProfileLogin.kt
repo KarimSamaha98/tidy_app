@@ -71,8 +71,8 @@ class ProfileLogin : Fragment() {
             email = binding.email.text.toString()
 
             //Move to password entry
-            binding.email.visibility = View.GONE
-            binding.toPassword.visibility = View.GONE
+            binding.email.visibility = View.INVISIBLE
+            binding.toPassword.visibility = View.INVISIBLE
             binding.toTask.visibility = View.VISIBLE
             binding.password.visibility = View.VISIBLE
         }
@@ -123,8 +123,8 @@ class ProfileLogin : Fragment() {
                     }
 
                     if (correctUsername && correctPassword) {
-                            //Store Credential
-                        (activity as MainActivity).loginInfo = UserDataClass(email=email, password=password, first_name=first_name, last_name=last_name, space_id=space_id, key=key, admin=admin, image=image)
+                        //Store Credential
+                        MainActivity.loginInfo = UserDataClass(email=email, password=password, first_name=first_name, last_name=last_name, space_id=space_id, key=key, admin=admin, image=image)
                         //Change Fragments
                         Handler().postDelayed({
                             (activity as MainActivity).setBottomNavigationVisibility(View.VISIBLE)

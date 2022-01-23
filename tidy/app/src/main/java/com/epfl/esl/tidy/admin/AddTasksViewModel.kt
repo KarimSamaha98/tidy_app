@@ -1,6 +1,8 @@
 package com.epfl.esl.tidy.admin
 
+import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModel
+import com.epfl.esl.tidy.R
 import com.epfl.esl.tidy.utils.Constants
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -13,9 +15,9 @@ class AddTasksViewModel : ViewModel() {
     var spaceID: String = ""
 
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-    //val tasksRef: DatabaseReference = database.getReference("Tasks")
-
     val spaceRef: DatabaseReference = database.getReference(Constants.SPACEIDS)
+
+    var allRooms : ArrayList<String> = ArrayList()
 
     fun sendDataToFireBase() {
         val key = spaceRef.push().key.toString()

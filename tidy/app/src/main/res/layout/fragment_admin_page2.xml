@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/add_rooms"
+            android:text="@string/add_room"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/addSuppliesButton"
             app:layout_constraintEnd_toEndOf="parent"

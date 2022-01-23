@@ -3,24 +3,20 @@
     <string name="overview_title">Overview</string>
     <string name="overview_desc">You can find all of the rooms and supplies to clean with.</string>
     <string name="pick_image">Pick image</string>
-    <string name="room">Room</string>
-    <string name="room_description">Add a description of the room</string>
-    <string name="supply_description">Add a description of the supply</string>
-    <string name="add_room">Add Room</string>
+
 
     <!-- Task view items -->
     <string name="tasks_title">Tasks</string>
     <string name="tasks_main_description">Here are all the tasks!</string>
 
     <!-- Add tasks items -->
-    <string name="task_description">Add a description for the task (optional)</string>
-    <string name="task_name">Task name</string>
+    <string name="task_description">Description (optional)</string>
+    <string name="task_name">Task</string>
     <string name="task_complete_date">Date completed</string>
     <string name="task_user">Username</string>
     <string name="task_due_date">Due date</string>
 
-
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- Login info -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="NextButton">Go</string>
     <string name="Email_Address">Email Address</string>
@@ -33,17 +29,13 @@
     <string name="Space_ID">Space ID</string>
     <string name="Sign_Out">Sign Out</string>
     <string name="Administrator">Admin</string>
-    <string name="existing_room">Existing Rooms</string>
-    <string name="add_rooms">Add Rooms</string>
-    <string name="add_room_description">Add new rooms to your space</string>
 
+    <!-- Nav bar -->
     <string name="room_view">Rooms</string>
     <string name="task_view">Tasks</string>
     <string name="settings">Settings</string>
-    <string name="clear">Clear</string>
-    <string name="update_room">Update Room</string>
-
     <string name="augmented_reality">Augmented Reality</string>
+
     <string name="supplies">Supplies</string>
     <string name="rooms">Rooms</string>
     <string name="supply_dropdown">Select Supplies</string>
@@ -51,13 +43,35 @@
     <string name="task_hist_description">Here are all the completed tasks!</string>
     <string name="history">History</string>
 
-    <string name="fit_image_to_scan">Fit image to scan</string>
-    <string name="sample_text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</string>
-    <string name="due_date">Due Date</string>
 
+    <!--    Admin Title-->
+    <string name="admin_title">Admin</string>
+    <string name="or">OR</string>
+    <string name="create_new_space">Create a New Space</string>
+    <string name="edit_existing_space">Edit Existing Space</string>
+    <string name="admin_description">Create new spaces and edit old ones.</string>
+    <string name="enter_valid_id">Enter a valid Space ID</string>
+    <string name="add_items">Add Items</string>
+    <string name="add_supplies">Add Supply</string>
+    <string name="add_tasks">Add Task</string>
+    <string name="room">Room</string>
+    <string name="spaceID">Space ID: </string>
+    <string name="supply">Supply</string>
+    <string name="add_supply">Add Supply</string>
+    <string name="add_room">Add Room</string>
+    <string name="update_supply">Update Supply</string>
+    <string name="update_tasks">Update Tasks</string>
+    <string name="existing_supplies">Existing Supplies</string>
+    <string name="existing_room">Existing Rooms</string>
+    <string name="existing_tasks">Existing Tasks</string>
+    <string name="room_description">Add a description of the room</string>
+    <string name="supply_description">Add a description of the supply</string>
+    <string name="clear">Clear</string>
+    <string name="update_room">Update Room</string>
+    <string name="invalid">invalid</string>
 
     <string-array name="supplies">
-        <item>Vaccum Cleaner</item>
+        <item>Vacuum Cleaner</item>
         <item>Broom</item>
         <item>Mop</item>
         <item>All Purpose Cleaner</item>
@@ -68,24 +82,34 @@
         <item>Bucket</item>
     </string-array>
 
-    <!--    Admin Title-->
-    <string name="admin_title">Admin</string>
-    <string name="or">OR</string>
-    <string name="create_new_space">Create a New Space</string>
-    <string name="edit_existing_space">Edit an Existing Space</string>
-    <string name="admin_description">Create new spaces and edit old ones.</string>
-    <string name="enter_valid_id">Enter a valid SpaceID</string>
-    <string name="add_items">Add Items</string>
-    <string name="add_supplies">Add Supplies</string>
-    <string name="add_tasks">Add Tasks</string>
-    <string name="task_room">Task room</string>
-    <string name="spaceID"><u>spaceID:</u></string>
-    <string name="supply">Supply</string>
-    <string name="add_supply">Add Supply</string>
-    <string name="update_supply">Update Supply</string>
-    <string name="update_tasks">Update Tasks</string>
-    <string name="existing_supplies">Existing Supplies</string>
+    <string-array name="tasks">
+        <item>Clean floor</item>
+        <item>Clean window</item>
+        <item>Clean counter</item>
+        <item>Clean extraction vent</item>
+        <item>Clean wall behind hotplates</item>
+        <item>Clean microwave</item>
+        <item>Clean couch</item>
+        <item>Throw out trash bags</item>
+        <item>Clean hotplates</item>
+        <item>Clean fridge</item>
+        <item>Clean freezer</item>
+        <item>Clean oven</item>
+    </string-array>
+
+    <string-array name="rooms">
+        <item>Living room</item>
+        <item>Kitchen</item>
+        <item>Bathroom</item>
+        <item>Hallway</item>
+        <item>Common area</item>
+    </string-array>
+
+    <!--  AR  -->
+    <string name="fit_image_to_scan">Fit image to scan</string>
+    <string name="sample_text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</string>
     <string name="ar_welcome">Welcome to Tidy\'s AR Feature!</string>
     <string name="ar_guide">Move around your space to get instant description and help on what needs to be done! Sleek right?</string>
-    <string name="existing_tasks">Existing Tasks</string>
+    <string name="repeat_every">Repeat Every</string>
+    <string name="task_due_date_title">DUE: </string>
 </resources>
