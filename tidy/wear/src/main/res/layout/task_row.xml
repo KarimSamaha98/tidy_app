@@ -19,7 +19,7 @@
             android:layout_width="110dp"
             android:layout_height="21dp"
             android:text="@string/task_name"
-            android:textColor="@color/black"
+            android:textColor="@color/b"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

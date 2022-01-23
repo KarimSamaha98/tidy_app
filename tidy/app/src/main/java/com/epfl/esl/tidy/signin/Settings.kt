@@ -42,6 +42,7 @@ class Settings : Fragment() {
     lateinit var space_id: String
     lateinit var password: String
     lateinit var image: Uri
+    var storageRef = Firebase.storage.reference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -102,14 +103,14 @@ class Settings : Fragment() {
     }
 
     fun updateView(){
-        val image = MainActivity.loginInfo.image ?: Uri.parse("android.resource://com.epfl.esl.tidy/" + R.drawable.user)
 
         binding.firstName.text = MainActivity.loginInfo.first_name
+        binding.profilePic.setImageResource(R.drawable.user)
         binding.lastName.text = MainActivity.loginInfo.last_name
         binding.email.text = MainActivity.loginInfo.email
         binding.password.text = MainActivity.loginInfo.password
         binding.spaceId.text = MainActivity.loginInfo.space_id
-        val imageRef = storageRef.child("ProfileImages/"+email+".jpg")
+        val imageRef = storageRef.child("ProfileImages/"+MainActivity.loginInfo.email+".jpg")
         imageRef.getBytes(Long.MAX_VALUE).addOnSuccessListener { byteArray ->
             try {
                 val image: Drawable = BitmapDrawable((activity as MainActivity).resources, BitmapFactory.decodeByteArray(byteArray,0, byteArray.size))

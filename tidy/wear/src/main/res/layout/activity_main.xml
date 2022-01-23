@@ -6,7 +6,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tidy_green"
+    android:background="@color/white"
     tools:deviceIds="wear">
 
     <ImageView
@@ -14,7 +14,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/phone"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/my_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -29,7 +29,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         android:layout_height="41dp"
         android:gravity="center"
         android:text="@string/NotSignedIn"
-        android:textColor="@color/white"
+        android:textColor="@color/tidy_primary"
         android:textSize="15sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
