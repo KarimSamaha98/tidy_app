@@ -4,7 +4,10 @@ import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Matrix
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -39,7 +42,6 @@ class Settings : Fragment() {
     lateinit var space_id: String
     lateinit var password: String
     lateinit var image: Uri
-    private var storageRef = Firebase.storage.reference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -107,6 +109,13 @@ class Settings : Fragment() {
         binding.email.text = MainActivity.loginInfo.email
         binding.password.text = MainActivity.loginInfo.password
         binding.spaceId.text = MainActivity.loginInfo.space_id
+        val imageRef = storageRef.child("ProfileImages/"+email+".jpg")
+        imageRef.getBytes(Long.MAX_VALUE).addOnSuccessListener { byteArray ->
+            try {
+                val image: Drawable = BitmapDrawable((activity as MainActivity).resources, BitmapFactory.decodeByteArray(byteArray,0, byteArray.size))
+                binding.profilePic.setImageDrawable(image)
+            } catch (e: NullPointerException){
+            }}
         binding.profilePic.setImageURI(image)
         switchToDisplay()
     }
